@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 type ButtonAtomProps = {
   children: string;
-  onPress: () => void;
+  onPress?: () => void;
   isIconOnly?: boolean;
   icon?: ReactNode;
   startContent?: ReactNode;
@@ -26,7 +26,7 @@ export const ButtonAtom = ({
   ) : (
     <Button
       onClick={onPress}
-      className="flex flex-row items-center justify-center text-base"
+      className="flex flex-row items-center justify-center text-base hover:cursor-pointer"
     >
       {startContent}
       {children}
