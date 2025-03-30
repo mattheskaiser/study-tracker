@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 
 type ButtonAtomProps = {
-  label: string;
+  children: string;
   onPress: () => void;
   isIconOnly?: boolean;
   icon?: ReactNode;
@@ -14,7 +14,7 @@ type ButtonAtomProps = {
 };
 
 export const ButtonAtom = ({
-  label,
+  children,
   onPress,
   isIconOnly,
   icon,
@@ -29,7 +29,7 @@ export const ButtonAtom = ({
       className="flex flex-row items-center justify-center text-base"
     >
       {startContent}
-      {label}
+      {children}
       {endContent}
     </Button>
   );
