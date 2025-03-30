@@ -54,7 +54,15 @@ export default [
         node: true
       }
     },
-
+    ignores: [
+      "node_modules/",
+      "dist/",
+      "build/",
+      "coverage/",
+      "**/*.min.js",
+      "src/components/ui/",
+      "/src/lib/"
+    ],
     rules: {
       // React rules
       'react/display-name': 'off',
