@@ -4,7 +4,7 @@ import { TextAtom } from "@/components/atoms/Text.atom";
 
 export const NavbarMolecule = () => {
   return (
-    <div className="h-16 border-b shadow-xl">
+    <div className="sticky top-0 left-0 z-20 h-16 border-b bg-white shadow-xl">
       <div className="container mx-auto flex h-full flex-row items-center gap-x-4 px-6">
         <div className="relative size-10">
           <Image

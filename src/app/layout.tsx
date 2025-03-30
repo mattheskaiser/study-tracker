@@ -30,8 +30,10 @@ const RootLayout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavbarMolecule />
-        {children}
+        <div className="flex flex-col gap-y-18">
+          <NavbarMolecule />
+          {children}
+        </div>
       </body>
     </html>
   );
