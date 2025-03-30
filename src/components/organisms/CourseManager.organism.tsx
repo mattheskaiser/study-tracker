@@ -1,10 +1,17 @@
+import type { ClassValue } from "clsx";
+
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { cn } from "@/lib/utils";
 
-export const CourseManagerOrganism = () => {
+export const CourseManagerOrganism = ({
+  className,
+}: {
+  className?: ClassValue;
+}) => {
   return (
     <CardAtom
-      className="w-[65%]"
+      className={cn("w-full lg:w-[65%]", className)}
       title={
         <TextAtom size="large" isBold>
           Deine Kurse

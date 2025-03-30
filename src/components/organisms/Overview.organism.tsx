@@ -4,7 +4,7 @@ import { TextAtom } from "@/components/atoms/Text.atom";
 export const OverviewOrganism = () => {
   return (
     <CardAtom
-      className="w-[35%]"
+      className="w-full lg:w-[35%]"
       title={
         <TextAtom size="large" isBold>
           Überblick
