@@ -1,23 +1,51 @@
 "use client";
 
-import { Plus } from "lucide-react";
-
-import { ButtonAtom } from "@/components/atoms/Button.atom";
+import { CardAtom } from "@/components/atoms/Card.atom";
+import { TextAtom } from "@/components/atoms/Text.atom";
 
 const Home = () => {
   return (
     <div className="no-scrollbar container mx-auto min-h-screen w-full overflow-x-hidden overflow-y-scroll">
-      <div className="flex flex-col">
-        <div className="h-32 bg-red-500"></div>
+      <div className="mt-8 flex flex-col gap-y-8 px-6">
+        <CardAtom
+          title={
+            <TextAtom size="large" isBold>
+              Finde Deine Daten
+            </TextAtom>
+          }
+          description={
+            <TextAtom size="small">
+              Wenn du neu auf dieser Plattform bist, gib bitte deine
+              E-Mail-Adresse ein, um dein Konto einzurichten.
+            </TextAtom>
+          }
+        />
         <div className="flex flex-row gap-x-6">
-          <div className="h-96 w-[70%] bg-green-500">
-            <ButtonAtom
-              label="Kurs hinzufügen"
-              startContent={<Plus />}
-              onPress={() => alert("Pressed")}
-            />
-          </div>
-          <div className="h-96 w-[30%] bg-blue-500"></div>
+          <CardAtom
+            className="w-[65%]"
+            title={
+              <TextAtom size="large" isBold>
+                Deine Kurse
+              </TextAtom>
+            }
+            description={
+              <TextAtom size="small">
+                Füge alle deine Kurse und Noten hinzu, um deinen
+                Studienfortschritt genau zu verfolgen.
+              </TextAtom>
+            }
+          />
+          <CardAtom
+            className="w-[35%]"
+            title={
+              <TextAtom size="large" isBold>
+                Überblick
+              </TextAtom>
+            }
+            description={
+              <TextAtom size="small">Dein Studium auf einen Blick.</TextAtom>
+            }
+          />
         </div>
       </div>
     </div>
