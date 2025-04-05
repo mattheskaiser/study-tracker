@@ -1,9 +1,6 @@
-import { Search } from "lucide-react";
-
-import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { Input } from "@/components/ui/input";
+import { FindEmailMolecule } from "@/components/molecules/FindEmail.molecule";
 import { Switch } from "@/components/ui/switch";
 
 export const AccountFinderOrganism = () => {
@@ -28,10 +25,7 @@ export const AccountFinderOrganism = () => {
       }
       content={
         <div className="flex w-full flex-row gap-x-6">
-          <Input disabled type="email" placeholder="Email" />
-          <ButtonAtom endContent={<Search strokeWidth={2} />}>
-            Email suchen
-          </ButtonAtom>
+          <FindEmailMolecule />
         </div>
       }
     />

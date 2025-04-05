@@ -11,6 +11,8 @@ type ButtonAtomProps = {
   icon?: ReactNode;
   startContent?: ReactNode;
   endContent?: ReactNode;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
 export const ButtonAtom = ({
@@ -20,11 +22,17 @@ export const ButtonAtom = ({
   icon,
   startContent,
   endContent,
+  type,
+  disabled,
 }: ButtonAtomProps) => {
   return isIconOnly ? (
-    <Button>{icon}</Button>
+    <Button type={type} disabled={disabled}>
+      {icon}
+    </Button>
   ) : (
     <Button
+      disabled={disabled}
+      type={type}
       onClick={onPress}
       className="flex flex-row items-center justify-center text-base hover:cursor-pointer"
     >
