@@ -1,7 +1,6 @@
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { FindEmailMolecule } from "@/components/molecules/FindEmail.molecule";
-import { Switch } from "@/components/ui/switch";
 
 export const AccountFinderOrganism = () => {
   return (
@@ -17,10 +16,6 @@ export const AccountFinderOrganism = () => {
             Falls du bereits registriert bist, suche nach deiner E-Mail.
             Andernfalls gib deine E-Mail ein, um dein Konto freizuschalten.
           </TextAtom>
-          <div className="flex flex-row items-center gap-x-2">
-            <TextAtom size="small">Bist du neu hier?</TextAtom>
-            <Switch />
-          </div>
         </div>
       }
       content={
