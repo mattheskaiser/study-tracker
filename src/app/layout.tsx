@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { NavbarMolecule } from "@/components/molecules/Navbar.molecule";
+import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
@@ -32,7 +34,8 @@ const RootLayout = ({
       >
         <div className="flex flex-col gap-y-12">
           <NavbarMolecule />
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
+          <Toaster />
         </div>
       </body>
     </html>
