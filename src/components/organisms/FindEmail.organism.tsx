@@ -1,4 +1,5 @@
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
 import { Search, UserPlus } from "lucide-react";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
@@ -28,9 +29,27 @@ export const FindEmailOrganism = () => {
 
   const isNewUser = watch("newUser");
 
-  const onSubmit: SubmitHandler<FormFields> = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FormFields> = async (formData) => {
+    try {
+      console.log("Folgende Form wurde gesendet:", formData);
+
+      const { data } = await axios.post("/api/user", formData);
+
+      console.log("Antwort vom Server:", data);
+      alert(
+        !formData.newUser ? "User gefunden!" : "User erfolgreich erstellt!",
+      );
+
+      reset();
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios Fehler:", error.response?.data || error.message);
+        alert(error.response?.data?.error || "Etwas ist schiefgelaufen");
+      } else {
+        console.error("Unbekannter Fehler:", error);
+        alert("Etwas ist schiefgelaufen");
+      }
+    }
   };
 
   return (
