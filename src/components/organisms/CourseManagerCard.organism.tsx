@@ -1,5 +1,6 @@
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { CreateCourseOrganism } from "@/components/organisms/CreateCourse.organism";
 
 export const CourseManagerCardOrganism = () => {
   return (
@@ -16,6 +17,7 @@ export const CourseManagerCardOrganism = () => {
           genau zu verfolgen.
         </TextAtom>
       }
+      content={<CreateCourseOrganism />}
     />
   );
 };

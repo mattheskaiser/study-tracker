@@ -18,11 +18,7 @@ export const AccountFinderCardOrganism = () => {
           </TextAtom>
         </div>
       }
-      content={
-        <div className="flex w-full flex-row gap-x-6">
-          <FindEmailOrganism />
-        </div>
-      }
+      content={<FindEmailOrganism />}
     />
   );
 };
