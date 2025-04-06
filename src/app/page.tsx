@@ -1,17 +1,17 @@
 "use client";
 
-import { AccountFinderOrganism } from "@/components/organisms/AccountFinder.organism";
-import { CourseManagerOrganism } from "@/components/organisms/CourseManager.organism";
-import { OverviewOrganism } from "@/components/organisms/Overview.organism";
+import { AccountFinderCardOrganism } from "@/components/organisms/AccountFinderCard.organism";
+import { CourseManagerCardOrganism } from "@/components/organisms/CourseManagerCard.organism";
+import { OverviewCardOrganism } from "@/components/organisms/OverviewCard.organism";
 
 const Home = () => {
   return (
     <div className="no-scrollbar container mx-auto min-h-screen w-full overflow-x-hidden overflow-y-scroll">
       <div className="flex flex-col gap-y-6 px-6">
-        <AccountFinderOrganism />
+        <AccountFinderCardOrganism />
         <div className="flex flex-col gap-6 lg:flex-row">
-          <CourseManagerOrganism className="order-2 lg:order-1" />
-          <OverviewOrganism />
+          <CourseManagerCardOrganism />
+          <OverviewCardOrganism />
         </div>
       </div>
     </div>

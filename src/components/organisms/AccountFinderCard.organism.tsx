@@ -1,8 +1,8 @@
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { FindEmailMolecule } from "@/components/molecules/FindEmail.molecule";
+import { FindEmailOrganism } from "@/components/organisms/FindEmail.organism";
 
-export const AccountFinderOrganism = () => {
+export const AccountFinderCardOrganism = () => {
   return (
     <CardAtom
       title={
@@ -20,7 +20,7 @@ export const AccountFinderOrganism = () => {
       }
       content={
         <div className="flex w-full flex-row gap-x-6">
-          <FindEmailMolecule />
+          <FindEmailOrganism />
         </div>
       }
     />
