@@ -52,12 +52,20 @@ export const FindEmailOrganism = () => {
       reset();
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        console.error("Axios Fehler:", error.response?.data || error.message);
-        alert(error.response?.data?.error || "Etwas ist schiefgelaufen");
+        toast("Der Vorgang war leider nicht erfolgreich.", {
+          dismissible: true,
+          description: "Dein Account konnte nicht gefunden werden.",
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        });
         setIsLoading(false);
       } else {
-        console.error("Unbekannter Fehler:", error);
-        alert("Etwas ist schiefgelaufen");
+        toast("Der Vorgang war leider nicht erfolgreich.", {
+          dismissible: true,
+          description: "Ein ist leider ein unbekannter Fehler aufgetreten.",
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        });
         setIsLoading(false);
       }
     }
