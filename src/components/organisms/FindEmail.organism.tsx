@@ -11,7 +11,7 @@ type FormFields = {
   email: string;
 };
 
-export const FindEmailMolecule = () => {
+export const FindEmailOrganism = () => {
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ export const FindEmailMolecule = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-row gap-x-6"
+      className="flex w-full flex-col gap-x-6 gap-y-4 md:flex-row"
     >
       <div className="flex w-full flex-col gap-y-4">
         <Input
