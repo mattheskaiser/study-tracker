@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 
 type CardAtomProps = {
-  title: ReactNode | string;
+  title?: ReactNode | string;
   description?: ReactNode | string;
   content?: ReactNode;
   footer?: ReactNode | string;

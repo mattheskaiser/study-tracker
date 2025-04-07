@@ -2,6 +2,7 @@ import { useQueryState } from "nuqs";
 
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { CourseListOrganism } from "@/components/organisms/CourseList.organism";
 import { CreateCourseOrganism } from "@/components/organisms/CreateCourse.organism";
 
 export const CourseManagerCardOrganism = () => {
@@ -26,7 +27,10 @@ export const CourseManagerCardOrganism = () => {
             Hinweis: Bitte melde dich an, um Kurse anzusehen und hinzuzufügen.
           </TextAtom>
         ) : (
-          <CreateCourseOrganism />
+          <div className="flex flex-col gap-y-6">
+            <CreateCourseOrganism />
+            <CourseListOrganism />
+          </div>
         )
       }
     />

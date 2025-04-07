@@ -1,6 +1,9 @@
 import type { SubmitHandler } from "react-hook-form";
 import { Controller, useForm } from "react-hook-form";
+import axios from "axios";
 import { Plus } from "lucide-react";
+import { useQueryState } from "nuqs";
+import { toast } from "sonner";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { Input } from "@/components/ui/input";
@@ -14,11 +17,13 @@ import {
 
 type FormFields = {
   name: string;
-  status: "open" | "inProgress" | "done";
+  status: "open" | "in_progress" | "done";
   grade?: number;
 };
 
 export const CreateCourseOrganism = () => {
+  const [userId] = useQueryState("userId");
+
   const {
     register,
     handleSubmit,
@@ -33,9 +38,24 @@ export const CreateCourseOrganism = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FormFields> = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FormFields> = async (formData) => {
+    try {
+      await axios.post("/api/courses", { ...formData, userId });
+      reset();
+      toast("Der Vorgang war erfolgreich!", {
+        dismissible: true,
+        description: "Der Kurs konnte erfolgreich erstellt werden.",
+        style: { textDecorationColor: "black" },
+        position: "top-center",
+      });
+    } catch {
+      toast("Der Vorgang war leider nicht erfolgreich.", {
+        dismissible: true,
+        description: "Der Kurs konnte leider nicht erstellt werden.",
+        style: { textDecorationColor: "black" },
+        position: "top-center",
+      });
+    }
   };
 
   return (
@@ -52,7 +72,7 @@ export const CreateCourseOrganism = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="open">Offen</SelectItem>
-                <SelectItem value="inProgress">In Arbeit</SelectItem>
+                <SelectItem value="in_progress">In Arbeit</SelectItem>
                 <SelectItem value="done">Abgeschlossen</SelectItem>
               </SelectContent>
             </Select>
