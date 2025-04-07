@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 import { Search, UserPlus } from "lucide-react";
-import Image from "next/image";
 import { useQueryState } from "nuqs";
 import { toast } from "sonner";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 
@@ -104,14 +104,7 @@ export const FindEmailOrganism = () => {
         disabled={!!userId || isLoading}
         endContent={
           isLoading ? (
-            <div className="relative size-[24px]">
-              <Image
-                fill
-                src={"/spinner.gif"}
-                alt="loading spinner"
-                className="object-cover"
-              />
-            </div>
+            <LoadingSpinnerMolecule color="white" />
           ) : !isNewUser ? (
             <Search strokeWidth={2} />
           ) : (
