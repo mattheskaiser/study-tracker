@@ -1,8 +1,7 @@
-// app/api/courses/route.ts
-import { CourseStatus, PrismaClient } from "@prisma/client";
+import type { CourseStatus } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-// Use singleton pattern for Prisma client
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 const prisma = globalForPrisma.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
@@ -53,16 +52,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Convert string status to proper enum value
-    const statusMap: Record<string, CourseStatus> = {
-      open: CourseStatus.OPEN,
-      in_progress: CourseStatus.IN_PROGRESS,
-      done: CourseStatus.DONE,
-    };
-
-    const courseStatus = statusMap[status.toLowerCase()];
-
-    if (!courseStatus) {
+    // Validate status is a valid enum value
+    const validStatuses = ["open", "in_progress", "done"];
+    if (!validStatuses.includes(status)) {
       return NextResponse.json(
         {
           error:
@@ -72,11 +64,12 @@ export async function POST(req: Request) {
       );
     }
 
+    // Since status is already the correct string value that matches enum
     const course = await prisma.course.create({
       data: {
         userId,
         name,
-        status: courseStatus,
+        status: status as CourseStatus,
         grade: grade ? parseFloat(String(grade)) : null,
       },
     });

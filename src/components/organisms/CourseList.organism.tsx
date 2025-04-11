@@ -69,7 +69,6 @@ export const CourseListOrganism = () => {
       </TextAtom>
     );
   }
-  console.log(courses);
   return (
     <div className="flex flex-col gap-y-2">
       {courses.map((course) => (

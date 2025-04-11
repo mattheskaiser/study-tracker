@@ -14,9 +14,9 @@ datasource db {
 }
 
 enum CourseStatus {
-  OPEN
-  IN_PROGRESS
-  DONE
+  open
+  in_progress
+  done
 }
 
 model User {

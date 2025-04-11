@@ -61,7 +61,11 @@ export const CreateCourseOrganism = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-x-2 gap-y-4 md:flex-row">
-        <Input type="text" {...register("name", { required: true })} />
+        <Input
+          type="text"
+          placeholder="Kursname eingeben..."
+          {...register("name", { required: true })}
+        />
         <Controller
           name="status"
           control={control}
@@ -79,7 +83,9 @@ export const CreateCourseOrganism = () => {
           )}
         />
         <Input
+          aria-description="Bitte Note angeben (optional)"
           type="number"
+          placeholder="Note eingeben..."
           step="0.1"
           {...register("grade", {
             valueAsNumber: true,

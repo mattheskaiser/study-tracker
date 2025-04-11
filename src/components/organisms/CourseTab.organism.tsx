@@ -38,6 +38,7 @@ export const CourseTabOrganism = ({
     reset();
   };
 
+  console.log(grade, status);
   return (
     <div className="flex flex-row justify-between rounded-xl border p-2">
       <TextAtom size="small" isBold className="flex items-center">
@@ -48,7 +49,7 @@ export const CourseTabOrganism = ({
           name="status"
           control={control}
           render={({ field }) => (
-            <Select onValueChange={field.onChange}>
+            <Select onValueChange={field.onChange} value={field.value}>
               <SelectTrigger className="max-w-[150px]">
                 <SelectValue placeholder="Status auswählen" />
               </SelectTrigger>
