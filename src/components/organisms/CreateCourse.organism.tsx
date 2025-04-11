@@ -14,10 +14,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import type { CourseStatusType } from "@/types/general.types";
 
 type FormFields = {
   name: string;
-  status: "open" | "in_progress" | "done";
+  status: CourseStatusType;
   grade?: number;
 };
 
@@ -59,6 +60,7 @@ export const CreateCourseOrganism = () => {
   };
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-x-2 gap-y-4 md:flex-row">
         <Input

@@ -50,7 +50,7 @@ export const FindEmailOrganism = () => {
       });
       setIsLoading(false);
       reset();
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isAxiosError(error)) {
         toast("Der Vorgang war leider nicht erfolgreich.", {
           dismissible: true,
@@ -73,6 +73,7 @@ export const FindEmailOrganism = () => {
 
   return (
     <form
+      /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
       onSubmit={handleSubmit(onSubmit)}
       className="flex w-full flex-col gap-x-6 gap-y-4 md:flex-row"
     >

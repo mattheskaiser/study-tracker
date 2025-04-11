@@ -9,15 +9,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import type { CourseStatusType } from "@/types/general.types";
 
 type CourseTabMoleculeProps = {
   name: string;
-  status: "open" | "in_progress" | "done";
+  status: CourseStatusType;
   grade?: number;
 };
 
 type FormDataTypes = {
-  status: "open" | "in_progress" | "done";
+  status: CourseStatusType;
   grade?: number;
 };
 
@@ -34,16 +35,16 @@ export const CourseTabOrganism = ({
   });
 
   const onSubmit = (formData: FormDataTypes) => {
-    console.log(formData);
+    alert(formData);
     reset();
   };
 
-  console.log(grade, status);
   return (
     <div className="flex flex-row justify-between rounded-xl border p-2">
       <TextAtom size="small" isBold className="flex items-center">
         {name}
       </TextAtom>
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row gap-x-4">
         <Controller
           name="status"

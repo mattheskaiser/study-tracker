@@ -4,18 +4,11 @@ import { useQueryState } from "nuqs";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { CourseTabOrganism } from "@/components/organisms/CourseTab.organism";
-
-type Course = {
-  id: string;
-  name: string;
-  status: "open" | "in_progress" | "done";
-  grade?: number;
-  userId: string;
-};
+import type { CoursesType, CourseType } from "@/types/general.types";
 
 export const CourseListOrganism = () => {
   const [userId] = useQueryState("userId");
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<CourseType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +28,7 @@ export const CourseListOrganism = () => {
           throw new Error(`Failed to fetch courses: ${response.status}`);
         }
 
-        const data = await response.json();
+        const data: CoursesType = await response.json();
         setCourses(data.courses || []);
       } catch (err) {
         setError(
