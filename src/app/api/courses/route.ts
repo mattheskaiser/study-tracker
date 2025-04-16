@@ -40,7 +40,6 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log("Received data:", body);
 
     const { userId, name, status, grade } = body;
 
@@ -52,7 +51,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Validate status is a valid enum value
     const validStatuses = ["open", "in_progress", "done"];
     if (!validStatuses.includes(status)) {
       return NextResponse.json(
@@ -64,7 +62,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Since status is already the correct string value that matches enum
     const course = await prisma.course.create({
       data: {
         userId,
@@ -74,10 +71,40 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log("Course created:", course);
     return NextResponse.json({ course }, { status: 201 });
   } catch (error: any) {
     console.error("Error creating course:", error.message, error);
+    return NextResponse.json(
+      { error: `Internal Server Error: ${error.message}` },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const url = new URL(req.url);
+    const courseId = url.searchParams.get("courseId");
+
+    if (!courseId) {
+      return NextResponse.json(
+        { error: "courseId is required" },
+        { status: 400 },
+      );
+    }
+
+    await prisma.course.delete({
+      where: {
+        id: courseId,
+      },
+    });
+
+    return NextResponse.json(
+      { message: "Course deleted successfully" },
+      { status: 200 },
+    );
+  } catch (error: any) {
+    console.error("Error deleting course:", error.message);
     return NextResponse.json(
       { error: `Internal Server Error: ${error.message}` },
       { status: 500 },

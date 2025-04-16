@@ -67,6 +67,7 @@ export const CourseListOrganism = () => {
       {courses.map((course) => (
         <CourseTabOrganism
           key={course.name}
+          id={course.id}
           name={course.name}
           status={course.status}
           grade={course.grade}
