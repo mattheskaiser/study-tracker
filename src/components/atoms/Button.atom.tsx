@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 
 type ButtonAtomProps = {
-  children: string;
+  children?: string;
   onPress?: () => void;
   isIconOnly?: boolean;
   icon?: ReactNode;
@@ -26,7 +26,7 @@ export const ButtonAtom = ({
   disabled,
 }: ButtonAtomProps) => {
   return isIconOnly ? (
-    <Button type={type} disabled={disabled}>
+    <Button type={type} disabled={disabled} onClick={onPress}>
       {icon}
     </Button>
   ) : (
