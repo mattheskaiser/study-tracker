@@ -1,5 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { useQueryState } from "nuqs";
+import { toast } from "sonner";
 
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { DeleteButtonMolecule } from "@/components/molecules/DeleteButton.molecule";
@@ -54,8 +55,20 @@ export const CourseTabOrganism = ({
       if (!response.ok) {
         throw new Error("Failed to delete course");
       }
+      toast("Der Vorgang war erfolgreich!", {
+        dismissible: true,
+        description: "Der Kurs konnte erfolgreich gelöscht werden.",
+        style: { textDecorationColor: "black" },
+        position: "top-center",
+      });
     } catch (error) {
       console.error("Error deleting course:", error);
+      toast("Der Vorgang war leider nicht erfolgreich.", {
+        dismissible: true,
+        description: "Der Kurs konnte leider nicht gelöscht werden.",
+        style: { textDecorationColor: "black" },
+        position: "top-center",
+      });
     }
     void setCourseId(null);
   };
