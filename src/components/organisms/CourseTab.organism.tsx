@@ -101,6 +101,8 @@ export const CourseTabOrganism = ({
             )}
           />
           <Input
+            min={1}
+            max={6}
             type="number"
             step="0.1"
             {...register("grade", {

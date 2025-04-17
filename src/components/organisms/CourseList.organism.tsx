@@ -66,7 +66,7 @@ export const CourseListOrganism = () => {
     <div className="flex flex-col gap-y-2">
       {courses.map((course) => (
         <CourseTabOrganism
-          key={course.name}
+          key={course.id}
           id={course.id}
           name={course.name}
           status={course.status}

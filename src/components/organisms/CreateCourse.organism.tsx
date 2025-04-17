@@ -30,6 +30,7 @@ export const CreateCourseOrganism = () => {
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { isSubmitting },
   } = useForm<FormFields>({
     defaultValues: {
@@ -59,6 +60,8 @@ export const CreateCourseOrganism = () => {
     }
   };
 
+  const statusValue = watch("status");
+  console.log(statusValue);
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -85,6 +88,9 @@ export const CreateCourseOrganism = () => {
           )}
         />
         <Input
+          min={1}
+          max={6}
+          disabled={statusValue === "open" || statusValue === "in_progress"}
           aria-description="Bitte Note angeben (optional)"
           type="number"
           placeholder="Note eingeben..."
