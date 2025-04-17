@@ -61,7 +61,6 @@ export const CreateCourseOrganism = () => {
   };
 
   const statusValue = watch("status");
-  console.log(statusValue);
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={handleSubmit(onSubmit)}>
