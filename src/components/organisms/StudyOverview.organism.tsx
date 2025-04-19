@@ -35,6 +35,7 @@ export const StudyOverviewOrganism = () => {
     const finished = courses.filter((course) => course.status === "done");
     setFinishedCourses(finished);
 
+    // @ts-expect-error grade could technically be undefined in type - but ensured through validation
     const total = finished.reduce((sum, course) => sum + course.grade, 0);
     setSumOfGrades(total);
   }, [courses]);
@@ -48,6 +49,7 @@ export const StudyOverviewOrganism = () => {
       ? (sumOfGrades / finishedCourses.length).toFixed(2)
       : "0";
 
+  console.log(amountOfOpenCourses, amountOfFinishedCourses, averageGrade);
   return (
     <div className="flex flex-col gap-y-6">
       <OverviewBoxMolecule

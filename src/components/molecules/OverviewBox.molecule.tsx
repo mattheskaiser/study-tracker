@@ -16,8 +16,10 @@ export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
       <TextAtom size="small" className="flex items-center">
         {box.label}
       </TextAtom>
-      <TextAtom size="medium" isBold className="flex items-center pr-6">
-        {box.value ?? "N/A"}
+      <TextAtom size="small" isBold className="flex items-center pr-6">
+        {box.value === null || box.value === undefined || box.value === "0"
+          ? "N/A"
+          : box.value}
       </TextAtom>
     </div>
   ));
