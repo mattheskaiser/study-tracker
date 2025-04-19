@@ -21,7 +21,7 @@ export const StudyOverviewOrganism = () => {
         if (!response.ok) {
           throw new Error(`Failed to fetch courses: ${response.status}`);
         }
-        const data: CoursesType = await response.json();
+        const data = (await response.json()) as CoursesType;
         setCourses(data.courses || []);
       } catch (err) {
         console.error("Error fetching courses:", err);
@@ -49,7 +49,6 @@ export const StudyOverviewOrganism = () => {
       ? (sumOfGrades / finishedCourses.length).toFixed(2)
       : "0";
 
-  console.log(amountOfOpenCourses, amountOfFinishedCourses, averageGrade);
   return (
     <div className="flex flex-col gap-y-6">
       <OverviewBoxMolecule

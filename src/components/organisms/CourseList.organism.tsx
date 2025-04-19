@@ -28,7 +28,7 @@ export const CourseListOrganism = () => {
           throw new Error(`Failed to fetch courses: ${response.status}`);
         }
 
-        const data: CoursesType = await response.json();
+        const data = (await response.json()) as CoursesType;
         setCourses(data.courses || []);
       } catch (err) {
         setError(
