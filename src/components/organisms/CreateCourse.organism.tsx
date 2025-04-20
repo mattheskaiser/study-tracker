@@ -1,12 +1,14 @@
-import type { SubmitHandler } from "react-hook-form";
+import type { Resolver, SubmitHandler } from "react-hook-form";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Plus } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { toast } from "sonner";
+import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
+import { TextAtom } from "@/components/atoms/Text.atom";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -16,13 +18,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { courseSchema } from "@/schemas/schema";
-import type { CourseStatusType } from "@/types/general.types";
 
-type FormFields = {
-  name: string;
-  status: CourseStatusType;
-  grade?: number;
-};
+type FormFields = z.infer<typeof courseSchema>;
 
 export const CreateCourseOrganism = () => {
   const [userId] = useQueryState("userId");
@@ -32,15 +29,14 @@ export const CreateCourseOrganism = () => {
     handleSubmit,
     control,
     reset,
-    watch,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<FormFields>({
     defaultValues: {
       name: "",
       status: "open",
       grade: undefined,
     },
-    resolver: zodResolver(courseSchema),
+    resolver: zodResolver(courseSchema) as Resolver<FormFields>,
   });
 
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
@@ -63,10 +59,9 @@ export const CreateCourseOrganism = () => {
     }
   };
 
-  const statusValue = watch("status");
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
       <div className="flex flex-col gap-x-2 gap-y-4 md:flex-row">
         <Input
           type="text"
@@ -92,7 +87,6 @@ export const CreateCourseOrganism = () => {
         <Input
           min={1}
           max={6}
-          disabled={statusValue === "open" || statusValue === "in_progress"}
           aria-description="Bitte Note angeben (optional)"
           type="number"
           placeholder="Note eingeben..."
@@ -109,6 +103,22 @@ export const CreateCourseOrganism = () => {
         >
           Kurs hinzufügen
         </ButtonAtom>
+      </div>
+      <div className="flex flex-col gap-y-2">
+        {errors.name && (
+          <TextAtom
+            size="small"
+            className="text-red-500"
+            children={errors.name.message}
+          />
+        )}
+        {errors.grade && (
+          <TextAtom
+            size="small"
+            className="text-red-500"
+            children={errors.grade.message}
+          />
+        )}
       </div>
     </form>
   );
