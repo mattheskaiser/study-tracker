@@ -96,11 +96,9 @@ export const FindEmailOrganism = () => {
             disabled={!!userId}
           />
           {errors.email && (
-            <TextAtom
-              size="small"
-              className="text-red-500"
-              children={errors.email.message}
-            />
+            <TextAtom size="small" color="error">
+              {errors.email.message}
+            </TextAtom>
           )}
         </div>
 

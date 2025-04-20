@@ -23,7 +23,7 @@ export const CourseManagerCardOrganism = () => {
       }
       content={
         !userId ? (
-          <TextAtom size="small" className="text-yellow-500">
+          <TextAtom size="small" color="warning">
             Hinweis: Bitte melde dich an, um Kurse anzusehen und hinzuzufügen.
           </TextAtom>
         ) : (

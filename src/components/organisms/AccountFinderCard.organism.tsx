@@ -20,7 +20,7 @@ export const AccountFinderCardOrganism = () => {
             Andernfalls gib deine E-Mail ein, um dein Konto freizuschalten.
           </TextAtom>
         ) : (
-          <TextAtom size="small" className="text-green-500">
+          <TextAtom size="small" color="success">
             Hinweis: Du bist nun mit deinem Account verbunden und kannst deine
             Kurse einsehen, bearbeiten und deine Statistiken abrufen.
           </TextAtom>

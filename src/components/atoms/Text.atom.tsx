@@ -7,6 +7,7 @@ type TextAtomProps = {
   size?: "small" | "medium" | "large";
   isBold?: boolean;
   className?: ClassValue;
+  color?: "black" | "white" | "success" | "warning" | "error";
 };
 
 export const TextAtom = ({
@@ -14,6 +15,7 @@ export const TextAtom = ({
   size = "medium",
   isBold = false,
   className,
+  color = "black",
 }: TextAtomProps) => {
   return (
     <p
@@ -23,6 +25,13 @@ export const TextAtom = ({
           "text-sm": size === "small",
           "text-base": size === "medium",
           "text-xl": size === "large",
+        },
+        {
+          "text-black": color === "black",
+          "text-white": color === "white",
+          "text-green-500": color === "success",
+          "text-yellow-500": color === "warning",
+          "text-red-500": color === "error",
         },
         {
           "font-bold": isBold,

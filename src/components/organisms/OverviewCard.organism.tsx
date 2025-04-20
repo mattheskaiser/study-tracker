@@ -19,7 +19,7 @@ export const OverviewCardOrganism = () => {
       }
       content={
         !userId ? (
-          <TextAtom size="small" className="text-yellow-500">
+          <TextAtom size="small" color="warning">
             Hinweis: Bitte melde dich an, um auf deine Statistiken zuzugreifen.
           </TextAtom>
         ) : (

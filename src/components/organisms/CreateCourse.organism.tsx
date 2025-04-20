@@ -106,18 +106,14 @@ export const CreateCourseOrganism = () => {
       </div>
       <div className="flex flex-col gap-y-2">
         {errors.name && (
-          <TextAtom
-            size="small"
-            className="text-red-500"
-            children={errors.name.message}
-          />
+          <TextAtom size="small" color="error">
+            {errors.name.message}
+          </TextAtom>
         )}
         {errors.grade && (
-          <TextAtom
-            size="small"
-            className="text-red-500"
-            children={errors.grade.message}
-          />
+          <TextAtom size="small" color="error">
+            {errors.grade.message}
+          </TextAtom>
         )}
       </div>
     </form>

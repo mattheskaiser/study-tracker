@@ -52,12 +52,16 @@ export const CourseListOrganism = () => {
   }
 
   if (error) {
-    return <div className="py-2 text-red-500">Error: {error}</div>;
+    return (
+      <TextAtom size="small" color="error">
+        Deine Kurse konnten nicht geladen werden.
+      </TextAtom>
+    );
   }
 
   if (courses.length === 0) {
     return (
-      <TextAtom size="small" className="text-yellow-500">
+      <TextAtom size="small" color="warning">
         Hinweis: Du hast bisher noch keine Kurse angelegt.
       </TextAtom>
     );
