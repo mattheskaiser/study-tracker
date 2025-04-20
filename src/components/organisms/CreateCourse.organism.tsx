@@ -1,5 +1,6 @@
 import type { SubmitHandler } from "react-hook-form";
 import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Plus } from "lucide-react";
 import { useQueryState } from "nuqs";
@@ -14,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { courseSchema } from "@/schemas/schema";
 import type { CourseStatusType } from "@/types/general.types";
 
 type FormFields = {
@@ -38,6 +40,7 @@ export const CreateCourseOrganism = () => {
       status: "open",
       grade: undefined,
     },
+    resolver: zodResolver(courseSchema),
   });
 
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {

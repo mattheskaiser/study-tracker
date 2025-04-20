@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Search, UserPlus } from "lucide-react";
 import { useQueryState } from "nuqs";
@@ -10,6 +11,7 @@ import { TextAtom } from "@/components/atoms/Text.atom";
 import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { emailSchema } from "@/schemas/schema";
 
 type FormFields = {
   newUser: boolean;
@@ -30,6 +32,7 @@ export const FindEmailOrganism = () => {
         email: "",
         newUser: false,
       },
+      resolver: zodResolver(emailSchema),
     },
   );
 
