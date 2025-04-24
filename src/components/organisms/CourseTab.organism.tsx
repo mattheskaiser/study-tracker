@@ -55,9 +55,10 @@ export const CourseTabOrganism = ({
       if (!response.ok) {
         throw new Error("Failed to delete course");
       }
-      toast("Der Vorgang war erfolgreich!", {
+      toast("Der Kurs wurde erfolgreich gelöscht.", {
         dismissible: true,
-        description: "Der Kurs konnte erfolgreich gelöscht werden.",
+        description:
+          "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
         style: { textDecorationColor: "black" },
         position: "top-center",
       });

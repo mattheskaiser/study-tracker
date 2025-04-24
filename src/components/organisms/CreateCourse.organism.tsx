@@ -43,9 +43,10 @@ export const CreateCourseOrganism = () => {
     try {
       await axios.post("/api/courses", { ...formData, userId });
       reset();
-      toast("Der Vorgang war erfolgreich!", {
+      toast("Der Kurse wurde erfolgreich erstellt!", {
         dismissible: true,
-        description: "Der Kurs konnte erfolgreich erstellt werden.",
+        description:
+          "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
         style: { textDecorationColor: "black" },
         position: "top-center",
       });
