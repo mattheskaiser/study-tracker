@@ -63,7 +63,6 @@ export const FindEmailOrganism = () => {
         toast("Der Vorgang war leider nicht erfolgreich.", {
           dismissible: true,
           description: "Dein Account konnte nicht gefunden werden.",
-          style: { textDecorationColor: "black" },
           position: "top-center",
         });
         setIsLoading(false);
@@ -71,7 +70,6 @@ export const FindEmailOrganism = () => {
         toast("Der Vorgang war leider nicht erfolgreich.", {
           dismissible: true,
           description: "Ein ist leider ein unbekannter Fehler aufgetreten.",
-          style: { textDecorationColor: "black" },
           position: "top-center",
         });
         setIsLoading(false);
