@@ -1,10 +1,7 @@
 import type { CourseStatus } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
-const prisma = globalForPrisma.prisma || new PrismaClient();
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
   try {
@@ -74,6 +71,65 @@ export async function POST(req: Request) {
     return NextResponse.json({ course }, { status: 201 });
   } catch (error: any) {
     console.error("Error creating course:", error.message, error);
+    return NextResponse.json(
+      { error: `Internal Server Error: ${error.message}` },
+      { status: 500 },
+    );
+  }
+}
+
+export async function PATCH(req: Request) {
+  try {
+    const body = await req.json();
+    const { courseId, status, grade } = body;
+
+    if (!courseId) {
+      return NextResponse.json(
+        { error: "courseId is required" },
+        { status: 400 },
+      );
+    }
+
+    if (!status && grade === undefined) {
+      return NextResponse.json(
+        { error: "No update parameters provided" },
+        { status: 400 },
+      );
+    }
+
+    if (status) {
+      const validStatuses = ["open", "in_progress", "done"];
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json(
+          {
+            error:
+              "Invalid status value. Must be one of: open, in_progress, done",
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    const updateData: { status?: CourseStatus; grade?: number | null } = {};
+
+    if (status) {
+      updateData.status = status as CourseStatus;
+    }
+
+    if (grade !== undefined) {
+      updateData.grade = grade !== null ? parseFloat(String(grade)) : null;
+    }
+
+    const updatedCourse = await prisma.course.update({
+      where: {
+        id: courseId,
+      },
+      data: updateData,
+    });
+
+    return NextResponse.json({ course: updatedCourse }, { status: 200 });
+  } catch (error: any) {
+    console.error("Error updating course:", error.message);
     return NextResponse.json(
       { error: `Internal Server Error: ${error.message}` },
       { status: 500 },
