@@ -90,7 +90,6 @@ export async function PATCH(req: Request) {
       );
     }
 
-    // Check if there's anything to update
     if (!status && grade === undefined) {
       return NextResponse.json(
         { error: "No update parameters provided" },
@@ -98,7 +97,6 @@ export async function PATCH(req: Request) {
       );
     }
 
-    // Validate status if provided
     if (status) {
       const validStatuses = ["open", "in_progress", "done"];
       if (!validStatuses.includes(status)) {
@@ -112,7 +110,6 @@ export async function PATCH(req: Request) {
       }
     }
 
-    // Build update data
     const updateData: { status?: CourseStatus; grade?: number | null } = {};
 
     if (status) {
@@ -123,7 +120,6 @@ export async function PATCH(req: Request) {
       updateData.grade = grade !== null ? parseFloat(String(grade)) : null;
     }
 
-    // Update the course
     const updatedCourse = await prisma.course.update({
       where: {
         id: courseId,

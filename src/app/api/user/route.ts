@@ -18,7 +18,6 @@ export async function POST(req: Request) {
     });
 
     if (newUser) {
-      // Falls der Nutzer schon existiert, Fehlermeldung zurückgeben
       if (existingUser) {
         return NextResponse.json(
           { error: "User existiert bereits" },
@@ -26,7 +25,6 @@ export async function POST(req: Request) {
         );
       }
 
-      // Falls der Nutzer nicht existiert, neuen Nutzer anlegen
       const newUser = await prisma.user.create({
         data: { email },
       });
@@ -34,7 +32,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ user: newUser }, { status: 201 });
     }
 
-    // Falls `newUser` false ist, nur prüfen, ob User existiert
     if (!existingUser) {
       return NextResponse.json(
         { error: "User nicht gefunden" },
