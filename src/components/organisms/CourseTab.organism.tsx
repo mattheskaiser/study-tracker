@@ -116,7 +116,11 @@ export const CourseTabOrganism = ({
   };
 
   return (
-    <div className={cn("flex flex-row justify-between rounded-xl border p-2")}>
+    <div
+      className={cn(
+        "flex flex-col justify-between rounded-xl border p-2 lg:flex-row",
+      )}
+    >
       <div className="flex flex-col gap-y-2">
         <TextAtom
           size="small"
@@ -136,7 +140,7 @@ export const CourseTabOrganism = ({
         <form
           /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-row gap-x-4"
+          className="mt-2 flex flex-row gap-x-4 lg:mt-0"
         >
           <Controller
             name="status"
@@ -172,16 +176,17 @@ export const CourseTabOrganism = ({
           />
         </form>
       ) : (
-        <div className="flex flex-row items-center gap-x-6">
-          <div className="flex flex-row gap-x-6">
+        <div className="relative flex flex-row items-center gap-x-6 gap-y-2">
+          <div className="flex flex-col gap-x-6 lg:flex-row">
             <TextAtom className="text-start">{`Status: ${displayStatus(status)}`}</TextAtom>
             <TextAtom className="text-start">{`Note: ${grade ? grade : "N/A"}`}</TextAtom>
           </div>
-
-          <CourseTabDropdownMolecule
-            setEditAction={() => setEdit(true)}
-            deleteAction={() => handleDelete(id)}
-          />
+          <div className="absolute top-0 right-0 lg:relative">
+            <CourseTabDropdownMolecule
+              setEditAction={() => setEdit(true)}
+              deleteAction={() => handleDelete(id)}
+            />
+          </div>
         </div>
       )}
     </div>
