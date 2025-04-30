@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -32,11 +33,13 @@ const RootLayout = ({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col gap-y-12">
-          <NavbarMolecule />
-          <NuqsAdapter>{children}</NuqsAdapter>
-          <Toaster />
-        </div>
+        <Suspense>
+          <div className="flex flex-col gap-y-12">
+            <NavbarMolecule />
+            <NuqsAdapter>{children}</NuqsAdapter>
+            <Toaster />
+          </div>
+        </Suspense>
       </body>
     </html>
   );
