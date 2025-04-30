@@ -95,7 +95,7 @@ export const CreateCourseOrganism = () => {
           {...register("grade", {
             valueAsNumber: true,
           })}
-          className="max-w-16"
+          className="max-w-32"
         />
         <ButtonAtom
           disabled={isSubmitting}

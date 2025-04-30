@@ -49,6 +49,9 @@ export const StudyOverviewOrganism = () => {
       ? (sumOfGrades / finishedCourses.length).toFixed(2)
       : "0";
 
+  const progress = (finishedCourses.length / courses.length) * 100;
+  console.log(progress);
+
   return (
     <div className="flex flex-col gap-y-6">
       <OverviewBoxMolecule
@@ -56,6 +59,11 @@ export const StudyOverviewOrganism = () => {
           { label: "Offene Kurse", value: amountOfOpenCourses },
           { label: "Abgeschlossene Kurse", value: amountOfFinishedCourses },
           { label: "Durchschnittsnote", value: averageGrade },
+          {
+            label: "Fortschritt",
+            value: progress.toString(),
+            isProgressBar: true,
+          },
         ]}
       />
     </div>
