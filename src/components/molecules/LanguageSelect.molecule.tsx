@@ -1,4 +1,5 @@
 "use client";
+import { useContext } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { FlagAtom } from "@/components/atoms/Flag.atom";
@@ -9,26 +10,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { LanguageContext } from "@/context";
 
 export const LanguageSelectMolecule = () => {
   const { control } = useForm();
+  const { language, setLanguage } = useContext(LanguageContext);
   return (
     <Controller
       name="language"
       control={control}
       render={({ field }) => (
-        <Select onValueChange={field.onChange} defaultValue="english">
+        <Select
+          onValueChange={(value) => {
+            field.onChange;
+            if (setLanguage) {
+              setLanguage(value);
+            }
+          }}
+          defaultValue="en"
+        >
           <SelectTrigger className="max-w-[150px]">
             <SelectValue placeholder="Sprache" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="english">
+            <SelectItem value="en">
               <FlagAtom countryCode={"us"} countryLabel={"English"} />
             </SelectItem>
-            <SelectItem value="spanish">
+            <SelectItem value="esp">
               <FlagAtom countryCode={"es"} countryLabel={"Español"} />
             </SelectItem>
-            <SelectItem value="german">
+            <SelectItem value="de">
               <FlagAtom countryCode={"de"} countryLabel={"Deutsch"} />
             </SelectItem>
           </SelectContent>
