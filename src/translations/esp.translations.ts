@@ -2,7 +2,7 @@ export const espTranslations = {
   accountFinderCard: {
     cardTitle: "Encuentra tus datos",
     cardDescriptionLoginFalse:
-      "Busca tu correo electrónico, en caso de que ya estés registrado. De lo contrario, ingresa tu correo electrónico para crear una cuenta.",
+      "Busca tu correo electrónico en caso de que ya estés registrado. De lo contrario, introduce tu correo para crear una cuenta.",
     cardDescriptionLoginTrue:
       "Nota: Ahora estás conectado a tu cuenta y puedes ver y editar tus cursos, así como consultar tus estadísticas.",
     findEmailOrganism: {
@@ -10,7 +10,7 @@ export const espTranslations = {
         successToastMessage: "¡El proceso fue exitoso!",
         successToastDescription: "Tu cuenta fue encontrada o creada.",
         errorToastMessage: "Desafortunadamente, el proceso no fue exitoso.",
-        errorToastDescription: "Tu cuenta no fue encontrada.",
+        errorToastDescription: "No se encontró tu cuenta.",
         otherToastDescription:
           "Desafortunadamente, ocurrió un error desconocido.",
       },
@@ -25,6 +25,37 @@ export const espTranslations = {
         emailNonEmpty: "El correo es obligatorio",
         emailInvalid: "Correo electrónico no válido",
       },
+    },
+  },
+  courseManagerCard: {
+    cardTitle: "Tus Cursos",
+    cardDescription:
+      "Agrega todos tus cursos y calificaciones para seguir tu progreso académico con precisión.",
+    cardNoteLoginFalse:
+      "Nota: Por favor inicia sesión para ver y agregar cursos.",
+    createCourseOrganism: {
+      toasts: {
+        successToastMessage: "¡El curso fue creado con éxito!",
+        successToastDescription:
+          "Por favor actualiza la página para ver los cambios.",
+        errorToastMessage: "Desafortunadamente, el proceso no fue exitoso.",
+        errorToastDescription: "No se pudo crear el curso.",
+      },
+      form: {
+        courseNamePlaceholder: "Introduce el nombre del curso...",
+        courseStatusPlaceholder: "Seleccionar estado",
+        courseStatusOpen: "Abierto",
+        courseStatusInProgress: "En progreso",
+        courseStatusDone: "Completado",
+        courseGradePlaceholder: "Introduce la calificación...",
+        buttonLabel: "Agregar curso",
+      },
+    },
+    courseListOrganism: {
+      errorMessage: "Desafortunadamente, no se pudieron cargar tus cursos.",
+      noCoursesAddedNote: "Nota: Aún no has agregado cursos.",
+      buttonLabelCollapse: "Colapsar cursos",
+      buttonLabelShowAll: "Mostrar todos los cursos",
     },
   },
 };
