@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -5,6 +6,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { NavbarMolecule } from "@/components/molecules/Navbar.molecule";
 import { Toaster } from "@/components/ui/sonner";
+import { LanguageContextWrapper } from "@/context";
 
 import "./globals.css";
 
@@ -26,20 +28,22 @@ export const metadata: Metadata = {
 const RootLayout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) => {
   return (
     <html lang="de">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Suspense>
-          <div className="flex flex-col gap-y-12">
-            <NavbarMolecule />
-            <NuqsAdapter>{children}</NuqsAdapter>
-            <Toaster />
-          </div>
-        </Suspense>
+        <LanguageContextWrapper>
+          <Suspense>
+            <div className="flex flex-col gap-y-12">
+              <NavbarMolecule />
+              <NuqsAdapter>{children}</NuqsAdapter>
+              <Toaster />
+            </div>
+          </Suspense>
+        </LanguageContextWrapper>
       </body>
     </html>
   );
