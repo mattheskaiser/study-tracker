@@ -3,26 +3,27 @@ import { useQueryState } from "nuqs";
 import { CardAtom } from "@/components/atoms/Card.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { FindEmailOrganism } from "@/components/organisms/FindEmail.organism";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const AccountFinderCardOrganism = () => {
   const [userId] = useQueryState("userId");
+  const translation = useTranslation();
+
   return (
     <CardAtom
       title={
         <TextAtom size="large" isBold>
-          Finde Deine Daten
+          {translation.accountFinderCard.cardTitle}
         </TextAtom>
       }
       description={
         !userId ? (
           <TextAtom size="small">
-            Falls du bereits registriert bist, suche nach deiner E-Mail.
-            Andernfalls gib deine E-Mail ein, um dein Konto freizuschalten.
+            {translation.accountFinderCard.cardDescriptionLoginFalse}
           </TextAtom>
         ) : (
           <TextAtom size="small" color="success">
-            Hinweis: Du bist nun mit deinem Account verbunden und kannst deine
-            Kurse einsehen, bearbeiten und deine Statistiken abrufen.
+            {translation.accountFinderCard.cardDescriptionLoginTrue}
           </TextAtom>
         )
       }

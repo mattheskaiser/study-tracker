@@ -11,6 +11,7 @@ import { TextAtom } from "@/components/atoms/Text.atom";
 import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 import { emailSchema } from "@/schemas/schema";
 
 type FormFields = {
@@ -45,33 +46,53 @@ export const FindEmailOrganism = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isNewUser = watch("newUser");
 
+  const translation = useTranslation();
+
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
     setIsLoading(true);
     try {
       const { data } = await axios.post<DataTypes>("/api/user", formData);
       void setUserId(data.user.id);
-      toast("Der Vorgang war erfolgreich!", {
-        dismissible: true,
-        description: "Dein Account konnte gefunden oder erstellt werden.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.accountFinderCard.findEmailOrganism.toasts
+          .successToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.accountFinderCard.findEmailOrganism.toasts
+              .successToastDescription,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
       setIsLoading(false);
       reset();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast("Der Vorgang war leider nicht erfolgreich.", {
-          dismissible: true,
-          description: "Dein Account konnte nicht gefunden werden.",
-          position: "top-center",
-        });
+        toast(
+          translation.accountFinderCard.findEmailOrganism.toasts
+            .errorToastMessage,
+          {
+            dismissible: true,
+            description:
+              translation.accountFinderCard.findEmailOrganism.toasts
+                .errorToastDescription,
+            position: "top-center",
+          },
+        );
         setIsLoading(false);
       } else {
-        toast("Der Vorgang war leider nicht erfolgreich.", {
-          dismissible: true,
-          description: "Ein ist leider ein unbekannter Fehler aufgetreten.",
-          position: "top-center",
-        });
+        toast(
+          translation.accountFinderCard.findEmailOrganism.toasts
+            .errorToastMessage,
+          {
+            dismissible: true,
+            description:
+              translation.accountFinderCard.findEmailOrganism.toasts
+                .otherToastDescription,
+            position: "top-center",
+          },
+        );
         setIsLoading(false);
       }
     }
@@ -89,7 +110,11 @@ export const FindEmailOrganism = () => {
             {...register("email", { required: true })}
             type="email"
             placeholder={
-              !userId ? "Email eingeben..." : "Email wurde bereits angegeben"
+              !userId
+                ? translation.accountFinderCard.findEmailOrganism.form
+                    .emailNotEnteredPlaceholder
+                : translation.accountFinderCard.findEmailOrganism.form
+                    .emailEnteredPlaceholder
             }
             disabled={!!userId}
           />
@@ -112,7 +137,9 @@ export const FindEmailOrganism = () => {
               />
             )}
           />
-          <TextAtom size="small">Ich bin ein neuer Benutzer</TextAtom>
+          <TextAtom size="small">
+            {translation.accountFinderCard.findEmailOrganism.form.checkboxLabel}
+          </TextAtom>
         </div>
       </div>
       <ButtonAtom
@@ -128,7 +155,11 @@ export const FindEmailOrganism = () => {
         }
         type="submit"
       >
-        {!isNewUser ? "Email suchen" : "Account anlegen"}
+        {!isNewUser
+          ? translation.accountFinderCard.findEmailOrganism.form
+              .searchEmailButton
+          : translation.accountFinderCard.findEmailOrganism.form
+              .createAccountButton}
       </ButtonAtom>
     </form>
   );
