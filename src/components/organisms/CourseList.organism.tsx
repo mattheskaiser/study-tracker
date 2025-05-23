@@ -6,6 +6,7 @@ import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { CourseTabOrganism } from "@/components/organisms/CourseTab.organism";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 import type { CoursesType, CourseType } from "@/types/general.types";
 
 export const CourseListOrganism = () => {
@@ -14,6 +15,7 @@ export const CourseListOrganism = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showAllCourses, setShowAllCourses] = useState<boolean>(false);
+  const translation = useTranslation();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -57,7 +59,7 @@ export const CourseListOrganism = () => {
   if (error) {
     return (
       <TextAtom size="small" color="error">
-        Deine Kurse konnten nicht geladen werden.
+        {translation.courseManagerCard.courseListOrganism.errorMessage}
       </TextAtom>
     );
   }
@@ -65,7 +67,7 @@ export const CourseListOrganism = () => {
   if (courses.length === 0) {
     return (
       <TextAtom size="small" color="warning">
-        Hinweis: Du hast bisher noch keine Kurse angelegt.
+        {translation.courseManagerCard.courseListOrganism.noCoursesAddedNote}
       </TextAtom>
     );
   }
@@ -98,7 +100,11 @@ export const CourseListOrganism = () => {
           endContent={showAllCourses ? <ArrowUp /> : <ArrowDown />}
           onPress={() => setShowAllCourses((prev) => !prev)}
         >
-          {showAllCourses ? "Kurse einklappen" : "Alle Kurse anzeigen"}
+          {showAllCourses
+            ? translation.courseManagerCard.courseListOrganism
+                .buttonLabelCollapse
+            : translation.courseManagerCard.courseListOrganism
+                .buttonLabelShowAll}
         </ButtonAtom>
       )}
     </div>

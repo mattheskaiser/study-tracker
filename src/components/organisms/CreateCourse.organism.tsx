@@ -17,12 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 import { courseSchema } from "@/schemas/schema";
 
 type FormFields = z.infer<typeof courseSchema>;
 
 export const CreateCourseOrganism = () => {
   const [userId] = useQueryState("userId");
+  const translation = useTranslation();
 
   const {
     register,
@@ -43,20 +45,31 @@ export const CreateCourseOrganism = () => {
     try {
       await axios.post("/api/courses", { ...formData, userId });
       reset();
-      toast("Der Kurse wurde erfolgreich erstellt!", {
-        dismissible: true,
-        description:
-          "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.courseManagerCard.createCourseOrganism.toasts
+          .successToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.courseManagerCard.createCourseOrganism.toasts
+              .successToastDescription,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
     } catch {
-      toast("Der Vorgang war leider nicht erfolgreich.", {
-        dismissible: true,
-        description: "Der Kurs konnte leider nicht erstellt werden.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.courseManagerCard.createCourseOrganism.toasts
+          .errorToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.courseManagerCard.createCourseOrganism.toasts
+              .errorToastDescription,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
     }
   };
 
@@ -66,7 +79,10 @@ export const CreateCourseOrganism = () => {
       <div className="flex flex-col gap-x-2 gap-y-4 md:flex-row">
         <Input
           type="text"
-          placeholder="Kursname eingeben..."
+          placeholder={
+            translation.courseManagerCard.createCourseOrganism.form
+              .courseNamePlaceholder
+          }
           {...register("name", { required: true })}
         />
         <Controller
@@ -75,12 +91,32 @@ export const CreateCourseOrganism = () => {
           render={({ field }) => (
             <Select onValueChange={field.onChange} defaultValue="open">
               <SelectTrigger className="max-w-[150px]">
-                <SelectValue placeholder="Status auswählen" />
+                <SelectValue
+                  placeholder={
+                    translation.courseManagerCard.createCourseOrganism.form
+                      .courseStatusPlaceholder
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="open">Offen</SelectItem>
-                <SelectItem value="in_progress">In Arbeit</SelectItem>
-                <SelectItem value="done">Abgeschlossen</SelectItem>
+                <SelectItem value="open">
+                  {
+                    translation.courseManagerCard.createCourseOrganism.form
+                      .courseStatusOpen
+                  }
+                </SelectItem>
+                <SelectItem value="in_progress">
+                  {
+                    translation.courseManagerCard.createCourseOrganism.form
+                      .courseStatusInProgress
+                  }
+                </SelectItem>
+                <SelectItem value="done">
+                  {
+                    translation.courseManagerCard.createCourseOrganism.form
+                      .courseStatusDone
+                  }
+                </SelectItem>
               </SelectContent>
             </Select>
           )}
@@ -88,9 +124,11 @@ export const CreateCourseOrganism = () => {
         <Input
           min={1}
           max={6}
-          aria-description="Bitte Note angeben (optional)"
           type="number"
-          placeholder="Note eingeben..."
+          placeholder={
+            translation.courseManagerCard.createCourseOrganism.form
+              .courseGradePlaceholder
+          }
           step="0.1"
           {...register("grade", {
             valueAsNumber: true,
@@ -102,7 +140,7 @@ export const CreateCourseOrganism = () => {
           endContent={<Plus strokeWidth={2} />}
           type="submit"
         >
-          Kurs hinzufügen
+          {translation.courseManagerCard.createCourseOrganism.form.buttonLabel}
         </ButtonAtom>
       </div>
       <div className="flex flex-col gap-y-2">

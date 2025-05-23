@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type ButtonAtomProps = {
-  children?: string;
+  children?: ReactNode;
   onPress?: () => void;
   isIconOnly?: boolean;
   icon?: ReactNode;

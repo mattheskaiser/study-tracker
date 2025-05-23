@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { useQueryState } from "nuqs";
 
 import { OverviewBoxMolecule } from "@/components/molecules/OverviewBox.molecule";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 import type { CoursesType, CourseType } from "@/types/general.types";
 
 export const StudyOverviewOrganism = () => {
+  const translation = useTranslation();
+
   const [userId] = useQueryState("userId");
   const [courses, setCourses] = useState<CourseType[]>([]);
   const [finishedCourses, setFinishedCourses] = useState<CourseType[]>([]);
@@ -50,17 +53,22 @@ export const StudyOverviewOrganism = () => {
       : "0";
 
   const progress = (finishedCourses.length / courses.length) * 100;
-  console.log(progress);
 
   return (
     <div className="flex flex-col gap-y-6">
       <OverviewBoxMolecule
         boxes={[
-          { label: "Offene Kurse", value: amountOfOpenCourses },
-          { label: "Abgeschlossene Kurse", value: amountOfFinishedCourses },
-          { label: "Durchschnittsnote", value: averageGrade },
           {
-            label: "Fortschritt",
+            label: translation.overviewCard.openCourses,
+            value: amountOfOpenCourses,
+          },
+          {
+            label: translation.overviewCard.finishedCourses,
+            value: amountOfFinishedCourses,
+          },
+          { label: translation.overviewCard.gradeAverage, value: averageGrade },
+          {
+            label: translation.overviewCard.progress,
             value: progress.toString(),
             isProgressBar: true,
           },
