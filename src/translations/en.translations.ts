@@ -81,4 +81,13 @@ export const enTranslations = {
       },
     },
   },
+  overviewCard: {
+    cardTitle: "Overview",
+    cardDescription: "Your studies at a glance.",
+    cardNote: "Note: Please log in to access your statistics.",
+    openCourses: "Open Courses",
+    finishedCourses: "Completed Courses",
+    gradeAverage: "Grade Average",
+    progress: "Progress",
+  },
 };

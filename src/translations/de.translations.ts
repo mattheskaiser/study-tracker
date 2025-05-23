@@ -83,4 +83,14 @@ export const deTranslations = {
       },
     },
   },
+  overviewCard: {
+    cardTitle: "Überblick",
+    cardDescription: "Dein Studium auf einen Blick.",
+    cardNote:
+      "Hinweis: Bitte melde dich an, um auf deine Statistiken zuzugreifen.",
+    openCourses: "Offene Kurse",
+    finishedCourses: "Abgeschlossene Kurse",
+    gradeAverage: "Notendurchschnitt",
+    progress: "Fortschritt",
+  },
 };

@@ -84,4 +84,13 @@ export const espTranslations = {
       },
     },
   },
+  overviewCard: {
+    cardTitle: "Resumen",
+    cardDescription: "Tus estudios de un vistazo.",
+    cardNote: "Nota: Por favor, inicia sesión para acceder a tus estadísticas.",
+    openCourses: "Cursos abiertos",
+    finishedCourses: "Cursos completados",
+    gradeAverage: "Promedio de notas",
+    progress: "Progreso",
+  },
 };
