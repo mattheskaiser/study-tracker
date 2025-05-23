@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const CourseTabDropdownMolecule = ({
   setEditAction,
@@ -20,7 +21,7 @@ export const CourseTabDropdownMolecule = ({
   deleteAction: () => void;
 }) => {
   const [open, setOpen] = React.useState(false);
-
+  const translate = useTranslation();
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
@@ -31,10 +32,16 @@ export const CourseTabDropdownMolecule = ({
       <DropdownMenuContent align="center" className="w-[200px]">
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={setEditAction}>
-            Bearbeiten
+            {
+              translate.courseManagerCard.courseListOrganism.courseTabOrganism
+                .dropdown.edit
+            }
           </DropdownMenuItem>
           <DropdownMenuItem onClick={deleteAction} className="text-red-600">
-            Löschen
+            {
+              translate.courseManagerCard.courseListOrganism.courseTabOrganism
+                .dropdown.delete
+            }
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

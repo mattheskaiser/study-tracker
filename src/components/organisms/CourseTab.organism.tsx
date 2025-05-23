@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 import { cn } from "@/lib/utils";
 import { courseEditSchema } from "@/schemas/schema";
 import type { CourseStatusType } from "@/types/general.types";
@@ -59,24 +60,37 @@ export const CourseTabOrganism = ({
     resolver: zodResolver(courseEditSchema) as Resolver<FormDataTypes>,
   });
 
+  const translation = useTranslation();
+
   const onSubmit: SubmitHandler<FormDataTypes> = async (formData) => {
     try {
       await axios.patch("/api/courses", { ...formData, courseId: id });
       setEdit(false);
-      toast("Dein Kurs wurde erfolgreich angepasst!", {
-        dismissible: true,
-        description:
-          "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.courseManagerCard.courseListOrganism.courseTabOrganism
+          .toasts.editSuccessToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.courseManagerCard.courseListOrganism.courseTabOrganism
+              .toasts.editSuccessToastDescription,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
     } catch {
-      toast("Der Vorgang war leider nicht erfolgreich.", {
-        dismissible: true,
-        description: "Der Kurs konnte leider nicht bearbeitet werden.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.courseManagerCard.courseListOrganism.courseTabOrganism
+          .toasts.editErrorToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.courseManagerCard.courseListOrganism.courseTabOrganism
+              .toasts.editErrorToastDescription,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
     }
   };
 
@@ -90,29 +104,46 @@ export const CourseTabOrganism = ({
       if (!response.ok) {
         throw new Error("Failed to delete course");
       }
-      toast("Der Kurs wurde erfolgreich gelöscht.", {
-        dismissible: true,
-        description:
-          "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.courseManagerCard.courseListOrganism.courseTabOrganism
+          .toasts.deleteSuccessToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.courseManagerCard.courseListOrganism.courseTabOrganism
+              .toasts.deleteSuccessToastMessage,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
     } catch (error) {
       console.error("Error deleting course:", error);
-      toast("Der Vorgang war leider nicht erfolgreich.", {
-        dismissible: true,
-        description: "Der Kurs konnte leider nicht gelöscht werden.",
-        style: { textDecorationColor: "black" },
-        position: "top-center",
-      });
+      toast(
+        translation.courseManagerCard.courseListOrganism.courseTabOrganism
+          .toasts.deleteErrorToastMessage,
+        {
+          dismissible: true,
+          description:
+            translation.courseManagerCard.courseListOrganism.courseTabOrganism
+              .toasts.deleteErrorToastDescription,
+          style: { textDecorationColor: "black" },
+          position: "top-center",
+        },
+      );
     }
     void setCourseId(null);
   };
 
   const displayStatus = (formStatus: FormDataTypes["status"]) => {
-    if (formStatus === "open") return "Offen";
-    if (formStatus === "in_progress") return "In Arbeit";
-    if (formStatus === "done") return "Abgeschlossen";
+    if (formStatus === "open")
+      return translation.courseManagerCard.courseListOrganism.courseTabOrganism
+        .courseStatusOpen;
+    if (formStatus === "in_progress")
+      return translation.courseManagerCard.courseListOrganism.courseTabOrganism
+        .courseStatusInProgress;
+    if (formStatus === "done")
+      return translation.courseManagerCard.courseListOrganism.courseTabOrganism
+        .courseStatusDone;
   };
 
   return (
@@ -148,12 +179,32 @@ export const CourseTabOrganism = ({
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="max-w-[150px]">
-                  <SelectValue placeholder="Status auswählen" />
+                  <SelectValue
+                    placeholder={
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.selectStatusPlaceholder
+                    }
+                  />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="open">Offen</SelectItem>
-                  <SelectItem value="in_progress">In Arbeit</SelectItem>
-                  <SelectItem value="done">Abgeschlossen</SelectItem>
+                  <SelectItem value="open">
+                    {
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.courseStatusOpen
+                    }
+                  </SelectItem>
+                  <SelectItem value="in_progress">
+                    {
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.courseStatusInProgress
+                    }
+                  </SelectItem>
+                  <SelectItem value="done">
+                    {
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.courseStatusDone
+                    }
+                  </SelectItem>
                 </SelectContent>
               </Select>
             )}
@@ -178,8 +229,14 @@ export const CourseTabOrganism = ({
       ) : (
         <div className="relative flex flex-row items-center gap-x-6 gap-y-2">
           <div className="flex flex-col gap-x-6 lg:flex-row">
-            <TextAtom className="text-start">{`Status: ${displayStatus(status)}`}</TextAtom>
-            <TextAtom className="text-start">{`Note: ${grade ? grade : "N/A"}`}</TextAtom>
+            <TextAtom className="text-start">{`${
+              translation.courseManagerCard.courseListOrganism.courseTabOrganism
+                .status
+            }: ${displayStatus(status)}`}</TextAtom>
+            <TextAtom className="text-start">{`${
+              translation.courseManagerCard.courseListOrganism.courseTabOrganism
+                .grade
+            }: ${grade ? grade : "N/A"}`}</TextAtom>
           </div>
           <div className="absolute top-0 right-0 lg:relative">
             <CourseTabDropdownMolecule

@@ -56,6 +56,32 @@ export const espTranslations = {
       noCoursesAddedNote: "Nota: Aún no has agregado cursos.",
       buttonLabelCollapse: "Colapsar cursos",
       buttonLabelShowAll: "Mostrar todos los cursos",
+      courseTabOrganism: {
+        toasts: {
+          editSuccessToastMessage: "¡Tu curso se actualizó correctamente!",
+          editSuccessToastDescription:
+            "Por favor, actualiza la página para ver tus cambios.",
+          editErrorToastMessage:
+            "Desafortunadamente, la operación no tuvo éxito.",
+          editErrorToastDescription: "No se pudo editar el curso.",
+          deleteSuccessToastMessage: "El curso se eliminó correctamente.",
+          deleteSuccessToastDescription:
+            "Por favor, actualiza la página para ver tus cambios.",
+          deleteErrorToastMessage:
+            "Desafortunadamente, la operación no tuvo éxito.",
+          deleteErrorToastDescription: "No se pudo eliminar el curso.",
+        },
+        courseStatusOpen: "Abierto",
+        courseStatusInProgress: "En curso",
+        courseStatusDone: "Completado",
+        selectStatusPlaceholder: "Seleccionar estado",
+        status: "Estado",
+        grade: "Nota",
+        dropdown: {
+          edit: "Editar",
+          delete: "Eliminar",
+        },
+      },
     },
   },
 };

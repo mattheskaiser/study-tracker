@@ -53,6 +53,32 @@ export const enTranslations = {
       noCoursesAddedNote: "Note: You haven't added any courses yet.",
       buttonLabelCollapse: "Collapse courses",
       buttonLabelShowAll: "Show all courses",
+      courseTabOrganism: {
+        toasts: {
+          editSuccessToastMessage: "Your course was successfully updated!",
+          editSuccessToastDescription:
+            "Please refresh the page to see your changes.",
+          editErrorToastMessage:
+            "The operation was unfortunately not successful.",
+          editErrorToastDescription: "The course could not be edited.",
+          deleteSuccessToastMessage: "The course was successfully deleted.",
+          deleteSuccessToastDescription:
+            "Please refresh the page to see your changes.",
+          deleteErrorToastMessage:
+            "The operation was unfortunately not successful.",
+          deleteErrorToastDescription: "The course could not be deleted.",
+        },
+        courseStatusOpen: "Open",
+        courseStatusInProgress: "In Progress",
+        courseStatusDone: "Completed",
+        selectStatusPlaceholder: "Select status",
+        status: "Status",
+        grade: "Grade",
+        dropdown: {
+          edit: "Edit",
+          delete: "Delete",
+        },
+      },
     },
   },
 };

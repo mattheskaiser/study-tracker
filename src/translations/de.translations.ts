@@ -55,7 +55,32 @@ export const deTranslations = {
       noCoursesAddedNote: "Hinweis: Du hast noch keine Kurse hinzugefügt.",
       buttonLabelCollapse: "Kurse einklappen",
       buttonLabelShowAll: "Alle Kurse anzeigen",
-      courseTabOrganism: {},
+      courseTabOrganism: {
+        toasts: {
+          editSuccessToastMessage: "Dein Kurs wurde erfolgreich angepasst!",
+          editSuccessToastDescription:
+            "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
+          editErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
+          editErrorToastDescription:
+            "Der Kurs konnte leider nicht bearbeitet werden.",
+          deleteSuccessToastMessage: "Der Kurs wurde erfolgreich gelöscht.",
+          deleteSuccessToastDescription:
+            "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
+          deleteErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
+          deleteErrorToastDescription:
+            "Der Kurs konnte leider nicht gelöscht werden.",
+        },
+        courseStatusOpen: "Offen",
+        courseStatusInProgress: "In Bearbeitung",
+        courseStatusDone: "Abgeschlossen",
+        selectStatusPlaceholder: "Status auswählen",
+        status: "Status",
+        grade: "Note",
+        dropdown: {
+          edit: "Bearbeiten",
+          delete: "Löschen",
+        },
+      },
     },
   },
 };
