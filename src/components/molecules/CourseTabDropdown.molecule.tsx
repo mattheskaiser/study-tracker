@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import { MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ export const CourseTabDropdownMolecule = ({
   setEditAction: () => void;
   deleteAction: () => void;
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const translate = useTranslation();
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>

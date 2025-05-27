@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowUp, SlidersHorizontal } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { useQueryState } from "nuqs";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { ListFilterDropdownMolecule } from "@/components/molecules/ListFilterDropdown.molecule";
 import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { CourseTabOrganism } from "@/components/organisms/CourseTab.organism";
 import { useTranslation } from "@/hooks/useTranslation.hook";
@@ -11,6 +12,7 @@ import type { CoursesType, CourseType } from "@/types/general.types";
 
 export const CourseListOrganism = () => {
   const [userId] = useQueryState("userId");
+  const [statusFilter] = useQueryState("statusFilter");
   const [courses, setCourses] = useState<CourseType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +50,15 @@ export const CourseListOrganism = () => {
     void fetchCourses();
   }, [userId]);
 
+  useEffect(() => {
+    if (statusFilter === "open")
+      setCourses(courses.filter((course) => course.status === "open"));
+    if (statusFilter === "inProgress")
+      setCourses(courses.filter((course) => course.status === "in_progress"));
+    if (statusFilter === "done")
+      setCourses(courses.filter((course) => course.status === "done"));
+  }, [statusFilter]);
+
   if (loading) {
     return (
       <div className="mt-6 flex w-full justify-center">
@@ -71,10 +82,13 @@ export const CourseListOrganism = () => {
       </TextAtom>
     );
   }
+
+  console.log(courses);
+
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex flex-row justify-end">
-        <ButtonAtom isIconOnly icon={<SlidersHorizontal />} />
+        <ListFilterDropdownMolecule />
       </div>
       <div className="flex flex-col gap-y-2">
         {showAllCourses
