@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, SlidersHorizontal } from "lucide-react";
 import { useQueryState } from "nuqs";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
@@ -73,19 +73,12 @@ export const CourseListOrganism = () => {
   }
   return (
     <div className="flex flex-col gap-y-2">
-      {showAllCourses
-        ? courses.map((course) => (
-            <CourseTabOrganism
-              key={course.id}
-              id={course.id}
-              name={course.name}
-              status={course.status}
-              grade={course.grade}
-            />
-          ))
-        : courses
-            .slice(0, 5)
-            .map((course) => (
+      <div className="flex flex-row justify-end">
+        <ButtonAtom isIconOnly icon={<SlidersHorizontal />} />
+      </div>
+      <div className="flex flex-col gap-y-2">
+        {showAllCourses
+          ? courses.map((course) => (
               <CourseTabOrganism
                 key={course.id}
                 id={course.id}
@@ -93,20 +86,32 @@ export const CourseListOrganism = () => {
                 status={course.status}
                 grade={course.grade}
               />
-            ))}
-      {courses.length > 5 && (
-        <ButtonAtom
-          className="mt-6"
-          endContent={showAllCourses ? <ArrowUp /> : <ArrowDown />}
-          onPress={() => setShowAllCourses((prev) => !prev)}
-        >
-          {showAllCourses
-            ? translation.courseManagerCard.courseListOrganism
-                .buttonLabelCollapse
-            : translation.courseManagerCard.courseListOrganism
-                .buttonLabelShowAll}
-        </ButtonAtom>
-      )}
+            ))
+          : courses
+              .slice(0, 5)
+              .map((course) => (
+                <CourseTabOrganism
+                  key={course.id}
+                  id={course.id}
+                  name={course.name}
+                  status={course.status}
+                  grade={course.grade}
+                />
+              ))}
+        {courses.length > 5 && (
+          <ButtonAtom
+            className="mt-6"
+            endContent={showAllCourses ? <ArrowUp /> : <ArrowDown />}
+            onPress={() => setShowAllCourses((prev) => !prev)}
+          >
+            {showAllCourses
+              ? translation.courseManagerCard.courseListOrganism
+                  .buttonLabelCollapse
+              : translation.courseManagerCard.courseListOrganism
+                  .buttonLabelShowAll}
+          </ButtonAtom>
+        )}
+      </div>
     </div>
   );
 };
