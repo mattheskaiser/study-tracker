@@ -149,7 +149,7 @@ export const CourseTabOrganism = ({
   return (
     <div
       className={cn(
-        "flex flex-col justify-between rounded-xl border p-2 lg:flex-row",
+        "flex flex-col justify-between rounded-xl border p-2 shadow-md lg:flex-row",
       )}
     >
       <div className="flex flex-col gap-y-2">

@@ -1,54 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowDown, ArrowUp } from "lucide-react";
-import { useQueryState } from "nuqs";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { ListFilterDropdownMolecule } from "@/components/molecules/ListFilterDropdown.molecule";
 import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { CourseTabOrganism } from "@/components/organisms/CourseTab.organism";
+import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import type { CoursesType, CourseType } from "@/types/general.types";
 
 export const CourseListOrganism = () => {
-  const [userId] = useQueryState("userId");
-  const [courses, setCourses] = useState<CourseType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [showAllCourses, setShowAllCourses] = useState<boolean>(false);
   const translation = useTranslation();
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      if (!userId) {
-        setCourses([]);
-        setLoading(false);
-        return;
-      }
+  const [showAllCourses, setShowAllCourses] = useState<boolean>(false);
 
-      try {
-        setLoading(true);
-        const response = await fetch(`/api/courses?userId=${userId}`);
+  const { isPending, error, courses } = useCourses();
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch courses: ${response.status}`);
-        }
-
-        const data = (await response.json()) as CoursesType;
-        setCourses(data.courses || []);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to fetch courses",
-        );
-        console.error("Error fetching courses:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    void fetchCourses();
-  }, [userId]);
-
-  if (loading) {
+  if (isPending) {
     return (
       <div className="mt-6 flex w-full justify-center">
         <LoadingSpinnerMolecule color="black" />
@@ -71,21 +39,15 @@ export const CourseListOrganism = () => {
       </TextAtom>
     );
   }
+
   return (
     <div className="flex flex-col gap-y-2">
-      {showAllCourses
-        ? courses.map((course) => (
-            <CourseTabOrganism
-              key={course.id}
-              id={course.id}
-              name={course.name}
-              status={course.status}
-              grade={course.grade}
-            />
-          ))
-        : courses
-            .slice(0, 5)
-            .map((course) => (
+      <div className="flex flex-row justify-end">
+        <ListFilterDropdownMolecule />
+      </div>
+      <div className="flex flex-col gap-y-2">
+        {showAllCourses
+          ? courses.map((course) => (
               <CourseTabOrganism
                 key={course.id}
                 id={course.id}
@@ -93,20 +55,32 @@ export const CourseListOrganism = () => {
                 status={course.status}
                 grade={course.grade}
               />
-            ))}
-      {courses.length > 5 && (
-        <ButtonAtom
-          className="mt-6"
-          endContent={showAllCourses ? <ArrowUp /> : <ArrowDown />}
-          onPress={() => setShowAllCourses((prev) => !prev)}
-        >
-          {showAllCourses
-            ? translation.courseManagerCard.courseListOrganism
-                .buttonLabelCollapse
-            : translation.courseManagerCard.courseListOrganism
-                .buttonLabelShowAll}
-        </ButtonAtom>
-      )}
+            ))
+          : courses
+              .slice(0, 5)
+              .map((course) => (
+                <CourseTabOrganism
+                  key={course.id}
+                  id={course.id}
+                  name={course.name}
+                  status={course.status}
+                  grade={course.grade}
+                />
+              ))}
+        {courses.length > 5 && (
+          <ButtonAtom
+            className="mt-6"
+            endContent={showAllCourses ? <ArrowUp /> : <ArrowDown />}
+            onPress={() => setShowAllCourses((prev) => !prev)}
+          >
+            {showAllCourses
+              ? translation.courseManagerCard.courseListOrganism
+                  .buttonLabelCollapse
+              : translation.courseManagerCard.courseListOrganism
+                  .buttonLabelShowAll}
+          </ButtonAtom>
+        )}
+      </div>
     </div>
   );
 };
