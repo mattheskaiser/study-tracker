@@ -10,7 +10,7 @@ export const OverviewCardOrganism = () => {
   const translation = useTranslation();
   return (
     <CardAtom
-      className="order-1 w-full lg:order-2 lg:w-[35%]"
+      className="order-1 w-full lg:order-2"
       title={
         <TextAtom size="large" isBold>
           {translation.overviewCard.cardTitle}
