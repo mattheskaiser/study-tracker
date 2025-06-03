@@ -51,7 +51,7 @@ export const CourseTabOrganism = ({
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormDataTypes>({
     defaultValues: {
       status: status,
@@ -220,11 +220,13 @@ export const CourseTabOrganism = ({
             className="max-w-16"
           />
           <ButtonAtom
+            isLoading={isSubmitting}
             type="submit"
-            isIconOnly
-            icon={<Save />}
             onPress={handleSubmit(onSubmit)}
-          />
+            label="Speichern"
+          >
+            <Save />
+          </ButtonAtom>
         </form>
       ) : (
         <div className="relative flex flex-row items-center gap-x-6 gap-y-2">

@@ -8,7 +8,6 @@ import { toast } from "sonner";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
@@ -33,7 +32,7 @@ export const FindEmailOrganism = () => {
     control,
     watch,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     defaultValues: {
       email: "",
@@ -102,7 +101,7 @@ export const FindEmailOrganism = () => {
     <form
       /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col gap-x-6 gap-y-4 md:flex-row"
+      className="flex w-full flex-col gap-x-2 gap-y-4 md:flex-row"
     >
       <div className="flex w-full flex-col gap-y-4">
         <div className="flex flex-col gap-y-2">
@@ -143,23 +142,18 @@ export const FindEmailOrganism = () => {
         </div>
       </div>
       <ButtonAtom
+        isLoading={isSubmitting}
         disabled={!!userId || isLoading}
-        endContent={
-          isLoading ? (
-            <LoadingSpinnerMolecule color="white" />
-          ) : !isNewUser ? (
-            <Search strokeWidth={2} />
-          ) : (
-            <UserPlus strokeWidth={2} />
-          )
+        label={
+          !isNewUser
+            ? translation.accountFinderCard.findEmailOrganism.form
+                .searchEmailButton
+            : translation.accountFinderCard.findEmailOrganism.form
+                .createAccountButton
         }
         type="submit"
       >
-        {!isNewUser
-          ? translation.accountFinderCard.findEmailOrganism.form
-              .searchEmailButton
-          : translation.accountFinderCard.findEmailOrganism.form
-              .createAccountButton}
+        {!isNewUser ? <Search strokeWidth={2} /> : <UserPlus strokeWidth={2} />}
       </ButtonAtom>
     </form>
   );

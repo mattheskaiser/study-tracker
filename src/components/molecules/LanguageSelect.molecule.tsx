@@ -14,7 +14,7 @@ import { LanguageContext } from "@/context";
 
 export const LanguageSelectMolecule = () => {
   const { control } = useForm();
-  const { language, setLanguage } = useContext(LanguageContext);
+  const { setLanguage } = useContext(LanguageContext);
   return (
     <Controller
       name="language"

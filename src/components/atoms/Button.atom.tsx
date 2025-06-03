@@ -2,55 +2,37 @@
 
 import type { ReactNode } from "react";
 import type { ClassValue } from "clsx";
+import { Loader2Icon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type ButtonAtomProps = {
-  children?: ReactNode;
+  children: ReactNode;
+  label?: ReactNode;
   onPress?: () => void;
-  isIconOnly?: boolean;
-  icon?: ReactNode;
-  startContent?: ReactNode;
-  endContent?: ReactNode;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: ClassValue;
+  isLoading?: boolean;
 };
 
 export const ButtonAtom = ({
   children,
   onPress,
-  isIconOnly,
-  icon,
-  startContent,
-  endContent,
   type,
   disabled,
   className,
+  isLoading,
 }: ButtonAtomProps) => {
-  return isIconOnly ? (
+  return (
     <Button
       type={type}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       onClick={onPress}
-      className={cn("", className)}
+      className={cn("hover:cursor-pointer", className)}
     >
-      {icon}
-    </Button>
-  ) : (
-    <Button
-      disabled={disabled}
-      type={type}
-      onClick={onPress}
-      className={cn(
-        "flex flex-row items-center justify-center text-base hover:cursor-pointer",
-        className,
-      )}
-    >
-      {startContent}
-      {children}
-      {endContent}
+      {!isLoading ? children : <Loader2Icon className="animate-spin" />}
     </Button>
   );
 };

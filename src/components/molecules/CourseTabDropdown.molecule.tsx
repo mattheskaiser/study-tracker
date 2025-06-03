@@ -25,9 +25,16 @@ export const CourseTabDropdownMolecule = ({
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button size="sm">
+        {/*<TooltipProvider>*/}
+        {/*  <Tooltip>*/}
+        {/*    <TooltipTrigger asChild>*/}
+        <Button>
           <MoreHorizontal />
         </Button>
+        {/*    </TooltipTrigger>*/}
+        {/*    <TooltipContent>Bearbeiten</TooltipContent>*/}
+        {/*  </Tooltip>*/}
+        {/*</TooltipProvider>*/}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="w-[200px]">
         <DropdownMenuGroup>

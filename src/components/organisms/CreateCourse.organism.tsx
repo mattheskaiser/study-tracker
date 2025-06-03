@@ -136,11 +136,13 @@ export const CreateCourseOrganism = () => {
           className="max-w-32"
         />
         <ButtonAtom
-          disabled={isSubmitting}
-          endContent={<Plus strokeWidth={2} />}
+          isLoading={isSubmitting}
+          label={
+            translation.courseManagerCard.createCourseOrganism.form.buttonLabel
+          }
           type="submit"
         >
-          {translation.courseManagerCard.createCourseOrganism.form.buttonLabel}
+          <Plus strokeWidth={2} />
         </ButtonAtom>
       </div>
       <div className="flex flex-col gap-y-2">

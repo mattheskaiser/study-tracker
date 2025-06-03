@@ -27,7 +27,7 @@ export const ListFilterDropdownMolecule = () => {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button size="sm">
+        <Button>
           <SlidersHorizontal />
         </Button>
       </DropdownMenuTrigger>
