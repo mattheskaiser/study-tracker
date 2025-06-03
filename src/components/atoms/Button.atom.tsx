@@ -30,7 +30,7 @@ export const ButtonAtom = ({
       type={type}
       disabled={disabled || isLoading}
       onClick={onPress}
-      className={cn("hover:cursor-pointer", className)}
+      className={cn(className)}
     >
       {!isLoading ? children : <Loader2Icon className="animate-spin" />}
     </Button>

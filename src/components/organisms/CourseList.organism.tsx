@@ -41,8 +41,8 @@ export const CourseListOrganism = () => {
   }
 
   return (
-    <div className="flex flex-col gap-y-2">
-      <div className="flex flex-row justify-end">
+    <div className="flex flex-col gap-y-6">
+      <div className="flex flex-row justify-start">
         <ListFilterDropdownMolecule />
       </div>
       <div className="flex flex-col gap-y-2">
