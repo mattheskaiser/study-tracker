@@ -1,5 +1,5 @@
 import type { Resolver, SubmitHandler } from "react-hook-form";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Plus } from "lucide-react";
@@ -9,14 +9,8 @@ import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { courseSchema } from "@/schemas/schema";
 
@@ -85,41 +79,34 @@ export const CreateCourseOrganism = () => {
           }
           {...register("name", { required: true })}
         />
-        <Controller
+        <SelectMolecule
           name="status"
+          defaultValue="open"
           control={control}
-          render={({ field }) => (
-            <Select onValueChange={field.onChange} defaultValue="open">
-              <SelectTrigger className="max-w-[150px]">
-                <SelectValue
-                  placeholder={
-                    translation.courseManagerCard.createCourseOrganism.form
-                      .courseStatusPlaceholder
-                  }
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="open">
-                  {
-                    translation.courseManagerCard.createCourseOrganism.form
-                      .courseStatusOpen
-                  }
-                </SelectItem>
-                <SelectItem value="in_progress">
-                  {
-                    translation.courseManagerCard.createCourseOrganism.form
-                      .courseStatusInProgress
-                  }
-                </SelectItem>
-                <SelectItem value="done">
-                  {
-                    translation.courseManagerCard.createCourseOrganism.form
-                      .courseStatusDone
-                  }
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          )}
+          placeholder={
+            translation.courseManagerCard.createCourseOrganism.form
+              .courseStatusPlaceholder
+          }
+          items={[
+            {
+              value: "open",
+              children:
+                translation.courseManagerCard.createCourseOrganism.form
+                  .courseStatusOpen,
+            },
+            {
+              value: "in_progress",
+              children:
+                translation.courseManagerCard.createCourseOrganism.form
+                  .courseStatusInProgress,
+            },
+            {
+              value: "done",
+              children:
+                translation.courseManagerCard.createCourseOrganism.form
+                  .courseStatusDone,
+            },
+          ]}
         />
         <Input
           min={1}
