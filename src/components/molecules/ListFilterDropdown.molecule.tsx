@@ -19,7 +19,7 @@ export const ListFilterDropdownMolecule = () => {
   const [open, setOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useQueryState("statusFilter");
 
-  const setStatus = (status: "open" | "inProgress" | "closed") => {
+  const setStatus = (status: "open" | "inProgress" | "done") => {
     if (statusFilter != status || null) void setStatusFilter(status);
     if (statusFilter === status) void setStatusFilter(null);
   };
@@ -27,7 +27,7 @@ export const ListFilterDropdownMolecule = () => {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button size="sm">
+        <Button>
           <SlidersHorizontal />
         </Button>
       </DropdownMenuTrigger>
@@ -48,10 +48,10 @@ export const ListFilterDropdownMolecule = () => {
                   {statusFilter === "inProgress" && <Check />}
                 </div>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setStatus("closed")}>
+              <DropdownMenuItem onClick={() => setStatus("done")}>
                 <div className="flex w-full flex-row items-center justify-between">
                   <TextAtom size="small">Abgeschlossen</TextAtom>
-                  {statusFilter === "closed" && <Check />}
+                  {statusFilter === "done" && <Check />}
                 </div>
               </DropdownMenuItem>
             </DropdownMenuSubContent>

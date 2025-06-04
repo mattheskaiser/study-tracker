@@ -41,8 +41,8 @@ export const CourseListOrganism = () => {
   }
 
   return (
-    <div className="flex flex-col gap-y-2">
-      <div className="flex flex-row justify-end">
+    <div className="flex flex-col gap-y-6">
+      <div className="flex flex-row justify-start">
         <ListFilterDropdownMolecule />
       </div>
       <div className="flex flex-col gap-y-2">
@@ -70,14 +70,16 @@ export const CourseListOrganism = () => {
         {courses.length > 5 && (
           <ButtonAtom
             className="mt-6"
-            endContent={showAllCourses ? <ArrowUp /> : <ArrowDown />}
+            label={
+              showAllCourses
+                ? translation.courseManagerCard.courseListOrganism
+                    .buttonLabelCollapse
+                : translation.courseManagerCard.courseListOrganism
+                    .buttonLabelShowAll
+            }
             onPress={() => setShowAllCourses((prev) => !prev)}
           >
-            {showAllCourses
-              ? translation.courseManagerCard.courseListOrganism
-                  .buttonLabelCollapse
-              : translation.courseManagerCard.courseListOrganism
-                  .buttonLabelShowAll}
+            {showAllCourses ? <ArrowUp /> : <ArrowDown />}
           </ButtonAtom>
         )}
       </div>

@@ -25,7 +25,7 @@ export const CourseTabDropdownMolecule = ({
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button size="sm">
+        <Button>
           <MoreHorizontal />
         </Button>
       </DropdownMenuTrigger>
