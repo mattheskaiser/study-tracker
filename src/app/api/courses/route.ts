@@ -38,23 +38,12 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { userId, name, status, grade } = body;
+    const { userId, name, semester, status, grade } = body;
 
-    if (!userId || !name || !status) {
-      console.error("Missing fields:", { userId, name, status });
+    if (!userId || !name || !status || !semester) {
+      console.error("Missing fields:", { userId, name, semester, status });
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400 },
-      );
-    }
-
-    const validStatuses = ["open", "in_progress", "done"];
-    if (!validStatuses.includes(status)) {
-      return NextResponse.json(
-        {
-          error:
-            "Invalid status value. Must be one of: open, in_progress, done",
-        },
         { status: 400 },
       );
     }
@@ -62,6 +51,7 @@ export async function POST(req: Request) {
     const course = await prisma.course.create({
       data: {
         userId,
+        semester,
         name,
         status: status as CourseStatus,
         grade: grade ? parseFloat(String(grade)) : null,
@@ -95,19 +85,6 @@ export async function PATCH(req: Request) {
         { error: "No update parameters provided" },
         { status: 400 },
       );
-    }
-
-    if (status) {
-      const validStatuses = ["open", "in_progress", "done"];
-      if (!validStatuses.includes(status)) {
-        return NextResponse.json(
-          {
-            error:
-              "Invalid status value. Must be one of: open, in_progress, done",
-          },
-          { status: 400 },
-        );
-      }
     }
 
     const updateData: { status?: CourseStatus; grade?: number | null } = {};
