@@ -8,6 +8,7 @@ export const emailSchema = z.object({
 export const courseSchema = z
   .object({
     name: z.string().nonempty("Kursname darf nicht leer sein"),
+    semester: z.enum(["sem1", "sem2", "sem3", "sem4", "sem5", "sem6"]),
     status: z.enum(["open", "in_progress", "done"]),
     grade: z.preprocess((val): number | undefined => {
       if (val === "" || val === null || val === undefined) return undefined;
@@ -26,6 +27,9 @@ export const courseSchema = z
 
 export const courseEditSchema = z
   .object({
+    semester: z
+      .enum(["sem1", "sem2", "sem3", "sem4", "sem5", "sem6"])
+      .optional(),
     status: z.enum(["open", "in_progress", "done"]),
     grade: z.preprocess((val): number | undefined => {
       if (val === "" || val === null || val === undefined) return undefined;

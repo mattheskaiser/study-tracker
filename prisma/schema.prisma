@@ -4,6 +4,10 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// Commands to run after changing prisma schema:
+// npx prisma migrate dev --name whatever-change-was-implemented
+// npx prisma generate
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -28,6 +32,7 @@ model User {
 model Course {
   id String @id @default(uuid())
   name String
+  semester String
   status CourseStatus
   grade Float?
   userId String
