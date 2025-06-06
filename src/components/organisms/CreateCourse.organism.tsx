@@ -11,6 +11,7 @@ import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
+import { SelectSemesterItems } from "@/constants/general.constants";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { courseSchema } from "@/schemas/schema";
 
@@ -83,14 +84,7 @@ export const CreateCourseOrganism = () => {
           name="semester"
           placeholder={"Semester auswählen"}
           control={control}
-          items={[
-            { value: "sem1", children: "1. Semester" },
-            { value: "sem2", children: "2. Semester" },
-            { value: "sem3", children: "3. Semester" },
-            { value: "sem4", children: "4. Semester" },
-            { value: "sem5", children: "5. Semester" },
-            { value: "sem6", children: "6. Semester" },
-          ]}
+          items={SelectSemesterItems}
         />
         <SelectMolecule
           name="status"

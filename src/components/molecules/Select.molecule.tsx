@@ -33,7 +33,11 @@ export const SelectMolecule = <T extends FieldValues>({
       name={name}
       control={control}
       render={({ field }) => (
-        <Select onValueChange={field.onChange} defaultValue={defaultValue}>
+        <Select
+          onValueChange={field.onChange}
+          value={field.value}
+          defaultValue={defaultValue}
+        >
           <SelectTrigger className="max-w-[150px]">
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>

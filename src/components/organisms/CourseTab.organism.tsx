@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  Controller,
-  type Resolver,
-  type SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { type Resolver, type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Save } from "lucide-react";
@@ -14,14 +9,8 @@ import { toast } from "sonner";
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { CourseTabDropdownMolecule } from "@/components/molecules/CourseTabDropdown.molecule";
+import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { cn } from "@/lib/utils";
 import { courseEditSchema } from "@/schemas/schema";
@@ -173,41 +162,33 @@ export const CourseTabOrganism = ({
           onSubmit={handleSubmit(onSubmit)}
           className="mt-2 flex flex-row gap-x-4 lg:mt-0"
         >
-          <Controller
+          <SelectMolecule
             name="status"
+            placeholder={
+              translation.courseManagerCard.courseListOrganism.courseTabOrganism
+                .selectStatusPlaceholder
+            }
             control={control}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange} value={field.value}>
-                <SelectTrigger className="max-w-[150px]">
-                  <SelectValue
-                    placeholder={
-                      translation.courseManagerCard.courseListOrganism
-                        .courseTabOrganism.selectStatusPlaceholder
-                    }
-                  />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="open">
-                    {
-                      translation.courseManagerCard.courseListOrganism
-                        .courseTabOrganism.courseStatusOpen
-                    }
-                  </SelectItem>
-                  <SelectItem value="in_progress">
-                    {
-                      translation.courseManagerCard.courseListOrganism
-                        .courseTabOrganism.courseStatusInProgress
-                    }
-                  </SelectItem>
-                  <SelectItem value="done">
-                    {
-                      translation.courseManagerCard.courseListOrganism
-                        .courseTabOrganism.courseStatusDone
-                    }
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            )}
+            items={[
+              {
+                value: "open",
+                children:
+                  translation.courseManagerCard.courseListOrganism
+                    .courseTabOrganism.courseStatusOpen,
+              },
+              {
+                value: "in_progress",
+                children:
+                  translation.courseManagerCard.courseListOrganism
+                    .courseTabOrganism.courseStatusInProgress,
+              },
+              {
+                value: "done",
+                children:
+                  translation.courseManagerCard.courseListOrganism
+                    .courseTabOrganism.courseStatusDone,
+              },
+            ]}
           />
           <Input
             min={1}
@@ -222,7 +203,7 @@ export const CourseTabOrganism = ({
           <ButtonAtom
             isLoading={isSubmitting}
             type="submit"
-            onPress={handleSubmit(onSubmit)}
+            onPress={() => void handleSubmit(onSubmit)}
             label="Speichern"
           >
             <Save />
@@ -243,7 +224,7 @@ export const CourseTabOrganism = ({
           <div className="absolute top-0 right-0 lg:relative">
             <CourseTabDropdownMolecule
               setEditAction={() => setEdit(true)}
-              deleteAction={() => handleDelete(id)}
+              deleteAction={() => void handleDelete(id)}
             />
           </div>
         </div>
