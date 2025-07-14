@@ -13,6 +13,7 @@ import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
 import { SelectSemesterItems } from "@/constants/general.constants";
 import { useTranslation } from "@/hooks/useTranslation.hook";
+import { queryClient } from "@/lib/react-query";
 import { courseSchema } from "@/schemas/schema";
 
 type FormFields = z.infer<typeof courseSchema>;
@@ -39,6 +40,7 @@ export const CreateCourseOrganism = () => {
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
     try {
       await axios.post("/api/courses", { ...formData, userId });
+      await queryClient.invalidateQueries({ queryKey: ["courses", userId] });
       reset();
       toast(
         translation.courseManagerCard.createCourseOrganism.toasts

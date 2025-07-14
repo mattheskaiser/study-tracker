@@ -12,6 +12,7 @@ import { CourseTabDropdownMolecule } from "@/components/molecules/CourseTabDropd
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
+import { queryClient } from "@/lib/react-query";
 import { cn } from "@/lib/utils";
 import { courseEditSchema } from "@/schemas/schema";
 import type { CourseStatusType } from "@/types/general.types";
@@ -34,6 +35,7 @@ export const CourseTabOrganism = ({
   grade,
   id,
 }: CourseTabMoleculeProps) => {
+  const [userId] = useQueryState("userId");
   const [, setCourseId] = useQueryState("courseId");
   const [edit, setEdit] = useState<boolean>(false);
   const {
@@ -54,6 +56,7 @@ export const CourseTabOrganism = ({
   const onSubmit: SubmitHandler<FormDataTypes> = async (formData) => {
     try {
       await axios.patch("/api/courses", { ...formData, courseId: id });
+      await queryClient.invalidateQueries({ queryKey: ["courses", userId] });
       setEdit(false);
       toast(
         translation.courseManagerCard.courseListOrganism.courseTabOrganism
@@ -93,6 +96,7 @@ export const CourseTabOrganism = ({
       if (!response.ok) {
         throw new Error("Failed to delete course");
       }
+      await queryClient.invalidateQueries({ queryKey: ["courses", userId] });
       toast(
         translation.courseManagerCard.courseListOrganism.courseTabOrganism
           .toasts.deleteSuccessToastMessage,

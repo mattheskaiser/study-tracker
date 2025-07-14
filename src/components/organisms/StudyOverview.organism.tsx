@@ -1,47 +1,40 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useQueryState } from "nuqs";
 
 import { OverviewBoxMolecule } from "@/components/molecules/OverviewBox.molecule";
+import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
+import { TextAtom } from "@/components/atoms/Text.atom";
+import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import type { CoursesType, CourseType } from "@/types/general.types";
 
 export const StudyOverviewOrganism = () => {
   const translation = useTranslation();
+  const { courses, isPending, error } = useCourses();
 
-  const [userId] = useQueryState("userId");
-  const [courses, setCourses] = useState<CourseType[]>([]);
-  const [finishedCourses, setFinishedCourses] = useState<CourseType[]>([]);
-  const [sumOfGrades, setSumOfGrades] = useState<number>(0);
+  const finishedCourses = useMemo(() => 
+    courses.filter((course) => course.status === "done"), [courses]
+  );
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      if (!userId) {
-        setCourses([]);
-        return;
-      }
-      try {
-        const response = await fetch(`/api/courses?userId=${userId}`);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch courses: ${response.status}`);
-        }
-        const data = (await response.json()) as CoursesType;
-        setCourses(data.courses || []);
-      } catch (err) {
-        console.error("Error fetching courses:", err);
-      }
-    };
+  const sumOfGrades = useMemo(() => 
+    finishedCourses.reduce((sum, course) => sum + (course.grade || 0), 0), 
+    [finishedCourses]
+  );
 
-    void fetchCourses();
-  }, [userId]);
+  if (isPending) {
+    return (
+      <div className="mt-6 flex w-full justify-center">
+        <LoadingSpinnerMolecule color="black" />
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    const finished = courses.filter((course) => course.status === "done");
-    setFinishedCourses(finished);
-
-    // @ts-expect-error grade could technically be undefined in type - but ensured through validation
-    const total = finished.reduce((sum, course) => sum + course.grade, 0);
-    setSumOfGrades(total);
-  }, [courses]);
+  if (error) {
+    return (
+      <TextAtom size="small" color="error">
+        Error loading courses
+      </TextAtom>
+    );
+  }
 
   const amountOfOpenCourses = courses
     .filter((course) => course.status === "open")
@@ -52,7 +45,9 @@ export const StudyOverviewOrganism = () => {
       ? (sumOfGrades / finishedCourses.length).toFixed(2)
       : "0";
 
-  const progress = (finishedCourses.length / courses.length) * 100;
+  const progress = courses.length > 0 
+    ? (finishedCourses.length / courses.length) * 100
+    : 0;
 
   return (
     <div className="flex flex-col gap-y-6">

@@ -1,12 +1,11 @@
 "use client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 import { AccountFinderCardOrganism } from "@/components/organisms/AccountFinderCard.organism";
 import { CourseListCardOrganism } from "@/components/organisms/CourseListCard.organism";
 import { CreateCourseCardOrganism } from "@/components/organisms/CreateCourseCard.organism";
 import { OverviewCardOrganism } from "@/components/organisms/OverviewCard.organism";
-
-const queryClient = new QueryClient();
+import { queryClient } from "@/lib/react-query";
 
 const Home = () => {
   return (
