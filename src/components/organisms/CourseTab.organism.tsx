@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { queryClient } from "@/lib/react-query";
 import { cn } from "@/lib/utils";
-import { courseEditSchema } from "@/schemas/schema";
+import { useCourseEditSchema } from "@/schemas/schema";
 import type { CourseStatusType } from "@/types/general.types";
 
 type CourseTabMoleculeProps = {
@@ -38,6 +38,9 @@ export const CourseTabOrganism = ({
   const [userId] = useQueryState("userId");
   const [, setCourseId] = useQueryState("courseId");
   const [edit, setEdit] = useState<boolean>(false);
+  const translation = useTranslation();
+  const courseEditSchema = useCourseEditSchema();
+  
   const {
     register,
     handleSubmit,
@@ -50,8 +53,6 @@ export const CourseTabOrganism = ({
     },
     resolver: zodResolver(courseEditSchema) as Resolver<FormDataTypes>,
   });
-
-  const translation = useTranslation();
 
   const onSubmit: SubmitHandler<FormDataTypes> = async (formData) => {
     try {
@@ -208,7 +209,7 @@ export const CourseTabOrganism = ({
             isLoading={isSubmitting}
             type="submit"
             onPress={() => void handleSubmit(onSubmit)}
-            label="Speichern"
+            label={translation.common.save}
           >
             <Save />
           </ButtonAtom>

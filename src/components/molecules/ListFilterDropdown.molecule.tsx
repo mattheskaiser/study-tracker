@@ -14,10 +14,12 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const ListFilterDropdownMolecule = () => {
   const [open, setOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useQueryState("statusFilter");
+  const translation = useTranslation();
 
   const setStatus = (status: "open" | "inProgress" | "done") => {
     if (statusFilter != status || null) void setStatusFilter(status);
@@ -34,23 +36,31 @@ export const ListFilterDropdownMolecule = () => {
       <DropdownMenuContent align="center" className="w-[200px]">
         <DropdownMenuGroup>
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger>Nach Status filtern</DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger>
+              {translation.courseManagerCard.courseListOrganism.filterDropdown.filterByStatus}
+            </DropdownMenuSubTrigger>
             <DropdownMenuSubContent className="p-0">
               <DropdownMenuItem onClick={() => setStatus("open")}>
                 <div className="flex w-full flex-row items-center justify-between">
-                  <TextAtom size="small">Offen</TextAtom>
+                  <TextAtom size="small">
+                    {translation.courseManagerCard.courseListOrganism.filterDropdown.open}
+                  </TextAtom>
                   {statusFilter === "open" && <Check />}
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setStatus("inProgress")}>
                 <div className="flex w-full flex-row items-center justify-between">
-                  <TextAtom size="small">In Bearbeitung</TextAtom>
+                  <TextAtom size="small">
+                    {translation.courseManagerCard.courseListOrganism.filterDropdown.inProgress}
+                  </TextAtom>
                   {statusFilter === "inProgress" && <Check />}
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setStatus("done")}>
                 <div className="flex w-full flex-row items-center justify-between">
-                  <TextAtom size="small">Abgeschlossen</TextAtom>
+                  <TextAtom size="small">
+                    {translation.courseManagerCard.courseListOrganism.filterDropdown.done}
+                  </TextAtom>
                   {statusFilter === "done" && <Check />}
                 </div>
               </DropdownMenuItem>

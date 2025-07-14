@@ -1,4 +1,19 @@
 export const enTranslations = {
+  validation: {
+    email: {
+      required: "Email is required",
+      invalid: "Invalid email"
+    },
+    course: {
+      name: {
+        required: "Course name cannot be empty"
+      },
+      grade: {
+        requiredIfDone: "Grade is required when the course is completed",
+        onlyIfDone: "Grade can only be set when the course is completed"
+      }
+    }
+  },
   accountFinderCard: {
     cardTitle: "Find your data",
     cardDescriptionLoginFalse:
@@ -26,6 +41,32 @@ export const enTranslations = {
       },
     },
   },
+  createCourseCard: {
+    title: "Course Creation",
+    description: "Add new courses to your course list"
+  },
+  courseListCard: {
+    title: "Course List",
+    description: "List of your courses - edit them or whatever you need"
+  },
+  common: {
+    save: "Save",
+    selectLanguage: "Language",
+    languages: {
+      english: "English",
+      spanish: "Spanish",
+      german: "German"
+    },
+    selectSemester: "Select semester",
+    semesters: {
+      sem1: "1st Semester",
+      sem2: "2nd Semester",
+      sem3: "3rd Semester",
+      sem4: "4th Semester",
+      sem5: "5th Semester",
+      sem6: "6th Semester"
+    }
+  },
   courseManagerCard: {
     cardTitle: "Your Courses",
     cardDescription:
@@ -33,10 +74,10 @@ export const enTranslations = {
     cardNoteLoginFalse: "Note: Please log in to view and add courses.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "The course was successfully created!",
-        successToastDescription: "Please refresh the page to see your changes.",
-        errorToastMessage: "Unfortunately, the process was not successful.",
-        errorToastDescription: "The course could not be created.",
+        successToastMessage: "Course created successfully!",
+        successToastDescription: "Your new course has been added to your list",
+        errorToastMessage: "Failed to create course",
+        errorToastDescription: "Please try again later.",
       },
       form: {
         courseNamePlaceholder: "Enter course name...",
@@ -53,20 +94,22 @@ export const enTranslations = {
       noCoursesAddedNote: "Note: You haven't added any courses yet.",
       buttonLabelCollapse: "Collapse courses",
       buttonLabelShowAll: "Show all courses",
+      filterDropdown: {
+        filterByStatus: "Filter by status",
+        open: "Open",
+        inProgress: "In progress",
+        done: "Completed"
+      },
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "Your course was successfully updated!",
-          editSuccessToastDescription:
-            "Please refresh the page to see your changes.",
-          editErrorToastMessage:
-            "The operation was unfortunately not successful.",
-          editErrorToastDescription: "The course could not be edited.",
-          deleteSuccessToastMessage: "The course was successfully deleted.",
-          deleteSuccessToastDescription:
-            "Please refresh the page to see your changes.",
-          deleteErrorToastMessage:
-            "The operation was unfortunately not successful.",
-          deleteErrorToastDescription: "The course could not be deleted.",
+          editSuccessToastMessage: "Course updated successfully!",
+          editSuccessToastDescription: "Your changes have been saved",
+          editErrorToastMessage: "Failed to update course",
+          editErrorToastDescription: "Please try again later.",
+          deleteSuccessToastMessage: "Course deleted successfully",
+          deleteSuccessToastDescription: "The course has been permanently removed",
+          deleteErrorToastMessage: "Failed to delete course",
+          deleteErrorToastDescription: "Please try again later.",
         },
         courseStatusOpen: "Open",
         courseStatusInProgress: "In Progress",

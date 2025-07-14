@@ -13,7 +13,7 @@ export const useTranslation = () => {
   useEffect(() => {
     if (language) {
       if (language === "en") setTranslationFile(enTranslations);
-      if (language === "esp") setTranslationFile(espTranslations);
+      if (language === "es") setTranslationFile(espTranslations);
       if (language === "de") setTranslationFile(deTranslations);
     }
   }, [language]);

@@ -1,4 +1,19 @@
 export const espTranslations = {
+  validation: {
+    email: {
+      required: "El correo electrónico es obligatorio",
+      invalid: "Correo electrónico inválido"
+    },
+    course: {
+      name: {
+        required: "El nombre del curso no puede estar vacío"
+      },
+      grade: {
+        requiredIfDone: "La calificación es obligatoria cuando el curso está completado",
+        onlyIfDone: "La calificación solo puede establecerse cuando el curso está completado"
+      }
+    }
+  },
   accountFinderCard: {
     cardTitle: "Encuentra tus datos",
     cardDescriptionLoginFalse:
@@ -27,6 +42,32 @@ export const espTranslations = {
       },
     },
   },
+  createCourseCard: {
+    title: "Creación de Cursos",
+    description: "Agrega nuevos cursos a tu lista"
+  },
+  courseListCard: {
+    title: "Lista de Cursos",
+    description: "Lista de tus cursos - edítalos o haz lo que necesites"
+  },
+  common: {
+    save: "Guardar",
+    selectLanguage: "Idioma",
+    languages: {
+      english: "Inglés",
+      spanish: "Español",
+      german: "Alemán"
+    },
+    selectSemester: "Seleccionar semestre",
+    semesters: {
+      sem1: "1er Semestre",
+      sem2: "2do Semestre",
+      sem3: "3er Semestre",
+      sem4: "4to Semestre",
+      sem5: "5to Semestre",
+      sem6: "6to Semestre"
+    }
+  },
   courseManagerCard: {
     cardTitle: "Tus Cursos",
     cardDescription:
@@ -35,11 +76,10 @@ export const espTranslations = {
       "Nota: Por favor inicia sesión para ver y agregar cursos.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "¡El curso fue creado con éxito!",
-        successToastDescription:
-          "Por favor actualiza la página para ver los cambios.",
-        errorToastMessage: "Desafortunadamente, el proceso no fue exitoso.",
-        errorToastDescription: "No se pudo crear el curso.",
+        successToastMessage: "¡Curso creado exitosamente!",
+        successToastDescription: "Tu nuevo curso ha sido añadido a la lista",
+        errorToastMessage: "Error al crear el curso",
+        errorToastDescription: "Por favor, inténtalo de nuevo.",
       },
       form: {
         courseNamePlaceholder: "Introduce el nombre del curso...",
@@ -56,20 +96,22 @@ export const espTranslations = {
       noCoursesAddedNote: "Nota: Aún no has agregado cursos.",
       buttonLabelCollapse: "Colapsar cursos",
       buttonLabelShowAll: "Mostrar todos los cursos",
+      filterDropdown: {
+        filterByStatus: "Filtrar por estado",
+        open: "Abierto",
+        inProgress: "En progreso",
+        done: "Completado"
+      },
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "¡Tu curso se actualizó correctamente!",
-          editSuccessToastDescription:
-            "Por favor, actualiza la página para ver tus cambios.",
-          editErrorToastMessage:
-            "Desafortunadamente, la operación no tuvo éxito.",
-          editErrorToastDescription: "No se pudo editar el curso.",
-          deleteSuccessToastMessage: "El curso se eliminó correctamente.",
-          deleteSuccessToastDescription:
-            "Por favor, actualiza la página para ver tus cambios.",
-          deleteErrorToastMessage:
-            "Desafortunadamente, la operación no tuvo éxito.",
-          deleteErrorToastDescription: "No se pudo eliminar el curso.",
+          editSuccessToastMessage: "¡Curso actualizado exitosamente!",
+          editSuccessToastDescription: "Tus cambios han sido guardados",
+          editErrorToastMessage: "Error al actualizar el curso",
+          editErrorToastDescription: "Por favor, inténtalo de nuevo más tarde.",
+          deleteSuccessToastMessage: "Curso eliminado exitosamente",
+          deleteSuccessToastDescription: "El curso ha sido eliminado permanentemente",
+          deleteErrorToastMessage: "Error al eliminar el curso",
+          deleteErrorToastDescription: "Por favor, inténtalo de nuevo más tarde.",
         },
         courseStatusOpen: "Abierto",
         courseStatusInProgress: "En curso",

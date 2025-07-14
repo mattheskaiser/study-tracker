@@ -1,4 +1,19 @@
 export const deTranslations = {
+  validation: {
+    email: {
+      required: "Email ist erforderlich",
+      invalid: "Ungültige Email"
+    },
+    course: {
+      name: {
+        required: "Kursname darf nicht leer sein"
+      },
+      grade: {
+        requiredIfDone: "Note ist erforderlich, wenn der Kurs abgeschlossen ist",
+        onlyIfDone: "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist"
+      }
+    }
+  },
   accountFinderCard: {
     cardTitle: "Finde deine Daten",
     cardDescriptionLoginFalse:
@@ -26,6 +41,32 @@ export const deTranslations = {
       },
     },
   },
+  createCourseCard: {
+    title: "Kurserstellung",
+    description: "Füge neue Kurse zu deiner Kursliste hinzu"
+  },
+  courseListCard: {
+    title: "Kursliste",
+    description: "Liste deiner Kurse - bearbeite sie oder was auch immer"
+  },
+  common: {
+    save: "Speichern",
+    selectLanguage: "Sprache",
+    languages: {
+      english: "Englisch",
+      spanish: "Spanisch",
+      german: "Deutsch"
+    },
+    selectSemester: "Semester auswählen",
+    semesters: {
+      sem1: "1. Semester",
+      sem2: "2. Semester",
+      sem3: "3. Semester",
+      sem4: "4. Semester",
+      sem5: "5. Semester",
+      sem6: "6. Semester"
+    }
+  },
   courseManagerCard: {
     cardTitle: "Deine Kurse",
     cardDescription:
@@ -34,11 +75,10 @@ export const deTranslations = {
       "Hinweis: Bitte melde dich an, um Kurse anzusehen und hinzuzufügen.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "Der Kurse wurde erfolgreich erstellt!",
-        successToastDescription:
-          "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
-        errorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
-        errorToastDescription: "Der Kurs konnte leider nicht erstellt werden.",
+        successToastMessage: "Kurs erfolgreich erstellt!",
+        successToastDescription: "Dein neuer Kurs wurde zur Liste hinzugefügt",
+        errorToastMessage: "Kurs konnte nicht erstellt werden",
+        errorToastDescription: "Bitte versuche es später erneut.",
       },
       form: {
         courseNamePlaceholder: "Kursname eingeben...",
@@ -55,20 +95,22 @@ export const deTranslations = {
       noCoursesAddedNote: "Hinweis: Du hast noch keine Kurse hinzugefügt.",
       buttonLabelCollapse: "Kurse einklappen",
       buttonLabelShowAll: "Alle Kurse anzeigen",
+      filterDropdown: {
+        filterByStatus: "Nach Status filtern",
+        open: "Offen",
+        inProgress: "In Bearbeitung",
+        done: "Abgeschlossen"
+      },
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "Dein Kurs wurde erfolgreich angepasst!",
-          editSuccessToastDescription:
-            "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
-          editErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
-          editErrorToastDescription:
-            "Der Kurs konnte leider nicht bearbeitet werden.",
-          deleteSuccessToastMessage: "Der Kurs wurde erfolgreich gelöscht.",
-          deleteSuccessToastDescription:
-            "Bitte aktualisiere die Seite, um deine Änderungen zu sehen.",
-          deleteErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
-          deleteErrorToastDescription:
-            "Der Kurs konnte leider nicht gelöscht werden.",
+          editSuccessToastMessage: "Kurs erfolgreich aktualisiert!",
+          editSuccessToastDescription: "Deine Änderungen wurden gespeichert",
+          editErrorToastMessage: "Kurs konnte nicht aktualisiert werden",
+          editErrorToastDescription: "Bitte versuche es später erneut.",
+          deleteSuccessToastMessage: "Kurs erfolgreich gelöscht",
+          deleteSuccessToastDescription: "Der Kurs wurde dauerhaft entfernt",
+          deleteErrorToastMessage: "Kurs konnte nicht gelöscht werden",
+          deleteErrorToastDescription: "Bitte versuche es später erneut.",
         },
         courseStatusOpen: "Offen",
         courseStatusInProgress: "In Bearbeitung",

@@ -11,16 +11,18 @@ import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
-import { SelectSemesterItems } from "@/constants/general.constants";
+import { useSelectSemesterItems } from "@/constants/general.constants";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { queryClient } from "@/lib/react-query";
-import { courseSchema } from "@/schemas/schema";
+import { useCourseSchema } from "@/schemas/schema";
 
-type FormFields = z.infer<typeof courseSchema>;
+type FormFields = z.infer<ReturnType<typeof useCourseSchema>>;
 
 export const CreateCourseOrganism = () => {
   const [userId] = useQueryState("userId");
   const translation = useTranslation();
+  const semesterItems = useSelectSemesterItems();
+  const courseSchema = useCourseSchema();
 
   const {
     register,
@@ -84,9 +86,9 @@ export const CreateCourseOrganism = () => {
         />
         <SelectMolecule
           name="semester"
-          placeholder={"Semester auswählen"}
+          placeholder={translation.common.selectSemester}
           control={control}
-          items={SelectSemesterItems}
+          items={semesterItems}
         />
         <SelectMolecule
           name="status"

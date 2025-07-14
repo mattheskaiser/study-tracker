@@ -1,6 +1,6 @@
 "use client";
 import { useContext } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 import { FlagAtom } from "@/components/atoms/Flag.atom";
 import {
@@ -11,10 +11,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LanguageContext } from "@/context";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const LanguageSelectMolecule = () => {
   const { control } = useForm();
   const { setLanguage } = useContext(LanguageContext);
+  const translation = useTranslation();
   return (
     <Controller
       name="language"
@@ -29,14 +31,14 @@ export const LanguageSelectMolecule = () => {
           }}
           defaultValue="en"
         >
-          <SelectTrigger className="max-w-[150px]">
-            <SelectValue placeholder="Sprache" />
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder={translation.common.selectLanguage} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="en">
               <FlagAtom countryCode={"us"} countryLabel={"English"} />
             </SelectItem>
-            <SelectItem value="esp">
+            <SelectItem value="es">
               <FlagAtom countryCode={"es"} countryLabel={"Español"} />
             </SelectItem>
             <SelectItem value="de">

@@ -11,7 +11,7 @@ import { TextAtom } from "@/components/atoms/Text.atom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { emailSchema } from "@/schemas/schema";
+import { useEmailSchema } from "@/schemas/schema";
 
 type FormFields = {
   newUser: boolean;
@@ -26,6 +26,9 @@ type DataTypes = {
 };
 
 export const FindEmailOrganism = () => {
+  const translation = useTranslation();
+  const emailSchema = useEmailSchema();
+  
   const {
     register,
     handleSubmit,
@@ -44,8 +47,6 @@ export const FindEmailOrganism = () => {
   const [userId, setUserId] = useQueryState("userId");
   const [isLoading, setIsLoading] = useState(false);
   const isNewUser = watch("newUser");
-
-  const translation = useTranslation();
 
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
     setIsLoading(true);

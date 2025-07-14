@@ -1,13 +1,23 @@
 import { z } from "zod";
 
-export const emailSchema = z.object({
-  email: z.string().nonempty("Email ist erforderlich").email("Ungültige Email"),
-  newUser: z.boolean(),
-});
+import { useTranslation } from "@/hooks/useTranslation.hook";
 
-export const courseSchema = z
-  .object({
-    name: z.string().nonempty("Kursname darf nicht leer sein"),
+export const useEmailSchema = () => {
+  const translation = useTranslation();
+  
+  return z.object({
+    email: z.string()
+      .nonempty(translation.validation.email.required)
+      .email(translation.validation.email.invalid),
+    newUser: z.boolean(),
+  });
+};
+
+export const useCourseSchema = () => {
+  const translation = useTranslation();
+  
+  return z.object({
+    name: z.string().nonempty(translation.validation.course.name.required),
     semester: z.enum(["sem1", "sem2", "sem3", "sem4", "sem5", "sem6"]),
     status: z.enum(["open", "in_progress", "done"]),
     grade: z.preprocess((val): number | undefined => {
@@ -18,18 +28,19 @@ export const courseSchema = z
   })
   .refine((data) => data.status !== "done" || typeof data.grade === "number", {
     path: ["grade"],
-    message: "Note ist erforderlich, wenn der Kurs abgeschlossen ist.",
+    message: translation.validation.course.grade.requiredIfDone,
   })
   .refine((data) => data.status === "done" || data.grade === undefined, {
     path: ["grade"],
-    message: "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist.",
+    message: translation.validation.course.grade.onlyIfDone,
   });
+};
 
-export const courseEditSchema = z
-  .object({
-    semester: z
-      .enum(["sem1", "sem2", "sem3", "sem4", "sem5", "sem6"])
-      .optional(),
+export const useCourseEditSchema = () => {
+  const translation = useTranslation();
+  
+  return z.object({
+    semester: z.enum(["sem1", "sem2", "sem3", "sem4", "sem5", "sem6"]).optional(),
     status: z.enum(["open", "in_progress", "done"]),
     grade: z.preprocess((val): number | undefined => {
       if (val === "" || val === null || val === undefined) return undefined;
@@ -39,9 +50,10 @@ export const courseEditSchema = z
   })
   .refine((data) => data.status !== "done" || typeof data.grade === "number", {
     path: ["grade"],
-    message: "Note ist erforderlich, wenn der Kurs abgeschlossen ist.",
+    message: translation.validation.course.grade.requiredIfDone,
   })
   .refine((data) => data.status === "done" || data.grade === undefined, {
     path: ["grade"],
-    message: "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist.",
+    message: translation.validation.course.grade.onlyIfDone,
   });
+};
