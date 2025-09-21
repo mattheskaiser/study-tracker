@@ -76,10 +76,10 @@ export const espTranslations = {
       "Nota: Por favor inicia sesión para ver y agregar cursos.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "¡Curso creado exitosamente!",
-        successToastDescription: "Tu nuevo curso ha sido añadido a la lista",
-        errorToastMessage: "Error al crear el curso",
-        errorToastDescription: "Por favor, inténtalo de nuevo.",
+        successToastMessage: "¡El curso fue creado con éxito!",
+        successToastDescription: "Tu curso ha sido agregado a la lista.",
+        errorToastMessage: "Desafortunadamente, el proceso no fue exitoso.",
+        errorToastDescription: "No se pudo crear el curso.",
       },
       form: {
         courseNamePlaceholder: "Introduce el nombre del curso...",
@@ -105,14 +105,16 @@ export const espTranslations = {
       },
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "¡Curso actualizado exitosamente!",
-          editSuccessToastDescription: "Tus cambios han sido guardados",
-          editErrorToastMessage: "Error al actualizar el curso",
-          editErrorToastDescription: "Por favor, inténtalo de nuevo más tarde.",
-          deleteSuccessToastMessage: "Curso eliminado exitosamente",
-          deleteSuccessToastDescription: "El curso ha sido eliminado permanentemente",
-          deleteErrorToastMessage: "Error al eliminar el curso",
-          deleteErrorToastDescription: "Por favor, inténtalo de nuevo más tarde.",
+          editSuccessToastMessage: "¡Tu curso se actualizó correctamente!",
+          editSuccessToastDescription: "Tus cambios han sido guardados.",
+          editErrorToastMessage:
+            "Desafortunadamente, la operación no tuvo éxito.",
+          editErrorToastDescription: "No se pudo editar el curso.",
+          deleteSuccessToastMessage: "El curso se eliminó correctamente.",
+          deleteSuccessToastDescription: "El curso ha sido removido de tu lista.",
+          deleteErrorToastMessage:
+            "Desafortunadamente, la operación no tuvo éxito.",
+          deleteErrorToastDescription: "No se pudo eliminar el curso.",
         },
         courseStatusOpen: "Abierto",
         courseStatusInProgress: "En curso",
@@ -143,5 +145,18 @@ export const espTranslations = {
   courseListCard: {
     cardTitle: "Lista de Cursos",
     cardDescription: "Lista de tus cursos - edítalos o adminístralos",
+  },
+  validation: {
+    email: {
+      required: "El correo electrónico es obligatorio",
+      invalid: "Correo electrónico no válido",
+    },
+    course: {
+      nameRequired: "El nombre del curso no puede estar vacío",
+      semesterRequired: "La selección del semestre es obligatoria",
+      gradeRequiredWhenDone: "La calificación es obligatoria cuando el curso está completado",
+      gradeOnlyWhenDone: "La calificación solo se puede proporcionar cuando el curso está completado",
+      gradeRange: "La calificación debe estar entre 1 y 6",
+    },
   },
 };

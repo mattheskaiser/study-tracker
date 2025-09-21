@@ -70,13 +70,6 @@ export const CourseListOrganism = () => {
         {courses.length > 5 && (
           <ButtonAtom
             className="mt-6"
-            label={
-              showAllCourses
-                ? translation.courseManagerCard.courseListOrganism
-                    .buttonLabelCollapse
-                : translation.courseManagerCard.courseListOrganism
-                    .buttonLabelShowAll
-            }
             onPress={() => setShowAllCourses((prev) => !prev)}
           >
             {showAllCourses ? <ArrowUp /> : <ArrowDown />}

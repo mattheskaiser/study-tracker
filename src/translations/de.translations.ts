@@ -75,10 +75,10 @@ export const deTranslations = {
       "Hinweis: Bitte melde dich an, um Kurse anzusehen und hinzuzufügen.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "Kurs erfolgreich erstellt!",
-        successToastDescription: "Dein neuer Kurs wurde zur Liste hinzugefügt",
-        errorToastMessage: "Kurs konnte nicht erstellt werden",
-        errorToastDescription: "Bitte versuche es später erneut.",
+        successToastMessage: "Der Kurs wurde erfolgreich erstellt!",
+        successToastDescription: "Dein Kurs wurde zur Liste hinzugefügt.",
+        errorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
+        errorToastDescription: "Der Kurs konnte leider nicht erstellt werden.",
       },
       form: {
         courseNamePlaceholder: "Kursname eingeben...",
@@ -104,14 +104,16 @@ export const deTranslations = {
       },
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "Kurs erfolgreich aktualisiert!",
-          editSuccessToastDescription: "Deine Änderungen wurden gespeichert",
-          editErrorToastMessage: "Kurs konnte nicht aktualisiert werden",
-          editErrorToastDescription: "Bitte versuche es später erneut.",
-          deleteSuccessToastMessage: "Kurs erfolgreich gelöscht",
-          deleteSuccessToastDescription: "Der Kurs wurde dauerhaft entfernt",
-          deleteErrorToastMessage: "Kurs konnte nicht gelöscht werden",
-          deleteErrorToastDescription: "Bitte versuche es später erneut.",
+          editSuccessToastMessage: "Dein Kurs wurde erfolgreich angepasst!",
+          editSuccessToastDescription: "Deine Änderungen wurden gespeichert.",
+          editErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
+          editErrorToastDescription:
+            "Der Kurs konnte leider nicht bearbeitet werden.",
+          deleteSuccessToastMessage: "Der Kurs wurde erfolgreich gelöscht.",
+          deleteSuccessToastDescription: "Der Kurs wurde aus deiner Liste entfernt.",
+          deleteErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
+          deleteErrorToastDescription:
+            "Der Kurs konnte leider nicht gelöscht werden.",
         },
         courseStatusOpen: "Offen",
         courseStatusInProgress: "In Bearbeitung",
@@ -143,5 +145,18 @@ export const deTranslations = {
   courseListCard: {
     cardTitle: "Kursliste",
     cardDescription: "Liste deiner Kurse - bearbeite sie oder verwalte sie",
+  },
+  validation: {
+    email: {
+      required: "E-Mail ist erforderlich",
+      invalid: "Ungültige E-Mail",
+    },
+    course: {
+      nameRequired: "Kursname darf nicht leer sein",
+      semesterRequired: "Semester-Auswahl ist erforderlich",
+      gradeRequiredWhenDone: "Note ist erforderlich, wenn der Kurs abgeschlossen ist",
+      gradeOnlyWhenDone: "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist",
+      gradeRange: "Note muss zwischen 1 und 6 liegen",
+    },
   },
 };

@@ -1,28 +1,44 @@
+import { useMemo } from "react";
 import type { Resolver, SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { Plus } from "lucide-react";
 import { useQueryState } from "nuqs";
-import { toast } from "sonner";
 import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
-import { useSelectSemesterItems } from "@/constants/general.constants";
+import { SelectSemesterItems } from "@/constants/general.constants";
+import { useCourseMutations } from "@/hooks/useCourseMutations.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { queryClient } from "@/lib/react-query";
-import { useCourseSchema } from "@/schemas/schema";
-
-type FormFields = z.infer<ReturnType<typeof useCourseSchema>>;
+import { createCourseSchema } from "@/schemas/dynamicSchemas";
+import { getValidationMessages } from "@/utils/validation.utils";
 
 export const CreateCourseOrganism = () => {
   const [userId] = useQueryState("userId");
   const translation = useTranslation();
-  const semesterItems = useSelectSemesterItems();
-  const courseSchema = useCourseSchema();
+  const { createCourse } = useCourseMutations();
+
+  const validationMessages = useMemo(
+    () => getValidationMessages(translation),
+    [translation],
+  );
+
+  const courseSchema = useMemo(
+    () => createCourseSchema(validationMessages),
+    [validationMessages],
+  );
+
+  type FormFields = z.infer<typeof courseSchema>;
+
+  const defaultValues = {
+    name: "",
+    semester: undefined as FormFields["semester"] | undefined,
+    status: "open" as FormFields["status"],
+    grade: undefined,
+  };
 
   const {
     register,
@@ -31,45 +47,16 @@ export const CreateCourseOrganism = () => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<FormFields>({
-    defaultValues: {
-      name: "",
-      status: "open",
-      grade: undefined,
-    },
+    defaultValues,
     resolver: zodResolver(courseSchema) as Resolver<FormFields>,
   });
 
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
-    try {
-      await axios.post("/api/courses", { ...formData, userId });
-      await queryClient.invalidateQueries({ queryKey: ["courses", userId] });
-      reset();
-      toast(
-        translation.courseManagerCard.createCourseOrganism.toasts
-          .successToastMessage,
-        {
-          dismissible: true,
-          description:
-            translation.courseManagerCard.createCourseOrganism.toasts
-              .successToastDescription,
-          style: { textDecorationColor: "black" },
-          position: "top-center",
-        },
-      );
-    } catch {
-      toast(
-        translation.courseManagerCard.createCourseOrganism.toasts
-          .errorToastMessage,
-        {
-          dismissible: true,
-          description:
-            translation.courseManagerCard.createCourseOrganism.toasts
-              .errorToastDescription,
-          style: { textDecorationColor: "black" },
-          position: "top-center",
-        },
-      );
-    }
+    createCourse.mutate(formData, {
+      onSuccess: () => {
+        reset(defaultValues);
+      },
+    });
   };
 
   return (
@@ -137,10 +124,7 @@ export const CreateCourseOrganism = () => {
           className="max-w-32"
         />
         <ButtonAtom
-          isLoading={isSubmitting}
-          label={
-            translation.courseManagerCard.createCourseOrganism.form.buttonLabel
-          }
+          isLoading={isSubmitting || createCourse.isPending}
           type="submit"
         >
           <Plus strokeWidth={2} />
@@ -150,6 +134,11 @@ export const CreateCourseOrganism = () => {
         {errors.name && (
           <TextAtom size="small" color="error">
             {errors.name.message}
+          </TextAtom>
+        )}
+        {errors.semester && (
+          <TextAtom size="small" color="error">
+            {errors.semester.message}
           </TextAtom>
         )}
         {errors.grade && (

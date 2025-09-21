@@ -1,30 +1,26 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { type Resolver, type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { Save } from "lucide-react";
 import { useQueryState } from "nuqs";
-import { toast } from "sonner";
+import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { CourseTabDropdownMolecule } from "@/components/molecules/CourseTabDropdown.molecule";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
+import { useCourseMutations } from "@/hooks/useCourseMutations.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { queryClient } from "@/lib/react-query";
 import { cn } from "@/lib/utils";
-import { useCourseEditSchema } from "@/schemas/schema";
+import { createCourseEditSchema } from "@/schemas/dynamicSchemas";
 import type { CourseStatusType } from "@/types/general.types";
+import { getValidationMessages } from "@/utils/validation.utils";
 
 type CourseTabMoleculeProps = {
   name: string;
   id: string;
-  status: CourseStatusType;
-  grade?: number;
-};
-
-type FormDataTypes = {
   status: CourseStatusType;
   grade?: number;
 };
@@ -39,8 +35,20 @@ export const CourseTabOrganism = ({
   const [, setCourseId] = useQueryState("courseId");
   const [edit, setEdit] = useState<boolean>(false);
   const translation = useTranslation();
-  const courseEditSchema = useCourseEditSchema();
-  
+  const { updateCourse, deleteCourse } = useCourseMutations();
+
+  const validationMessages = useMemo(
+    () => getValidationMessages(translation),
+    [translation],
+  );
+
+  const courseEditSchema = useMemo(
+    () => createCourseEditSchema(validationMessages),
+    [validationMessages],
+  );
+
+  type FormDataTypes = z.infer<typeof courseEditSchema>;
+
   const {
     register,
     handleSubmit,
@@ -55,77 +63,23 @@ export const CourseTabOrganism = ({
   });
 
   const onSubmit: SubmitHandler<FormDataTypes> = async (formData) => {
-    try {
-      await axios.patch("/api/courses", { ...formData, courseId: id });
-      await queryClient.invalidateQueries({ queryKey: ["courses", userId] });
-      setEdit(false);
-      toast(
-        translation.courseManagerCard.courseListOrganism.courseTabOrganism
-          .toasts.editSuccessToastMessage,
-        {
-          dismissible: true,
-          description:
-            translation.courseManagerCard.courseListOrganism.courseTabOrganism
-              .toasts.editSuccessToastDescription,
-          style: { textDecorationColor: "black" },
-          position: "top-center",
+    updateCourse.mutate(
+      { ...formData, courseId: id },
+      {
+        onSuccess: () => {
+          setEdit(false);
         },
-      );
-    } catch {
-      toast(
-        translation.courseManagerCard.courseListOrganism.courseTabOrganism
-          .toasts.editErrorToastMessage,
-        {
-          dismissible: true,
-          description:
-            translation.courseManagerCard.courseListOrganism.courseTabOrganism
-              .toasts.editErrorToastDescription,
-          style: { textDecorationColor: "black" },
-          position: "top-center",
-        },
-      );
-    }
+      },
+    );
   };
 
   const handleDelete = async (courseId: string) => {
     await setCourseId(courseId);
-    try {
-      const response = await fetch(`/api/courses?courseId=${courseId}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete course");
-      }
-      await queryClient.invalidateQueries({ queryKey: ["courses", userId] });
-      toast(
-        translation.courseManagerCard.courseListOrganism.courseTabOrganism
-          .toasts.deleteSuccessToastMessage,
-        {
-          dismissible: true,
-          description:
-            translation.courseManagerCard.courseListOrganism.courseTabOrganism
-              .toasts.deleteSuccessToastMessage,
-          style: { textDecorationColor: "black" },
-          position: "top-center",
-        },
-      );
-    } catch (error) {
-      console.error("Error deleting course:", error);
-      toast(
-        translation.courseManagerCard.courseListOrganism.courseTabOrganism
-          .toasts.deleteErrorToastMessage,
-        {
-          dismissible: true,
-          description:
-            translation.courseManagerCard.courseListOrganism.courseTabOrganism
-              .toasts.deleteErrorToastDescription,
-          style: { textDecorationColor: "black" },
-          position: "top-center",
-        },
-      );
-    }
-    void setCourseId(null);
+    deleteCourse.mutate(courseId, {
+      onSettled: () => {
+        void setCourseId(null);
+      },
+    });
   };
 
   const displayStatus = (formStatus: FormDataTypes["status"]) => {
@@ -206,7 +160,7 @@ export const CourseTabOrganism = ({
             className="max-w-16"
           />
           <ButtonAtom
-            isLoading={isSubmitting}
+            isLoading={isSubmitting || updateCourse.isPending}
             type="submit"
             onPress={() => void handleSubmit(onSubmit)}
           >

@@ -1,24 +1,19 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Search, UserPlus } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { toast } from "sonner";
+import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { useEmailSchema } from "@/schemas/schema";
-
-type FormFields = {
-  newUser: boolean;
-  email: string;
-};
-
-
+import { createEmailSchema } from "@/schemas/dynamicSchemas";
+import { getValidationMessages } from "@/utils/validation.utils";
 
 type DataTypes = {
   user: {
@@ -28,9 +23,22 @@ type DataTypes = {
 };
 
 export const FindEmailOrganism = () => {
+  const [userId, setUserId] = useQueryState("userId");
+  const [isLoading, setIsLoading] = useState(false);
   const translation = useTranslation();
-  const emailSchema = useEmailSchema();
-  
+
+  const validationMessages = useMemo(
+    () => getValidationMessages(translation),
+    [translation],
+  );
+
+  const emailSchema = useMemo(
+    () => createEmailSchema(validationMessages),
+    [validationMessages],
+  );
+
+  type FormFields = z.infer<typeof emailSchema>;
+
   const {
     register,
     handleSubmit,
@@ -46,8 +54,6 @@ export const FindEmailOrganism = () => {
     resolver: zodResolver(emailSchema),
   });
 
-  const [userId, setUserId] = useQueryState("userId");
-  const [isLoading, setIsLoading] = useState(false);
   const isNewUser = watch("newUser");
 
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
@@ -147,13 +153,6 @@ export const FindEmailOrganism = () => {
       <ButtonAtom
         isLoading={isSubmitting}
         disabled={!!userId || isLoading}
-        label={
-          !isNewUser
-            ? translation.accountFinderCard.findEmailOrganism.form
-                .searchEmailButton
-            : translation.accountFinderCard.findEmailOrganism.form
-                .createAccountButton
-        }
         type="submit"
       >
         {!isNewUser ? <Search strokeWidth={2} /> : <UserPlus strokeWidth={2} />}

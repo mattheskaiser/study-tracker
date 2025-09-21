@@ -35,7 +35,7 @@ export const SelectMolecule = <T extends FieldValues>({
       render={({ field }) => (
         <Select
           onValueChange={field.onChange}
-          value={field.value}
+          value={field.value || ""}
           defaultValue={defaultValue}
         >
           <SelectTrigger className="max-w-[150px]">
