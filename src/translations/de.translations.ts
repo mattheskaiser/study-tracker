@@ -31,8 +31,10 @@ export const deTranslations = {
       form: {
         emailNotEnteredPlaceholder: "E-Mail eingeben...",
         emailEnteredPlaceholder: "E-Mail wurde bereits eingegeben.",
+        pinPlaceholder: "PIN eingeben...",
+        confirmPinPlaceholder: "PIN bestätigen...",
         checkboxLabel: "Ich bin ein neuer Benutzer",
-        searchEmailButton: "E-Mail suchen",
+        searchEmailButton: "Anmelden",
         createAccountButton: "Konto erstellen",
       },
       validation: {
@@ -160,6 +162,13 @@ export const deTranslations = {
     email: {
       required: "E-Mail ist erforderlich",
       invalid: "Ungültige E-Mail",
+    },
+    pin: {
+      required: "PIN ist erforderlich",
+      minLength: "PIN muss mindestens 4 Ziffern haben",
+      maxLength: "PIN darf höchstens 6 Ziffern haben",
+      numbersOnly: "PIN darf nur Zahlen enthalten",
+      confirmMatch: "PIN-Bestätigung muss übereinstimmen",
     },
     course: {
       nameRequired: "Kursname darf nicht leer sein",

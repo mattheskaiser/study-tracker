@@ -10,7 +10,18 @@ export const createEmailSchema = (messages: ValidationMessages) =>
       .string()
       .nonempty(messages.email.required)
       .email(messages.email.invalid),
+    pin: z
+      .string()
+      .nonempty(messages.pin.required)
+      .min(4, messages.pin.minLength)
+      .max(6, messages.pin.maxLength)
+      .regex(/^\d+$/, messages.pin.numbersOnly),
+    confirmPin: z.string().optional(),
     newUser: z.boolean(),
+  })
+  .refine((data) => !data.newUser || (data.confirmPin && data.pin === data.confirmPin), {
+    path: ["confirmPin"],
+    message: messages.pin.confirmMatch,
   });
 
 export const createCourseSchema = (messages: ValidationMessages) =>

@@ -31,8 +31,10 @@ export const enTranslations = {
       form: {
         emailNotEnteredPlaceholder: "Enter email...",
         emailEnteredPlaceholder: "Email has already been entered.",
+        pinPlaceholder: "Enter PIN...",
+        confirmPinPlaceholder: "Confirm PIN...",
         checkboxLabel: "I'm a new user",
-        searchEmailButton: "Search email",
+        searchEmailButton: "Sign in",
         createAccountButton: "Create account",
       },
       validation: {
@@ -158,6 +160,13 @@ export const enTranslations = {
     email: {
       required: "Email is required",
       invalid: "Invalid email",
+    },
+    pin: {
+      required: "PIN is required",
+      minLength: "PIN must be at least 4 digits",
+      maxLength: "PIN must be at most 6 digits",
+      numbersOnly: "PIN must contain only numbers",
+      confirmMatch: "PIN confirmation must match",
     },
     course: {
       nameRequired: "Course name cannot be empty",

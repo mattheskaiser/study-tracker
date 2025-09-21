@@ -49,6 +49,8 @@ export const FindEmailOrganism = () => {
   } = useForm<FormFields>({
     defaultValues: {
       email: "",
+      pin: "",
+      confirmPin: "",
       newUser: false,
     },
     resolver: zodResolver(emailSchema),
@@ -77,14 +79,13 @@ export const FindEmailOrganism = () => {
       reset();
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.error || translation.accountFinderCard.findEmailOrganism.toasts.errorToastDescription;
         toast(
           translation.accountFinderCard.findEmailOrganism.toasts
             .errorToastMessage,
           {
             dismissible: true,
-            description:
-              translation.accountFinderCard.findEmailOrganism.toasts
-                .errorToastDescription,
+            description: errorMessage,
             position: "top-center",
           },
         );
@@ -120,9 +121,9 @@ export const FindEmailOrganism = () => {
             placeholder={
               !userId
                 ? translation.accountFinderCard.findEmailOrganism.form
-                    .emailNotEnteredPlaceholder
+                  .emailNotEnteredPlaceholder
                 : translation.accountFinderCard.findEmailOrganism.form
-                    .emailEnteredPlaceholder
+                  .emailEnteredPlaceholder
             }
             disabled={!!userId}
           />
@@ -132,6 +133,38 @@ export const FindEmailOrganism = () => {
             </TextAtom>
           )}
         </div>
+
+        <div className="flex flex-col gap-y-2">
+          <Input
+            {...register("pin", { required: true })}
+            type="password"
+            placeholder={translation.accountFinderCard.findEmailOrganism.form.pinPlaceholder}
+            disabled={!!userId}
+            maxLength={6}
+          />
+          {errors.pin && (
+            <TextAtom size="small" color="error">
+              {errors.pin.message}
+            </TextAtom>
+          )}
+        </div>
+
+        {isNewUser && (
+          <div className="flex flex-col gap-y-2">
+            <Input
+              {...register("confirmPin", { required: isNewUser })}
+              type="password"
+              placeholder={translation.accountFinderCard.findEmailOrganism.form.confirmPinPlaceholder}
+              disabled={!!userId}
+              maxLength={6}
+            />
+            {errors.confirmPin && (
+              <TextAtom size="small" color="error">
+                {errors.confirmPin.message}
+              </TextAtom>
+            )}
+          </div>
+        )}
 
         <div className="flex flex-row items-center gap-x-2">
           <Controller

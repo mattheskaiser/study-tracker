@@ -32,8 +32,10 @@ export const espTranslations = {
       form: {
         emailNotEnteredPlaceholder: "Ingresa el correo...",
         emailEnteredPlaceholder: "El correo ya fue ingresado.",
+        pinPlaceholder: "Ingresa el PIN...",
+        confirmPinPlaceholder: "Confirma el PIN...",
         checkboxLabel: "Soy un usuario nuevo",
-        searchEmailButton: "Buscar correo",
+        searchEmailButton: "Iniciar sesión",
         createAccountButton: "Crear cuenta",
       },
       validation: {
@@ -160,6 +162,13 @@ export const espTranslations = {
     email: {
       required: "El correo electrónico es obligatorio",
       invalid: "Correo electrónico no válido",
+    },
+    pin: {
+      required: "El PIN es obligatorio",
+      minLength: "El PIN debe tener al menos 4 dígitos",
+      maxLength: "El PIN debe tener como máximo 6 dígitos",
+      numbersOnly: "El PIN debe contener solo números",
+      confirmMatch: "La confirmación del PIN debe coincidir",
     },
     course: {
       nameRequired: "El nombre del curso no puede estar vacío",

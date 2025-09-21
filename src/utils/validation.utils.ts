@@ -7,6 +7,13 @@ export const getValidationMessages = (translation: TranslationType) => ({
     required: translation.validation.email.required,
     invalid: translation.validation.email.invalid,
   },
+  pin: {
+    required: translation.validation.pin.required,
+    minLength: translation.validation.pin.minLength,
+    maxLength: translation.validation.pin.maxLength,
+    numbersOnly: translation.validation.pin.numbersOnly,
+    confirmMatch: translation.validation.pin.confirmMatch,
+  },
   course: {
     nameRequired: translation.validation.course.nameRequired,
     semesterRequired: translation.validation.course.semesterRequired,
