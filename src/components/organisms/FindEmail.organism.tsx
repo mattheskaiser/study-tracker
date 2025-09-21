@@ -9,6 +9,7 @@ import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { LoggedInUserMolecule } from "@/components/molecules/LoggedInUser.molecule";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { createEmailSchema } from "@/schemas/dynamicSchemas";
@@ -46,9 +47,15 @@ const ModeTab = ({ active, onClick, icon, label }: ModeTabProps) => {
 
 export const FindEmailOrganism = () => {
   const [userId, setUserId] = useQueryState("userId");
+  const [userEmail, setUserEmail] = useQueryState("userEmail");
   const [isLoading, setIsLoading] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
   const translation = useTranslation();
+
+  const handleSignOut = () => {
+    void setUserId(null);
+    void setUserEmail(null);
+  };
 
   const validationMessages = useMemo(
     () => getValidationMessages(translation),
@@ -83,6 +90,7 @@ export const FindEmailOrganism = () => {
       const submitData = { ...formData, newUser: isNewUser };
       const { data } = await axios.post<DataTypes>("/api/user", submitData);
       void setUserId(data.user.id);
+      void setUserEmail(data.user.email);
       toast(
         translation.accountFinderCard.findEmailOrganism.toasts
           .successToastMessage,
@@ -127,6 +135,16 @@ export const FindEmailOrganism = () => {
     }
   };
 
+  // If user is logged in, show the logged-in state
+  if (userId && userEmail) {
+    return (
+      <LoggedInUserMolecule
+        userEmail={userEmail}
+        onSignOut={handleSignOut}
+      />
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Mode Selection Buttons */}
@@ -159,13 +177,9 @@ export const FindEmailOrganism = () => {
               {...register("email", { required: true })}
               type="email"
               placeholder={
-                !userId
-                  ? translation.accountFinderCard.findEmailOrganism.form
-                    .emailNotEnteredPlaceholder
-                  : translation.accountFinderCard.findEmailOrganism.form
-                    .emailEnteredPlaceholder
+                translation.accountFinderCard.findEmailOrganism.form
+                  .emailNotEnteredPlaceholder
               }
-              disabled={!!userId}
             />
           </div>
 
@@ -175,7 +189,6 @@ export const FindEmailOrganism = () => {
               {...register("pin", { required: true })}
               type="password"
               placeholder={translation.accountFinderCard.findEmailOrganism.form.pinPlaceholder}
-              disabled={!!userId}
               maxLength={6}
               className="text-center"
             />
@@ -188,7 +201,6 @@ export const FindEmailOrganism = () => {
                 {...register("confirmPin", { required: isNewUser })}
                 type="password"
                 placeholder={translation.accountFinderCard.findEmailOrganism.form.confirmPinPlaceholder}
-                disabled={!!userId}
                 maxLength={6}
                 className="text-center"
               />
@@ -198,7 +210,7 @@ export const FindEmailOrganism = () => {
           {/* Submit Button */}
           <ButtonAtom
             isLoading={isSubmitting}
-            disabled={!!userId || isLoading}
+            disabled={isLoading}
             type="submit"
           >
             {!isNewUser ? <Search strokeWidth={2} /> : <UserPlus strokeWidth={2} />}
@@ -231,7 +243,7 @@ export const FindEmailOrganism = () => {
                 )}
               </div>
             )}
-            <div className="w-10"></div> {/* Spacer for button alignment */}
+            <div className="w-10"></div>
           </div>
         )}
       </form>
