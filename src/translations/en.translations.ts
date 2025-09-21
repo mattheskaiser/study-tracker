@@ -95,12 +95,22 @@ export const enTranslations = {
       noCoursesAddedNote: "Note: You haven't added any courses yet.",
       buttonLabelCollapse: "Collapse courses",
       buttonLabelShowAll: "Show all courses",
-      filterDropdown: {
-        filterByStatus: "Filter by status",
-        open: "Open",
-        inProgress: "In progress",
-        done: "Completed"
+      filterByStatus: "Filter by status",
+      boardTitle: "Course Board",
+      totalCourses: "total",
+      viewTabs: {
+        status: "Status",
+        semester: "Semester",
       },
+      semesterLabels: {
+        sem1: "1st Semester",
+        sem2: "2nd Semester",
+        sem3: "3rd Semester",
+        sem4: "4th Semester",
+        sem5: "5th Semester",
+        sem6: "6th Semester",
+      },
+      emptyState: "No courses",
       courseTabOrganism: {
         toasts: {
           editSuccessToastMessage: "Your course was successfully updated!",
@@ -141,8 +151,8 @@ export const enTranslations = {
     cardDescription: "Add new courses to your course list",
   },
   courseListCard: {
-    cardTitle: "Course List",
-    cardDescription: "List of your courses - edit them or manage them",
+    cardTitle: "Course Board",
+    cardDescription: "Manage your courses with status and semester views",
   },
   validation: {
     email: {

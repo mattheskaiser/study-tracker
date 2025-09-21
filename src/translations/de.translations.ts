@@ -96,12 +96,22 @@ export const deTranslations = {
       noCoursesAddedNote: "Hinweis: Du hast noch keine Kurse hinzugefügt.",
       buttonLabelCollapse: "Kurse einklappen",
       buttonLabelShowAll: "Alle Kurse anzeigen",
-      filterDropdown: {
-        filterByStatus: "Nach Status filtern",
-        open: "Offen",
-        inProgress: "In Bearbeitung",
-        done: "Abgeschlossen"
+      filterByStatus: "Nach Status filtern",
+      boardTitle: "Kurs-Board",
+      totalCourses: "gesamt",
+      viewTabs: {
+        status: "Status",
+        semester: "Semester",
       },
+      semesterLabels: {
+        sem1: "1. Semester",
+        sem2: "2. Semester",
+        sem3: "3. Semester",
+        sem4: "4. Semester",
+        sem5: "5. Semester",
+        sem6: "6. Semester",
+      },
+      emptyState: "Keine Kurse",
       courseTabOrganism: {
         toasts: {
           editSuccessToastMessage: "Dein Kurs wurde erfolgreich angepasst!",
@@ -143,8 +153,8 @@ export const deTranslations = {
     cardDescription: "Füge neue Kurse zu deiner Kursliste hinzu",
   },
   courseListCard: {
-    cardTitle: "Kursliste",
-    cardDescription: "Liste deiner Kurse - bearbeite sie oder verwalte sie",
+    cardTitle: "Kurs-Board",
+    cardDescription: "Verwalte deine Kurse mit Status- und Semester-Ansichten",
   },
   validation: {
     email: {

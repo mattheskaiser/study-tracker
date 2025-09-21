@@ -6,7 +6,6 @@ import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.mo
 import { CourseTabOrganism } from "@/components/organisms/CourseTab.organism";
 import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { formatSemester } from "@/utils/semester.utils";
 
 type ViewColumnProps = {
   title: string;
@@ -14,9 +13,10 @@ type ViewColumnProps = {
   courses: any[];
   bgColor: string;
   count: number;
+  emptyStateText: string;
 };
 
-const ViewColumn = ({ title, icon, courses, bgColor, count }: ViewColumnProps) => {
+const ViewColumn = ({ title, icon, courses, bgColor, count, emptyStateText }: ViewColumnProps) => {
   return (
     <div className="flex flex-col h-full">
       <div className={`${bgColor} rounded-t-xl p-4 border-b border-gray-200`}>
@@ -43,7 +43,7 @@ const ViewColumn = ({ title, icon, courses, bgColor, count }: ViewColumnProps) =
         ))}
         {courses.length === 0 && (
           <div className="flex items-center justify-center h-32 text-gray-400 text-sm">
-            No courses
+            {emptyStateText}
           </div>
         )}
       </div>
@@ -62,11 +62,10 @@ const ViewTab = ({ active, onClick, icon, label }: ViewTabProps) => {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-        active
-          ? "bg-gray-900 text-white"
-          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-      }`}
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${active
+        ? "bg-gray-900 text-white"
+        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+        }`}
     >
       {icon}
       {label}
@@ -130,22 +129,19 @@ export const CourseListOrganism = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-gray-900">
-          Course Board ({courses.length} total)
-        </h2>
-        
+
         <div className="flex gap-2">
           <ViewTab
             active={activeView === 'status'}
             onClick={() => setActiveView('status')}
             icon={<LayoutGrid className="h-4 w-4" />}
-            label="Status"
+            label={translation.courseManagerCard.courseListOrganism.viewTabs.status}
           />
           <ViewTab
             active={activeView === 'semester'}
             onClick={() => setActiveView('semester')}
             icon={<Calendar className="h-4 w-4" />}
-            label="Semester"
+            label={translation.courseManagerCard.courseListOrganism.viewTabs.semester}
           />
         </div>
       </div>
@@ -158,6 +154,7 @@ export const CourseListOrganism = () => {
             courses={coursesByStatus.open}
             bgColor="bg-blue-50"
             count={coursesByStatus.open.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
             title={translation.courseManagerCard.courseListOrganism.courseTabOrganism.courseStatusInProgress}
@@ -165,6 +162,7 @@ export const CourseListOrganism = () => {
             courses={coursesByStatus.in_progress}
             bgColor="bg-yellow-50"
             count={coursesByStatus.in_progress.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
             title={translation.courseManagerCard.courseListOrganism.courseTabOrganism.courseStatusDone}
@@ -172,51 +170,58 @@ export const CourseListOrganism = () => {
             courses={coursesByStatus.done}
             bgColor="bg-green-50"
             count={coursesByStatus.done.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           <ViewColumn
-            title="1st Semester"
+            title={translation.courseManagerCard.courseListOrganism.semesterLabels.sem1}
             icon={<Calendar className="h-4 w-4 text-purple-600" />}
             courses={coursesBySemester.sem1}
             bgColor="bg-purple-50"
             count={coursesBySemester.sem1.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
-            title="2nd Semester"
+            title={translation.courseManagerCard.courseListOrganism.semesterLabels.sem2}
             icon={<Calendar className="h-4 w-4 text-indigo-600" />}
             courses={coursesBySemester.sem2}
             bgColor="bg-indigo-50"
             count={coursesBySemester.sem2.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
-            title="3rd Semester"
+            title={translation.courseManagerCard.courseListOrganism.semesterLabels.sem3}
             icon={<Calendar className="h-4 w-4 text-blue-600" />}
             courses={coursesBySemester.sem3}
             bgColor="bg-blue-50"
             count={coursesBySemester.sem3.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
-            title="4th Semester"
+            title={translation.courseManagerCard.courseListOrganism.semesterLabels.sem4}
             icon={<Calendar className="h-4 w-4 text-green-600" />}
             courses={coursesBySemester.sem4}
             bgColor="bg-green-50"
             count={coursesBySemester.sem4.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
-            title="5th Semester"
+            title={translation.courseManagerCard.courseListOrganism.semesterLabels.sem5}
             icon={<Calendar className="h-4 w-4 text-yellow-600" />}
             courses={coursesBySemester.sem5}
             bgColor="bg-yellow-50"
             count={coursesBySemester.sem5.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
           <ViewColumn
-            title="6th Semester"
+            title={translation.courseManagerCard.courseListOrganism.semesterLabels.sem6}
             icon={<Calendar className="h-4 w-4 text-red-600" />}
             courses={coursesBySemester.sem6}
             bgColor="bg-red-50"
             count={coursesBySemester.sem6.length}
+            emptyStateText={translation.courseManagerCard.courseListOrganism.emptyState}
           />
         </div>
       )}

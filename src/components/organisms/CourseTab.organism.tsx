@@ -1,12 +1,11 @@
 import { useMemo, useState } from "react";
 import { type Resolver, type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BookOpen, Calendar, GraduationCap, Save, Star } from "lucide-react";
+import { Calendar, Save, Star } from "lucide-react";
 import { useQueryState } from "nuqs";
 import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
-import { StatusBadge } from "@/components/atoms/StatusBadge.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { CourseTabDropdownMolecule } from "@/components/molecules/CourseTabDropdown.molecule";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
@@ -86,17 +85,7 @@ export const CourseTabOrganism = ({
     });
   };
 
-  const displayStatus = (formStatus: FormDataTypes["status"]) => {
-    if (formStatus === "open")
-      return translation.courseManagerCard.courseListOrganism.courseTabOrganism
-        .courseStatusOpen;
-    if (formStatus === "in_progress")
-      return translation.courseManagerCard.courseListOrganism.courseTabOrganism
-        .courseStatusInProgress;
-    if (formStatus === "done")
-      return translation.courseManagerCard.courseListOrganism.courseTabOrganism
-        .courseStatusDone;
-  };
+
 
   return (
     <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300">
@@ -175,7 +164,7 @@ export const CourseTabOrganism = ({
               </h3>
               <div className="flex items-center gap-2 text-xs text-gray-600">
                 <Calendar className="h-3 w-3 flex-shrink-0" />
-                <span>{formatSemester(semester)}</span>
+                <span>{formatSemester(semester, translation.courseManagerCard.courseListOrganism.semesterLabels)}</span>
               </div>
             </div>
             <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">

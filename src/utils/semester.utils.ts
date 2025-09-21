@@ -1,14 +1,14 @@
-export const formatSemester = (semester: string): string => {
-  const semesterMap: Record<string, string> = {
-    sem1: "1st Semester",
-    sem2: "2nd Semester", 
-    sem3: "3rd Semester",
-    sem4: "4th Semester",
-    sem5: "5th Semester",
-    sem6: "6th Semester",
-  };
-  
-  return semesterMap[semester] || semester;
+type SemesterLabels = {
+  sem1: string;
+  sem2: string;
+  sem3: string;
+  sem4: string;
+  sem5: string;
+  sem6: string;
+};
+
+export const formatSemester = (semester: string, labels: SemesterLabels): string => {
+  return labels[semester as keyof SemesterLabels] || semester;
 };
 
 export const formatSemesterShort = (semester: string): string => {

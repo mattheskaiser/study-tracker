@@ -97,12 +97,22 @@ export const espTranslations = {
       noCoursesAddedNote: "Nota: Aún no has agregado cursos.",
       buttonLabelCollapse: "Colapsar cursos",
       buttonLabelShowAll: "Mostrar todos los cursos",
-      filterDropdown: {
-        filterByStatus: "Filtrar por estado",
-        open: "Abierto",
-        inProgress: "En progreso",
-        done: "Completado"
+      filterByStatus: "Filtrar por estado",
+      boardTitle: "Panel de Cursos",
+      totalCourses: "total",
+      viewTabs: {
+        status: "Estado",
+        semester: "Semestre",
       },
+      semesterLabels: {
+        sem1: "1er Semestre",
+        sem2: "2do Semestre",
+        sem3: "3er Semestre",
+        sem4: "4to Semestre",
+        sem5: "5to Semestre",
+        sem6: "6to Semestre",
+      },
+      emptyState: "Sin cursos",
       courseTabOrganism: {
         toasts: {
           editSuccessToastMessage: "¡Tu curso se actualizó correctamente!",
@@ -143,8 +153,8 @@ export const espTranslations = {
     cardDescription: "Agrega nuevos cursos a tu lista de cursos",
   },
   courseListCard: {
-    cardTitle: "Lista de Cursos",
-    cardDescription: "Lista de tus cursos - edítalos o adminístralos",
+    cardTitle: "Panel de Cursos",
+    cardDescription: "Gestiona tus cursos con vistas de estado y semestre",
   },
   validation: {
     email: {
