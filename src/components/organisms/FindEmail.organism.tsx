@@ -1,15 +1,14 @@
 import { useMemo, useState } from "react";
-import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { Search, UserPlus } from "lucide-react";
+import { LogIn, Search, UserPlus } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { toast } from "sonner";
 import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { createEmailSchema } from "@/schemas/dynamicSchemas";
@@ -22,9 +21,33 @@ type DataTypes = {
   };
 };
 
+type ModeTabProps = {
+  active: boolean;
+  onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+};
+
+const ModeTab = ({ active, onClick, icon, label }: ModeTabProps) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${active
+        ? "bg-gray-900 text-white"
+        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+        }`}
+    >
+      {icon}
+      {label}
+    </button>
+  );
+};
+
 export const FindEmailOrganism = () => {
   const [userId, setUserId] = useQueryState("userId");
   const [isLoading, setIsLoading] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
   const translation = useTranslation();
 
   const validationMessages = useMemo(
@@ -42,8 +65,6 @@ export const FindEmailOrganism = () => {
   const {
     register,
     handleSubmit,
-    control,
-    watch,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
@@ -56,12 +77,11 @@ export const FindEmailOrganism = () => {
     resolver: zodResolver(emailSchema),
   });
 
-  const isNewUser = watch("newUser");
-
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
     setIsLoading(true);
     try {
-      const { data } = await axios.post<DataTypes>("/api/user", formData);
+      const submitData = { ...formData, newUser: isNewUser };
+      const { data } = await axios.post<DataTypes>("/api/user", submitData);
       void setUserId(data.user.id);
       toast(
         translation.accountFinderCard.findEmailOrganism.toasts
@@ -108,88 +128,113 @@ export const FindEmailOrganism = () => {
   };
 
   return (
-    <form
-      /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col gap-x-2 gap-y-4 md:flex-row"
-    >
-      <div className="flex w-full flex-col gap-y-4">
-        <div className="flex flex-col gap-y-2">
-          <Input
-            {...register("email", { required: true })}
-            type="email"
-            placeholder={
-              !userId
-                ? translation.accountFinderCard.findEmailOrganism.form
-                  .emailNotEnteredPlaceholder
-                : translation.accountFinderCard.findEmailOrganism.form
-                  .emailEnteredPlaceholder
-            }
-            disabled={!!userId}
-          />
-          {errors.email && (
-            <TextAtom size="small" color="error">
-              {errors.email.message}
-            </TextAtom>
-          )}
-        </div>
+    <div className="space-y-6">
+      {/* Mode Selection Buttons */}
+      <div className="flex gap-2">
+        <ModeTab
+          active={!isNewUser}
+          onClick={() => setIsNewUser(false)}
+          icon={<LogIn className="h-4 w-4" />}
+          label={translation.accountFinderCard.findEmailOrganism.form.searchEmailButton}
+        />
+        <ModeTab
+          active={isNewUser}
+          onClick={() => setIsNewUser(true)}
+          icon={<UserPlus className="h-4 w-4" />}
+          label={translation.accountFinderCard.findEmailOrganism.form.createAccountButton}
+        />
+      </div>
 
-        <div className="flex flex-col gap-y-2">
-          <Input
-            {...register("pin", { required: true })}
-            type="password"
-            placeholder={translation.accountFinderCard.findEmailOrganism.form.pinPlaceholder}
-            disabled={!!userId}
-            maxLength={6}
-          />
-          {errors.pin && (
-            <TextAtom size="small" color="error">
-              {errors.pin.message}
-            </TextAtom>
-          )}
-        </div>
-
-        {isNewUser && (
-          <div className="flex flex-col gap-y-2">
+      {/* Form */}
+      <form
+        /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-2"
+      >
+        {/* All inputs in one row */}
+        <div className="flex gap-2 items-start">
+          {/* Email Input - Takes more space */}
+          <div className="flex-[2] min-w-0">
             <Input
-              {...register("confirmPin", { required: isNewUser })}
+              {...register("email", { required: true })}
+              type="email"
+              placeholder={
+                !userId
+                  ? translation.accountFinderCard.findEmailOrganism.form
+                    .emailNotEnteredPlaceholder
+                  : translation.accountFinderCard.findEmailOrganism.form
+                    .emailEnteredPlaceholder
+              }
+              disabled={!!userId}
+            />
+          </div>
+
+          {/* PIN Input */}
+          <div className="flex-1 min-w-0">
+            <Input
+              {...register("pin", { required: true })}
               type="password"
-              placeholder={translation.accountFinderCard.findEmailOrganism.form.confirmPinPlaceholder}
+              placeholder={translation.accountFinderCard.findEmailOrganism.form.pinPlaceholder}
               disabled={!!userId}
               maxLength={6}
+              className="text-center"
             />
-            {errors.confirmPin && (
-              <TextAtom size="small" color="error">
-                {errors.confirmPin.message}
-              </TextAtom>
+          </div>
+
+          {/* Confirm PIN Input - Only show for new users */}
+          {isNewUser && (
+            <div className="flex-1 min-w-0">
+              <Input
+                {...register("confirmPin", { required: isNewUser })}
+                type="password"
+                placeholder={translation.accountFinderCard.findEmailOrganism.form.confirmPinPlaceholder}
+                disabled={!!userId}
+                maxLength={6}
+                className="text-center"
+              />
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <ButtonAtom
+            isLoading={isSubmitting}
+            disabled={!!userId || isLoading}
+            type="submit"
+          >
+            {!isNewUser ? <Search strokeWidth={2} /> : <UserPlus strokeWidth={2} />}
+          </ButtonAtom>
+        </div>
+
+        {/* Error messages */}
+        {(errors.email || errors.pin || errors.confirmPin) && (
+          <div className="flex gap-2">
+            <div className="flex-[2] min-w-0">
+              {errors.email && (
+                <TextAtom size="small" color="error">
+                  {errors.email.message}
+                </TextAtom>
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              {errors.pin && (
+                <TextAtom size="small" color="error">
+                  {errors.pin.message}
+                </TextAtom>
+              )}
+            </div>
+            {isNewUser && (
+              <div className="flex-1 min-w-0">
+                {errors.confirmPin && (
+                  <TextAtom size="small" color="error">
+                    {errors.confirmPin.message}
+                  </TextAtom>
+                )}
+              </div>
             )}
+            <div className="w-10"></div> {/* Spacer for button alignment */}
           </div>
         )}
-
-        <div className="flex flex-row items-center gap-x-2">
-          <Controller
-            name="newUser"
-            control={control}
-            render={({ field }) => (
-              <Checkbox
-                checked={field.value}
-                onCheckedChange={field.onChange}
-                disabled={!!userId}
-              />
-            )}
-          />
-          <TextAtom size="small">
-            {translation.accountFinderCard.findEmailOrganism.form.checkboxLabel}
-          </TextAtom>
-        </div>
-      </div>
-      <ButtonAtom
-        isLoading={isSubmitting}
-        disabled={!!userId || isLoading}
-        type="submit"
-      >
-        {!isNewUser ? <Search strokeWidth={2} /> : <UserPlus strokeWidth={2} />}
-      </ButtonAtom>
-    </form>
+      </form>
+    </div>
   );
 };
