@@ -82,6 +82,7 @@ export const deTranslations = {
       },
       form: {
         courseNamePlaceholder: "Kursname eingeben...",
+        semesterPlaceholder: "Semester auswählen",
         courseStatusPlaceholder: "Status auswählen",
         courseStatusOpen: "Offen",
         courseStatusInProgress: "In Bearbeitung",
@@ -134,5 +135,13 @@ export const deTranslations = {
     finishedCourses: "Abgeschlossene Kurse",
     gradeAverage: "Notendurchschnitt",
     progress: "Fortschritt",
+  },
+  createCourseCard: {
+    cardTitle: "Kurserstellung",
+    cardDescription: "Füge neue Kurse zu deiner Kursliste hinzu",
+  },
+  courseListCard: {
+    cardTitle: "Kursliste",
+    cardDescription: "Liste deiner Kurse - bearbeite sie oder verwalte sie",
   },
 };

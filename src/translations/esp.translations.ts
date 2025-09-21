@@ -83,6 +83,7 @@ export const espTranslations = {
       },
       form: {
         courseNamePlaceholder: "Introduce el nombre del curso...",
+        semesterPlaceholder: "Seleccionar semestre",
         courseStatusPlaceholder: "Seleccionar estado",
         courseStatusOpen: "Abierto",
         courseStatusInProgress: "En progreso",
@@ -134,5 +135,13 @@ export const espTranslations = {
     finishedCourses: "Cursos completados",
     gradeAverage: "Promedio de notas",
     progress: "Progreso",
+  },
+  createCourseCard: {
+    cardTitle: "Creación de Cursos",
+    cardDescription: "Agrega nuevos cursos a tu lista de cursos",
+  },
+  courseListCard: {
+    cardTitle: "Lista de Cursos",
+    cardDescription: "Lista de tus cursos - edítalos o adminístralos",
   },
 };

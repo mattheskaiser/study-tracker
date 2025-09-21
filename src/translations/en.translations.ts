@@ -81,6 +81,7 @@ export const enTranslations = {
       },
       form: {
         courseNamePlaceholder: "Enter course name...",
+        semesterPlaceholder: "Select semester",
         courseStatusPlaceholder: "Select status",
         courseStatusOpen: "Open",
         courseStatusInProgress: "In progress",
@@ -132,5 +133,13 @@ export const enTranslations = {
     finishedCourses: "Completed Courses",
     gradeAverage: "Grade Average",
     progress: "Progress",
+  },
+  createCourseCard: {
+    cardTitle: "Course Creation",
+    cardDescription: "Add new courses to your course list",
+  },
+  courseListCard: {
+    cardTitle: "Course List",
+    cardDescription: "List of your courses - edit them or manage them",
   },
 };

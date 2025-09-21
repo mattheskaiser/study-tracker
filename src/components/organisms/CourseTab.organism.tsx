@@ -209,7 +209,6 @@ export const CourseTabOrganism = ({
             isLoading={isSubmitting}
             type="submit"
             onPress={() => void handleSubmit(onSubmit)}
-            label={translation.common.save}
           >
             <Save />
           </ButtonAtom>

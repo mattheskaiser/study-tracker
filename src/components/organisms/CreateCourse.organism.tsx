@@ -86,7 +86,10 @@ export const CreateCourseOrganism = () => {
         />
         <SelectMolecule
           name="semester"
-          placeholder={translation.common.selectSemester}
+          placeholder={
+            translation.courseManagerCard.createCourseOrganism.form
+              .semesterPlaceholder
+          }
           control={control}
           items={semesterItems}
         />
