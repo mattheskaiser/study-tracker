@@ -99,7 +99,7 @@ export const CourseTabOrganism = ({
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300">
+    <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300">
       {edit ? (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
           <div className="space-y-3">
@@ -168,14 +168,11 @@ export const CourseTabOrganism = ({
         </form>
       ) : (
         <>
-          <div className="flex items-start justify-between mb-3">
+          <div className="flex items-start justify-between mb-2">
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <BookOpen className="h-4 w-4 text-gray-500 flex-shrink-0" />
-                <h3 className="font-semibold text-gray-900 truncate text-sm">
-                  {name}
-                </h3>
-              </div>
+              <h3 className="font-semibold text-gray-900 truncate text-sm mb-1">
+                {name}
+              </h3>
               <div className="flex items-center gap-2 text-xs text-gray-600">
                 <Calendar className="h-3 w-3 flex-shrink-0" />
                 <span>{formatSemester(semester)}</span>
@@ -189,19 +186,14 @@ export const CourseTabOrganism = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <StatusBadge status={status}>
-              {displayStatus(status)}
-            </StatusBadge>
-            {grade ? (
+          {grade && (
+            <div className="flex items-center justify-end">
               <div className="flex items-center gap-1 text-sm font-medium text-gray-700">
                 <Star className="h-3 w-3 text-yellow-500" />
                 <span>{grade}</span>
               </div>
-            ) : (
-              <span className="text-xs text-gray-400">No grade</span>
-            )}
-          </div>
+            </div>
+          )}
         </>
       )}
     </div>
