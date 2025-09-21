@@ -12,17 +12,17 @@ const Home = () => {
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="mb-8">
-            <AccountFinderCardOrganism />
-          </div>
+          <div className="space-y-6">
+            <div>
+              <AccountFinderCardOrganism />
+            </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-4 space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <CreateCourseCardOrganism />
               <OverviewCardOrganism />
             </div>
 
-            <div className="lg:col-span-8">
+            <div>
               <CourseListCardOrganism />
             </div>
           </div>

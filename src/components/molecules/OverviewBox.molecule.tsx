@@ -10,42 +10,48 @@ type OverviewBoxTypes = {
 };
 
 export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
+  const progressBox = boxes.find(box => box.isProgressBar);
+  const statBoxes = boxes.filter(box => !box.isProgressBar);
+
   return (
     <div className="space-y-4">
-      {boxes.map((box) => (
-        <div
-          className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
-          key={box.label}
-        >
-          <div className="flex items-center justify-between">
+      <div className="grid grid-cols-3 gap-3">
+        {statBoxes.map((box) => (
+          <div
+            className="bg-white rounded-lg border border-gray-200 p-3 shadow-sm hover:shadow-md transition-shadow duration-200 text-center"
+            key={box.label}
+          >
+            <div className="text-lg font-semibold text-gray-900 mb-1">
+              {box.value === null || box.value === undefined || box.value === "0"
+                ? "—"
+                : box.value}
+            </div>
             <TextAtom
               size="small"
               className="text-gray-600 font-medium"
             >
               {box.label}
             </TextAtom>
-
-            {!box.isProgressBar && (
-              <div className="text-lg font-semibold text-gray-900">
-                {box.value === null || box.value === undefined || box.value === "0"
-                  ? "—"
-                  : box.value}
-              </div>
-            )}
           </div>
+        ))}
+      </div>
 
-          {box.isProgressBar && (
-            <div className="mt-3 space-y-2">
-              <ProgressBarMolecule value={parseInt(box.value)} />
-              <div className="text-right">
-                <span className="text-lg font-semibold text-gray-900">
-                  {parseInt(box.value).toFixed(1)}%
-                </span>
-              </div>
-            </div>
-          )}
+      {progressBox && (
+        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
+          <div className="flex items-center justify-between mb-2">
+            <TextAtom
+              size="small"
+              className="text-gray-600 font-medium"
+            >
+              {progressBox.label}
+            </TextAtom>
+            <span className="text-lg font-semibold text-gray-900">
+              {parseInt(progressBox.value).toFixed(1)}%
+            </span>
+          </div>
+          <ProgressBarMolecule value={parseInt(progressBox.value)} />
         </div>
-      ))}
+      )}
     </div>
   );
 };
