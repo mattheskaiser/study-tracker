@@ -60,9 +60,8 @@ export const CreateCourseOrganism = () => {
   };
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
-      <div className="flex flex-col gap-x-2 gap-y-4 md:flex-row">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div>
         <Input
           type="text"
           placeholder={
@@ -70,7 +69,11 @@ export const CreateCourseOrganism = () => {
               .courseNamePlaceholder
           }
           {...register("name", { required: true })}
+          className="w-full"
         />
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
         <SelectMolecule
           name="semester"
           placeholder={
@@ -109,6 +112,9 @@ export const CreateCourseOrganism = () => {
             },
           ]}
         />
+      </div>
+
+      <div className="flex gap-3">
         <Input
           min={1}
           max={6}
@@ -121,32 +127,36 @@ export const CreateCourseOrganism = () => {
           {...register("grade", {
             valueAsNumber: true,
           })}
-          className="max-w-32"
+          className="flex-1"
         />
         <ButtonAtom
           isLoading={isSubmitting || createCourse.isPending}
           type="submit"
+          className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex-shrink-0"
         >
-          <Plus strokeWidth={2} />
+          <Plus className="h-4 w-4 text-white" />
         </ButtonAtom>
       </div>
-      <div className="flex flex-col gap-y-2">
-        {errors.name && (
-          <TextAtom size="small" color="error">
-            {errors.name.message}
-          </TextAtom>
-        )}
-        {errors.semester && (
-          <TextAtom size="small" color="error">
-            {errors.semester.message}
-          </TextAtom>
-        )}
-        {errors.grade && (
-          <TextAtom size="small" color="error">
-            {errors.grade.message}
-          </TextAtom>
-        )}
-      </div>
+
+      {(errors.name || errors.semester || errors.grade) && (
+        <div className="space-y-1 pt-2">
+          {errors.name && (
+            <TextAtom size="small" color="error">
+              {errors.name.message}
+            </TextAtom>
+          )}
+          {errors.semester && (
+            <TextAtom size="small" color="error">
+              {errors.semester.message}
+            </TextAtom>
+          )}
+          {errors.grade && (
+            <TextAtom size="small" color="error">
+              {errors.grade.message}
+            </TextAtom>
+          )}
+        </div>
+      )}
     </form>
   );
 };

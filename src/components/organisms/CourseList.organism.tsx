@@ -41,41 +41,62 @@ export const CourseListOrganism = () => {
   }
 
   return (
-    <div className="flex flex-col gap-y-6">
-      <div className="flex flex-row justify-start">
-        <ListFilterDropdownMolecule />
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {courses.length} {courses.length === 1 ? 'Course' : 'Courses'}
+          </h2>
+          <ListFilterDropdownMolecule />
+        </div>
       </div>
-      <div className="flex flex-col gap-y-2">
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
         {showAllCourses
           ? courses.map((course) => (
               <CourseTabOrganism
                 key={course.id}
                 id={course.id}
                 name={course.name}
+                semester={course.semester}
                 status={course.status}
                 grade={course.grade}
               />
             ))
           : courses
-              .slice(0, 5)
+              .slice(0, 8)
               .map((course) => (
                 <CourseTabOrganism
                   key={course.id}
                   id={course.id}
                   name={course.name}
+                  semester={course.semester}
                   status={course.status}
                   grade={course.grade}
                 />
               ))}
-        {courses.length > 5 && (
+      </div>
+
+      {courses.length > 8 && (
+        <div className="flex justify-center pt-2">
           <ButtonAtom
-            className="mt-6"
+            className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2 rounded-lg transition-colors duration-200"
             onPress={() => setShowAllCourses((prev) => !prev)}
           >
-            {showAllCourses ? <ArrowUp /> : <ArrowDown />}
+            {showAllCourses ? (
+              <>
+                <ArrowUp className="h-4 w-4 mr-2 text-white" />
+                Show Less
+              </>
+            ) : (
+              <>
+                <ArrowDown className="h-4 w-4 mr-2 text-white" />
+                Show All ({courses.length} courses)
+              </>
+            )}
           </ButtonAtom>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

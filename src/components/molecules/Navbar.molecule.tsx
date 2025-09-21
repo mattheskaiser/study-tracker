@@ -1,14 +1,13 @@
 import Image from "next/image";
 
-import { TextAtom } from "@/components/atoms/Text.atom";
 import { LanguageSelectMolecule } from "@/components/molecules/LanguageSelect.molecule";
 
 export const NavbarMolecule = () => {
   return (
-    <div className="sticky top-0 left-0 z-20 h-16 border-b bg-white shadow-xl">
-      <div className="container mx-auto flex justify-between px-6">
+    <div className="sticky top-0 left-0 z-20 h-16 border-b border-gray-200 bg-white/95 backdrop-blur-md shadow-sm">
+      <div className="container mx-auto flex justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 flex-row items-center gap-x-4">
-          <div className="relative size-10">
+          <div className="relative size-10 rounded-lg overflow-hidden">
             <Image
               src={"/study-tracker-logo.jpg"}
               alt="Study Tracker Logo"
@@ -16,9 +15,9 @@ export const NavbarMolecule = () => {
               fill
             />
           </div>
-          <TextAtom size="large" isBold>
+          <h1 className="text-xl font-bold text-gray-900">
             Study Tracker
-          </TextAtom>
+          </h1>
         </div>
         <div className="flex h-16 items-center">
           <LanguageSelectMolecule />

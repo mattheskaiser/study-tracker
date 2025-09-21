@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { type Resolver, type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Save } from "lucide-react";
+import { BookOpen, Calendar, GraduationCap, Save, Star } from "lucide-react";
 import { useQueryState } from "nuqs";
 import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
+import { StatusBadge } from "@/components/atoms/StatusBadge.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { CourseTabDropdownMolecule } from "@/components/molecules/CourseTabDropdown.molecule";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
@@ -16,17 +17,20 @@ import { queryClient } from "@/lib/react-query";
 import { cn } from "@/lib/utils";
 import { createCourseEditSchema } from "@/schemas/dynamicSchemas";
 import type { CourseStatusType } from "@/types/general.types";
+import { formatSemester } from "@/utils/semester.utils";
 import { getValidationMessages } from "@/utils/validation.utils";
 
 type CourseTabMoleculeProps = {
   name: string;
   id: string;
+  semester: string;
   status: CourseStatusType;
   grade?: number;
 };
 
 export const CourseTabOrganism = ({
   name,
+  semester,
   status,
   grade,
   id,
@@ -95,97 +99,110 @@ export const CourseTabOrganism = ({
   };
 
   return (
-    <div
-      className={cn(
-        "flex flex-col justify-between rounded-xl border p-2 shadow-md lg:flex-row",
-      )}
-    >
-      <div className="flex flex-col gap-y-2">
-        <TextAtom
-          size="small"
-          isBold
-          className="flex max-w-[250px] items-center"
-        >
-          {name}
-        </TextAtom>
-        {errors.grade && (
-          <TextAtom size="small" color="error">
-            {errors.grade.message}
-          </TextAtom>
-        )}
-      </div>
-
+    <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300">
       {edit ? (
-        <form
-          /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-2 flex flex-row gap-x-4 lg:mt-0"
-        >
-          <SelectMolecule
-            name="status"
-            placeholder={
-              translation.courseManagerCard.courseListOrganism.courseTabOrganism
-                .selectStatusPlaceholder
-            }
-            control={control}
-            items={[
-              {
-                value: "open",
-                children:
-                  translation.courseManagerCard.courseListOrganism
-                    .courseTabOrganism.courseStatusOpen,
-              },
-              {
-                value: "in_progress",
-                children:
-                  translation.courseManagerCard.courseListOrganism
-                    .courseTabOrganism.courseStatusInProgress,
-              },
-              {
-                value: "done",
-                children:
-                  translation.courseManagerCard.courseListOrganism
-                    .courseTabOrganism.courseStatusDone,
-              },
-            ]}
-          />
-          <Input
-            min={1}
-            max={6}
-            type="number"
-            step="0.1"
-            {...register("grade", {
-              valueAsNumber: true,
-            })}
-            className="max-w-16"
-          />
-          <ButtonAtom
-            isLoading={isSubmitting || updateCourse.isPending}
-            type="submit"
-            onPress={() => void handleSubmit(onSubmit)}
-          >
-            <Save />
-          </ButtonAtom>
-        </form>
-      ) : (
-        <div className="relative flex flex-row items-center gap-x-6 gap-y-2">
-          <div className="flex flex-col gap-x-6 lg:flex-row">
-            <TextAtom className="text-start">{`${
-              translation.courseManagerCard.courseListOrganism.courseTabOrganism
-                .status
-            }: ${displayStatus(status)}`}</TextAtom>
-            <TextAtom className="text-start">{`${
-              translation.courseManagerCard.courseListOrganism.courseTabOrganism
-                .grade
-            }: ${grade ? grade : "N/A"}`}</TextAtom>
-          </div>
-          <div className="absolute top-0 right-0 lg:relative">
-            <CourseTabDropdownMolecule
-              setEditAction={() => setEdit(true)}
-              deleteAction={() => void handleDelete(id)}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          <div className="space-y-3">
+            <SelectMolecule
+              name="status"
+              placeholder={
+                translation.courseManagerCard.courseListOrganism.courseTabOrganism
+                  .selectStatusPlaceholder
+              }
+              control={control}
+              items={[
+                {
+                  value: "open",
+                  children:
+                    translation.courseManagerCard.courseListOrganism
+                      .courseTabOrganism.courseStatusOpen,
+                },
+                {
+                  value: "in_progress",
+                  children:
+                    translation.courseManagerCard.courseListOrganism
+                      .courseTabOrganism.courseStatusInProgress,
+                },
+                {
+                  value: "done",
+                  children:
+                    translation.courseManagerCard.courseListOrganism
+                      .courseTabOrganism.courseStatusDone,
+                },
+              ]}
+            />
+            <Input
+              min={1}
+              max={6}
+              type="number"
+              step="0.1"
+              placeholder="Grade"
+              {...register("grade", {
+                valueAsNumber: true,
+              })}
+              className="w-full"
             />
           </div>
-        </div>
+          {errors.grade && (
+            <TextAtom size="small" color="error">
+              {errors.grade.message}
+            </TextAtom>
+          )}
+          <div className="flex justify-end gap-2">
+            <ButtonAtom
+              type="button"
+              onPress={() => setEdit(false)}
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 text-sm"
+            >
+              Cancel
+            </ButtonAtom>
+            <ButtonAtom
+              isLoading={isSubmitting || updateCourse.isPending}
+              type="submit"
+              className="bg-gray-900 hover:bg-gray-800 text-white px-3 py-1 text-sm"
+            >
+              <Save className="h-3 w-3 mr-1 text-white" />
+              Save
+            </ButtonAtom>
+          </div>
+        </form>
+      ) : (
+        <>
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <BookOpen className="h-4 w-4 text-gray-500 flex-shrink-0" />
+                <h3 className="font-semibold text-gray-900 truncate text-sm">
+                  {name}
+                </h3>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-gray-600">
+                <Calendar className="h-3 w-3 flex-shrink-0" />
+                <span>{formatSemester(semester)}</span>
+              </div>
+            </div>
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <CourseTabDropdownMolecule
+                setEditAction={() => setEdit(true)}
+                deleteAction={() => void handleDelete(id)}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <StatusBadge status={status}>
+              {displayStatus(status)}
+            </StatusBadge>
+            {grade ? (
+              <div className="flex items-center gap-1 text-sm font-medium text-gray-700">
+                <Star className="h-3 w-3 text-yellow-500" />
+                <span>{grade}</span>
+              </div>
+            ) : (
+              <span className="text-xs text-gray-400">No grade</span>
+            )}
+          </div>
+        </>
       )}
     </div>
   );

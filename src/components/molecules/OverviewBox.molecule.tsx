@@ -1,6 +1,5 @@
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { ProgressBarMolecule } from "@/components/molecules/ProgressBar.molecule";
-import { cn } from "@/lib/utils";
 
 type OverviewBoxTypes = {
   boxes: {
@@ -11,30 +10,42 @@ type OverviewBoxTypes = {
 };
 
 export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
-  return boxes.map((box) => (
-    <div
-      className={cn("flex flex-row justify-between rounded-xl border p-2", {
-        "flex-col gap-y-2": box.isProgressBar,
-      })}
-      key={box.label}
-    >
-      <TextAtom size="small" className="flex items-center">
-        {box.label}
-      </TextAtom>
-      {box.isProgressBar ? (
-        <div className="flex flex-col gap-y-2">
-          <ProgressBarMolecule value={parseInt(box.value)} />
-          <div className="-mt-11 mr-5 mb-4 text-end text-sm font-bold">
-            {parseInt(box.value).toFixed(1)}%
+  return (
+    <div className="space-y-4">
+      {boxes.map((box) => (
+        <div
+          className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+          key={box.label}
+        >
+          <div className="flex items-center justify-between">
+            <TextAtom
+              size="small"
+              className="text-gray-600 font-medium"
+            >
+              {box.label}
+            </TextAtom>
+
+            {!box.isProgressBar && (
+              <div className="text-2xl font-bold text-gray-900">
+                {box.value === null || box.value === undefined || box.value === "0"
+                  ? "—"
+                  : box.value}
+              </div>
+            )}
           </div>
+
+          {box.isProgressBar && (
+            <div className="mt-3 space-y-2">
+              <ProgressBarMolecule value={parseInt(box.value)} />
+              <div className="text-right">
+                <span className="text-xl font-bold text-gray-900">
+                  {parseInt(box.value).toFixed(1)}%
+                </span>
+              </div>
+            </div>
+          )}
         </div>
-      ) : (
-        <TextAtom size="small" isBold className="flex items-center pr-6">
-          {box.value === null || box.value === undefined || box.value === "0"
-            ? "N/A"
-            : box.value}
-        </TextAtom>
-      )}
+      ))}
     </div>
-  ));
+  );
 };
