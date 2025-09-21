@@ -26,7 +26,7 @@ export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
             </TextAtom>
 
             {!box.isProgressBar && (
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-lg font-semibold text-gray-900">
                 {box.value === null || box.value === undefined || box.value === "0"
                   ? "—"
                   : box.value}
@@ -38,7 +38,7 @@ export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
             <div className="mt-3 space-y-2">
               <ProgressBarMolecule value={parseInt(box.value)} />
               <div className="text-right">
-                <span className="text-xl font-bold text-gray-900">
+                <span className="text-lg font-semibold text-gray-900">
                   {parseInt(box.value).toFixed(1)}%
                 </span>
               </div>
