@@ -27,6 +27,8 @@ export const deTranslations = {
         errorToastMessage: "Leider war der Vorgang nicht erfolgreich.",
         errorToastDescription: "Dein Konto wurde nicht gefunden.",
         otherToastDescription: "Leider ist ein unbekannter Fehler aufgetreten.",
+        signOutSuccessToastMessage: "Der Vorgang war erfolgreich!",
+        signOutSuccessToastDescription: "Du wurdest von deinem Konto abgemeldet.",
       },
       form: {
         emailNotEnteredPlaceholder: "E-Mail eingeben...",

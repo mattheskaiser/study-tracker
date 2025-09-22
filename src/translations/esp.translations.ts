@@ -28,6 +28,8 @@ export const espTranslations = {
         errorToastDescription: "No se encontró tu cuenta.",
         otherToastDescription:
           "Desafortunadamente, ocurrió un error desconocido.",
+        signOutSuccessToastMessage: "¡El proceso fue exitoso!",
+        signOutSuccessToastDescription: "Has sido desconectado de tu cuenta.",
       },
       form: {
         emailNotEnteredPlaceholder: "Ingresa el correo...",

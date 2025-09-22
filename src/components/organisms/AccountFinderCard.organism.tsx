@@ -13,7 +13,10 @@ export const AccountFinderCardOrganism = () => {
     <CardAtom
       title={
         <TextAtom size="large" isBold>
-          {translation.accountFinderCard.cardTitle}
+          {userId 
+            ? translation.accountFinderCard.cardTitleLoggedIn || "Account"
+            : translation.accountFinderCard.cardTitle
+          }
         </TextAtom>
       }
       description={
@@ -21,11 +24,7 @@ export const AccountFinderCardOrganism = () => {
           <TextAtom size="small">
             {translation.accountFinderCard.cardDescriptionLoginFalse}
           </TextAtom>
-        ) : (
-          <TextAtom size="small" color="success">
-            {translation.accountFinderCard.cardDescriptionLoginTrue}
-          </TextAtom>
-        )
+        ) : null
       }
       content={<FindEmailOrganism />}
     />

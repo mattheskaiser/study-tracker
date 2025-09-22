@@ -27,6 +27,8 @@ export const enTranslations = {
         errorToastMessage: "Unfortunately, the process was not successful.",
         errorToastDescription: "Your account was not found.",
         otherToastDescription: "Unfortunately, an unknown error occurred.",
+        signOutSuccessToastMessage: "The process was successful!",
+        signOutSuccessToastDescription: "You have been logged out of your account.",
       },
       form: {
         emailNotEnteredPlaceholder: "Enter email...",

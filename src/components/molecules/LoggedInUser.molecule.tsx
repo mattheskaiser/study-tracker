@@ -3,6 +3,7 @@ import { toast } from "sonner";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
+import { useTranslation } from "@/hooks/useTranslation.hook";
 
 type LoggedInUserProps = {
   userEmail: string;
@@ -10,11 +11,17 @@ type LoggedInUserProps = {
 };
 
 export const LoggedInUserMolecule = ({ userEmail, onSignOut }: LoggedInUserProps) => {
+  const translation = useTranslation();
+
   const handleSignOut = () => {
-    toast("Signed out successfully", {
-      dismissible: true,
-      position: "top-center",
-    });
+    toast(
+      translation.accountFinderCard.findEmailOrganism.toasts.signOutSuccessToastMessage,
+      {
+        dismissible: true,
+        description: translation.accountFinderCard.findEmailOrganism.toasts.signOutSuccessToastDescription,
+        position: "top-center",
+      }
+    );
     onSignOut();
   };
 

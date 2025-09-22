@@ -23,9 +23,7 @@ export const StudyOverviewOrganism = () => {
       ? (sumOfGrades / finishedCourses.length).toFixed(2)
       : "0";
 
-  const progress = courses.length > 0 
-    ? (finishedCourses.length / courses.length) * 100
-    : 0;
+  const progress = courses.length > 0 ? (finishedCourses.length / courses.length) * 100 : 0;
 
   return (
     <div className="flex flex-col gap-y-6">
