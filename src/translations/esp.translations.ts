@@ -15,7 +15,8 @@ export const espTranslations = {
     }
   },
   accountFinderCard: {
-    cardTitle: "Encuentra tus datos",
+    cardTitle: "Cuenta",
+    cardTitleLoggedIn: "Cuenta",
     cardDescriptionLoginFalse:
       "Busca tu correo electrónico en caso de que ya estés registrado. De lo contrario, introduce tu correo para crear una cuenta.",
     cardDescriptionLoginTrue:

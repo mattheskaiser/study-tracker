@@ -14,7 +14,7 @@ export const AccountFinderCardOrganism = () => {
       title={
         <TextAtom size="large" isBold>
           {userId 
-            ? translation.accountFinderCard.cardTitleLoggedIn || "Account"
+            ? translation.accountFinderCard.cardTitleLoggedIn
             : translation.accountFinderCard.cardTitle
           }
         </TextAtom>

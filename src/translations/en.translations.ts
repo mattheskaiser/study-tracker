@@ -15,7 +15,8 @@ export const enTranslations = {
     }
   },
   accountFinderCard: {
-    cardTitle: "Find your data",
+    cardTitle: "Account",
+    cardTitleLoggedIn: "Account",
     cardDescriptionLoginFalse:
       "Search for your email in case you're already registered. Otherwise, enter your email to create an account.",
     cardDescriptionLoginTrue:
