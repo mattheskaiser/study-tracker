@@ -27,13 +27,13 @@ export const CardAtom = ({
   className,
 }: CardAtomProps) => {
   return (
-    <Card className={cn("border-2 shadow-xl", className)}>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+    <Card className={cn("border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white rounded-2xl", className)}>
+      <CardHeader className={description ? "pb-4" : "pb-2"}>
+        <CardTitle className="text-xl font-semibold text-gray-900">{title}</CardTitle>
+        {description && <CardDescription className="text-gray-600">{description}</CardDescription>}
       </CardHeader>
-      <CardContent>{content}</CardContent>
-      <CardFooter>{footer}</CardFooter>
+      <CardContent className="pt-0">{content}</CardContent>
+      {footer && <CardFooter className="pt-4">{footer}</CardFooter>}
     </Card>
   );
 };

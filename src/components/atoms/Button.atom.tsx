@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 
 type ButtonAtomProps = {
   children: ReactNode;
-  label?: ReactNode;
   onPress?: () => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;

@@ -1,21 +1,7 @@
 export const enTranslations = {
-  validation: {
-    email: {
-      required: "Email is required",
-      invalid: "Invalid email"
-    },
-    course: {
-      name: {
-        required: "Course name cannot be empty"
-      },
-      grade: {
-        requiredIfDone: "Grade is required when the course is completed",
-        onlyIfDone: "Grade can only be set when the course is completed"
-      }
-    }
-  },
   accountFinderCard: {
-    cardTitle: "Find your data",
+    cardTitle: "Account",
+    cardTitleLoggedIn: "Account",
     cardDescriptionLoginFalse:
       "Search for your email in case you're already registered. Otherwise, enter your email to create an account.",
     cardDescriptionLoginTrue:
@@ -27,12 +13,19 @@ export const enTranslations = {
         errorToastMessage: "Unfortunately, the process was not successful.",
         errorToastDescription: "Your account was not found.",
         otherToastDescription: "Unfortunately, an unknown error occurred.",
+        signOutSuccessToastMessage: "The process was successful!",
+        signOutSuccessToastDescription: "You have been logged out of your account.",
+      },
+      loggedInUser: {
+        loggedInAs: "Logged in as",
       },
       form: {
         emailNotEnteredPlaceholder: "Enter email...",
         emailEnteredPlaceholder: "Email has already been entered.",
+        pinPlaceholder: "Enter PIN...",
+        confirmPinPlaceholder: "Confirm PIN...",
         checkboxLabel: "I'm a new user",
-        searchEmailButton: "Search email",
+        searchEmailButton: "Sign in",
         createAccountButton: "Create account",
       },
       validation: {
@@ -40,14 +33,6 @@ export const enTranslations = {
         emailInvalid: "Invalid email",
       },
     },
-  },
-  createCourseCard: {
-    title: "Course Creation",
-    description: "Add new courses to your course list"
-  },
-  courseListCard: {
-    title: "Course List",
-    description: "List of your courses - edit them or whatever you need"
   },
   common: {
     save: "Save",
@@ -74,13 +59,14 @@ export const enTranslations = {
     cardNoteLoginFalse: "Note: Please log in to view and add courses.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "Course created successfully!",
-        successToastDescription: "Your new course has been added to your list",
-        errorToastMessage: "Failed to create course",
-        errorToastDescription: "Please try again later.",
+        successToastMessage: "The course was successfully created!",
+        successToastDescription: "Your course has been added to the list.",
+        errorToastMessage: "Unfortunately, the process was not successful.",
+        errorToastDescription: "The course could not be created.",
       },
       form: {
         courseNamePlaceholder: "Enter course name...",
+        semesterPlaceholder: "Select semester",
         courseStatusPlaceholder: "Select status",
         courseStatusOpen: "Open",
         courseStatusInProgress: "In progress",
@@ -94,22 +80,34 @@ export const enTranslations = {
       noCoursesAddedNote: "Note: You haven't added any courses yet.",
       buttonLabelCollapse: "Collapse courses",
       buttonLabelShowAll: "Show all courses",
-      filterDropdown: {
-        filterByStatus: "Filter by status",
-        open: "Open",
-        inProgress: "In progress",
-        done: "Completed"
+      filterByStatus: "Filter by status",
+      boardTitle: "Course Board",
+      totalCourses: "total",
+      viewTabs: {
+        status: "Status",
+        semester: "Semester",
       },
+      semesterLabels: {
+        sem1: "1st Semester",
+        sem2: "2nd Semester",
+        sem3: "3rd Semester",
+        sem4: "4th Semester",
+        sem5: "5th Semester",
+        sem6: "6th Semester",
+      },
+      emptyState: "No courses",
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "Course updated successfully!",
-          editSuccessToastDescription: "Your changes have been saved",
-          editErrorToastMessage: "Failed to update course",
-          editErrorToastDescription: "Please try again later.",
-          deleteSuccessToastMessage: "Course deleted successfully",
-          deleteSuccessToastDescription: "The course has been permanently removed",
-          deleteErrorToastMessage: "Failed to delete course",
-          deleteErrorToastDescription: "Please try again later.",
+          editSuccessToastMessage: "Your course was successfully updated!",
+          editSuccessToastDescription: "Your changes have been saved.",
+          editErrorToastMessage:
+            "The operation was unfortunately not successful.",
+          editErrorToastDescription: "The course could not be edited.",
+          deleteSuccessToastMessage: "The course was successfully deleted.",
+          deleteSuccessToastDescription: "The course has been removed from your list.",
+          deleteErrorToastMessage:
+            "The operation was unfortunately not successful.",
+          deleteErrorToastDescription: "The course could not be deleted.",
         },
         courseStatusOpen: "Open",
         courseStatusInProgress: "In Progress",
@@ -132,5 +130,33 @@ export const enTranslations = {
     finishedCourses: "Completed Courses",
     gradeAverage: "Grade Average",
     progress: "Progress",
+  },
+  createCourseCard: {
+    cardTitle: "Course Creation",
+    cardDescription: "Add new courses to your course list",
+  },
+  courseListCard: {
+    cardTitle: "Course Board",
+    cardDescription: "Manage your courses with status and semester views",
+  },
+  validation: {
+    email: {
+      required: "Email is required",
+      invalid: "Invalid email",
+    },
+    pin: {
+      required: "PIN is required",
+      minLength: "PIN must be at least 4 digits",
+      maxLength: "PIN must be at most 6 digits",
+      numbersOnly: "PIN must contain only numbers",
+      confirmMatch: "PIN confirmation must match",
+    },
+    course: {
+      nameRequired: "Course name cannot be empty",
+      semesterRequired: "Semester selection is required",
+      gradeRequiredWhenDone: "Grade is required when the course is completed",
+      gradeOnlyWhenDone: "Grade can only be provided when the course is completed",
+      gradeRange: "Grade must be between 1 and 6",
+    },
   },
 };

@@ -10,15 +10,21 @@ import { queryClient } from "@/lib/react-query";
 const Home = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="no-scrollbar container mx-auto min-h-screen w-full overflow-x-hidden overflow-y-scroll pb-12">
-        <div className="flex flex-col gap-y-6 px-6">
-          <AccountFinderCardOrganism />
-          <div className="flex flex-col gap-6 lg:grid lg:grid-cols-2">
-            <div className="flex flex-col gap-6">
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="space-y-6">
+            <div>
+              <AccountFinderCardOrganism />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <CreateCourseCardOrganism />
               <OverviewCardOrganism />
             </div>
-            <CourseListCardOrganism />
+
+            <div>
+              <CourseListCardOrganism />
+            </div>
           </div>
         </div>
       </div>

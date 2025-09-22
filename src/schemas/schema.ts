@@ -17,7 +17,7 @@ export const useCourseSchema = () => {
   const translation = useTranslation();
   
   return z.object({
-    name: z.string().nonempty(translation.validation.course.name.required),
+    name: z.string().nonempty(translation.validation.course.nameRequired),
     semester: z.enum(["sem1", "sem2", "sem3", "sem4", "sem5", "sem6"]),
     status: z.enum(["open", "in_progress", "done"]),
     grade: z.preprocess((val): number | undefined => {
@@ -28,11 +28,11 @@ export const useCourseSchema = () => {
   })
   .refine((data) => data.status !== "done" || typeof data.grade === "number", {
     path: ["grade"],
-    message: translation.validation.course.grade.requiredIfDone,
+    message: translation.validation.course.gradeRequiredWhenDone,
   })
   .refine((data) => data.status === "done" || data.grade === undefined, {
     path: ["grade"],
-    message: translation.validation.course.grade.onlyIfDone,
+    message: translation.validation.course.gradeOnlyWhenDone,
   });
 };
 
@@ -50,10 +50,10 @@ export const useCourseEditSchema = () => {
   })
   .refine((data) => data.status !== "done" || typeof data.grade === "number", {
     path: ["grade"],
-    message: translation.validation.course.grade.requiredIfDone,
+    message: translation.validation.course.gradeRequiredWhenDone,
   })
   .refine((data) => data.status === "done" || data.grade === undefined, {
     path: ["grade"],
-    message: translation.validation.course.grade.onlyIfDone,
+    message: translation.validation.course.gradeOnlyWhenDone,
   });
 };

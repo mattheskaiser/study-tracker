@@ -1,21 +1,7 @@
 export const espTranslations = {
-  validation: {
-    email: {
-      required: "El correo electrónico es obligatorio",
-      invalid: "Correo electrónico inválido"
-    },
-    course: {
-      name: {
-        required: "El nombre del curso no puede estar vacío"
-      },
-      grade: {
-        requiredIfDone: "La calificación es obligatoria cuando el curso está completado",
-        onlyIfDone: "La calificación solo puede establecerse cuando el curso está completado"
-      }
-    }
-  },
   accountFinderCard: {
-    cardTitle: "Encuentra tus datos",
+    cardTitle: "Cuenta",
+    cardTitleLoggedIn: "Cuenta",
     cardDescriptionLoginFalse:
       "Busca tu correo electrónico en caso de que ya estés registrado. De lo contrario, introduce tu correo para crear una cuenta.",
     cardDescriptionLoginTrue:
@@ -28,12 +14,19 @@ export const espTranslations = {
         errorToastDescription: "No se encontró tu cuenta.",
         otherToastDescription:
           "Desafortunadamente, ocurrió un error desconocido.",
+        signOutSuccessToastMessage: "¡El proceso fue exitoso!",
+        signOutSuccessToastDescription: "Has sido desconectado de tu cuenta.",
+      },
+      loggedInUser: {
+        loggedInAs: "Conectado como",
       },
       form: {
         emailNotEnteredPlaceholder: "Ingresa el correo...",
         emailEnteredPlaceholder: "El correo ya fue ingresado.",
+        pinPlaceholder: "Ingresa el PIN...",
+        confirmPinPlaceholder: "Confirma el PIN...",
         checkboxLabel: "Soy un usuario nuevo",
-        searchEmailButton: "Buscar correo",
+        searchEmailButton: "Iniciar sesión",
         createAccountButton: "Crear cuenta",
       },
       validation: {
@@ -41,14 +34,6 @@ export const espTranslations = {
         emailInvalid: "Correo electrónico no válido",
       },
     },
-  },
-  createCourseCard: {
-    title: "Creación de Cursos",
-    description: "Agrega nuevos cursos a tu lista"
-  },
-  courseListCard: {
-    title: "Lista de Cursos",
-    description: "Lista de tus cursos - edítalos o haz lo que necesites"
   },
   common: {
     save: "Guardar",
@@ -76,13 +61,14 @@ export const espTranslations = {
       "Nota: Por favor inicia sesión para ver y agregar cursos.",
     createCourseOrganism: {
       toasts: {
-        successToastMessage: "¡Curso creado exitosamente!",
-        successToastDescription: "Tu nuevo curso ha sido añadido a la lista",
-        errorToastMessage: "Error al crear el curso",
-        errorToastDescription: "Por favor, inténtalo de nuevo.",
+        successToastMessage: "¡El curso fue creado con éxito!",
+        successToastDescription: "Tu curso ha sido agregado a la lista.",
+        errorToastMessage: "Desafortunadamente, el proceso no fue exitoso.",
+        errorToastDescription: "No se pudo crear el curso.",
       },
       form: {
         courseNamePlaceholder: "Introduce el nombre del curso...",
+        semesterPlaceholder: "Seleccionar semestre",
         courseStatusPlaceholder: "Seleccionar estado",
         courseStatusOpen: "Abierto",
         courseStatusInProgress: "En progreso",
@@ -96,22 +82,34 @@ export const espTranslations = {
       noCoursesAddedNote: "Nota: Aún no has agregado cursos.",
       buttonLabelCollapse: "Colapsar cursos",
       buttonLabelShowAll: "Mostrar todos los cursos",
-      filterDropdown: {
-        filterByStatus: "Filtrar por estado",
-        open: "Abierto",
-        inProgress: "En progreso",
-        done: "Completado"
+      filterByStatus: "Filtrar por estado",
+      boardTitle: "Panel de Cursos",
+      totalCourses: "total",
+      viewTabs: {
+        status: "Estado",
+        semester: "Semestre",
       },
+      semesterLabels: {
+        sem1: "1er Semestre",
+        sem2: "2do Semestre",
+        sem3: "3er Semestre",
+        sem4: "4to Semestre",
+        sem5: "5to Semestre",
+        sem6: "6to Semestre",
+      },
+      emptyState: "Sin cursos",
       courseTabOrganism: {
         toasts: {
-          editSuccessToastMessage: "¡Curso actualizado exitosamente!",
-          editSuccessToastDescription: "Tus cambios han sido guardados",
-          editErrorToastMessage: "Error al actualizar el curso",
-          editErrorToastDescription: "Por favor, inténtalo de nuevo más tarde.",
-          deleteSuccessToastMessage: "Curso eliminado exitosamente",
-          deleteSuccessToastDescription: "El curso ha sido eliminado permanentemente",
-          deleteErrorToastMessage: "Error al eliminar el curso",
-          deleteErrorToastDescription: "Por favor, inténtalo de nuevo más tarde.",
+          editSuccessToastMessage: "¡Tu curso se actualizó correctamente!",
+          editSuccessToastDescription: "Tus cambios han sido guardados.",
+          editErrorToastMessage:
+            "Desafortunadamente, la operación no tuvo éxito.",
+          editErrorToastDescription: "No se pudo editar el curso.",
+          deleteSuccessToastMessage: "El curso se eliminó correctamente.",
+          deleteSuccessToastDescription: "El curso ha sido removido de tu lista.",
+          deleteErrorToastMessage:
+            "Desafortunadamente, la operación no tuvo éxito.",
+          deleteErrorToastDescription: "No se pudo eliminar el curso.",
         },
         courseStatusOpen: "Abierto",
         courseStatusInProgress: "En curso",
@@ -134,5 +132,33 @@ export const espTranslations = {
     finishedCourses: "Cursos completados",
     gradeAverage: "Promedio de notas",
     progress: "Progreso",
+  },
+  createCourseCard: {
+    cardTitle: "Creación de Cursos",
+    cardDescription: "Agrega nuevos cursos a tu lista de cursos",
+  },
+  courseListCard: {
+    cardTitle: "Panel de Cursos",
+    cardDescription: "Gestiona tus cursos con vistas de estado y semestre",
+  },
+  validation: {
+    email: {
+      required: "El correo electrónico es obligatorio",
+      invalid: "Correo electrónico no válido",
+    },
+    pin: {
+      required: "El PIN es obligatorio",
+      minLength: "El PIN debe tener al menos 4 dígitos",
+      maxLength: "El PIN debe tener como máximo 6 dígitos",
+      numbersOnly: "El PIN debe contener solo números",
+      confirmMatch: "La confirmación del PIN debe coincidir",
+    },
+    course: {
+      nameRequired: "El nombre del curso no puede estar vacío",
+      semesterRequired: "La selección del semestre es obligatoria",
+      gradeRequiredWhenDone: "La calificación es obligatoria cuando el curso está completado",
+      gradeOnlyWhenDone: "La calificación solo se puede proporcionar cuando el curso está completado",
+      gradeRange: "La calificación debe estar entre 1 y 6",
+    },
   },
 };

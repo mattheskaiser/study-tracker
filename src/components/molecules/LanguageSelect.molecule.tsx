@@ -24,7 +24,7 @@ export const LanguageSelectMolecule = () => {
       render={({ field }) => (
         <Select
           onValueChange={(value) => {
-            field.onChange;
+            field.onChange(value);
             if (setLanguage) {
               setLanguage(value);
             }

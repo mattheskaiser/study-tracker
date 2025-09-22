@@ -4,6 +4,7 @@ export type CourseType = {
   grade?: number;
   id: string;
   name: string;
+  semester: string;
   status: CourseStatusType;
   userId: string;
 };

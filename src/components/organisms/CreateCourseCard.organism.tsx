@@ -5,17 +5,17 @@ import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const CreateCourseCardOrganism = () => {
   const translation = useTranslation();
-  
+
   return (
     <CardAtom
       title={
         <TextAtom size="large" isBold>
-          {translation.createCourseCard.title}
+          {translation.createCourseCard.cardTitle}
         </TextAtom>
       }
       description={
         <TextAtom size="small">
-          {translation.createCourseCard.description}
+          {translation.createCourseCard.cardDescription}
         </TextAtom>
       }
       content={<CreateCourseOrganism />}

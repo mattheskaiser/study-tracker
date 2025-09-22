@@ -4,11 +4,11 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
-    const { email, newUser } = await req.json();
+    const { email, pin, newUser } = await req.json();
 
-    if (!email) {
+    if (!email || !pin) {
       return NextResponse.json(
-        { error: "Email ist erforderlich" },
+        { error: "Email and PIN are required" },
         { status: 400 },
       );
     }
@@ -20,30 +20,37 @@ export async function POST(req: Request) {
     if (newUser) {
       if (existingUser) {
         return NextResponse.json(
-          { error: "User existiert bereits" },
+          { error: "User already exists" },
           { status: 400 },
         );
       }
 
-      const newUser = await prisma.user.create({
-        data: { email },
+      const newUserRecord = await prisma.user.create({
+        data: { email, pin },
       });
 
-      return NextResponse.json({ user: newUser }, { status: 201 });
+      return NextResponse.json({ user: newUserRecord }, { status: 201 });
     }
 
     if (!existingUser) {
       return NextResponse.json(
-        { error: "User nicht gefunden" },
+        { error: "User not found" },
         { status: 404 },
+      );
+    }
+
+    if (existingUser.pin !== pin) {
+      return NextResponse.json(
+        { error: "Invalid PIN" },
+        { status: 401 },
       );
     }
 
     return NextResponse.json({ user: existingUser }, { status: 200 });
   } catch (error) {
-    console.error("Fehler beim User-Check:", error);
+    console.error("Error during user authentication:", error);
     return NextResponse.json(
-      { error: "Interner Serverfehler" },
+      { error: "Internal server error" },
       { status: 500 },
     );
   }
