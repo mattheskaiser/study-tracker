@@ -10,16 +10,16 @@ import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
 import { SelectMolecule } from "@/components/molecules/Select.molecule";
 import { Input } from "@/components/ui/input";
-import { SelectSemesterItems } from "@/constants/general.constants";
+import { useSelectSemesterItems } from "@/constants/general.constants";
 import { useCourseMutations } from "@/hooks/useCourseMutations.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 import { createCourseSchema } from "@/schemas/dynamicSchemas";
 import { getValidationMessages } from "@/utils/validation.utils";
 
 export const CreateCourseOrganism = () => {
-  const [userId] = useQueryState("userId");
   const translation = useTranslation();
   const { createCourse } = useCourseMutations();
+  const semesterItems = useSelectSemesterItems();
 
   const validationMessages = useMemo(
     () => getValidationMessages(translation),

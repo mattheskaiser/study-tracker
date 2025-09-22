@@ -1,19 +1,4 @@
 export const espTranslations = {
-  validation: {
-    email: {
-      required: "El correo electrónico es obligatorio",
-      invalid: "Correo electrónico inválido"
-    },
-    course: {
-      name: {
-        required: "El nombre del curso no puede estar vacío"
-      },
-      grade: {
-        requiredIfDone: "La calificación es obligatoria cuando el curso está completado",
-        onlyIfDone: "La calificación solo puede establecerse cuando el curso está completado"
-      }
-    }
-  },
   accountFinderCard: {
     cardTitle: "Cuenta",
     cardTitleLoggedIn: "Cuenta",
@@ -32,6 +17,9 @@ export const espTranslations = {
         signOutSuccessToastMessage: "¡El proceso fue exitoso!",
         signOutSuccessToastDescription: "Has sido desconectado de tu cuenta.",
       },
+      loggedInUser: {
+        loggedInAs: "Conectado como",
+      },
       form: {
         emailNotEnteredPlaceholder: "Ingresa el correo...",
         emailEnteredPlaceholder: "El correo ya fue ingresado.",
@@ -46,14 +34,6 @@ export const espTranslations = {
         emailInvalid: "Correo electrónico no válido",
       },
     },
-  },
-  createCourseCard: {
-    title: "Creación de Cursos",
-    description: "Agrega nuevos cursos a tu lista"
-  },
-  courseListCard: {
-    title: "Lista de Cursos",
-    description: "Lista de tus cursos - edítalos o haz lo que necesites"
   },
   common: {
     save: "Guardar",

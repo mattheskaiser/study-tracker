@@ -1,19 +1,4 @@
 export const deTranslations = {
-  validation: {
-    email: {
-      required: "Email ist erforderlich",
-      invalid: "Ungültige Email"
-    },
-    course: {
-      name: {
-        required: "Kursname darf nicht leer sein"
-      },
-      grade: {
-        requiredIfDone: "Note ist erforderlich, wenn der Kurs abgeschlossen ist",
-        onlyIfDone: "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist"
-      }
-    }
-  },
   accountFinderCard: {
     cardTitle: "Konto",
     cardTitleLoggedIn: "Konto",
@@ -31,6 +16,9 @@ export const deTranslations = {
         signOutSuccessToastMessage: "Der Vorgang war erfolgreich!",
         signOutSuccessToastDescription: "Du wurdest von deinem Konto abgemeldet.",
       },
+      loggedInUser: {
+        loggedInAs: "Angemeldet als",
+      },
       form: {
         emailNotEnteredPlaceholder: "E-Mail eingeben...",
         emailEnteredPlaceholder: "E-Mail wurde bereits eingegeben.",
@@ -45,14 +33,6 @@ export const deTranslations = {
         emailInvalid: "Ungültige E-Mail",
       },
     },
-  },
-  createCourseCard: {
-    title: "Kurserstellung",
-    description: "Füge neue Kurse zu deiner Kursliste hinzu"
-  },
-  courseListCard: {
-    title: "Kursliste",
-    description: "Liste deiner Kurse - bearbeite sie oder was auch immer"
   },
   common: {
     save: "Speichern",

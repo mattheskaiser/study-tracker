@@ -20,7 +20,8 @@ async function main() {
       await postgresClient.user.create({
         data: {
           id: user.id,
-          email: user.email
+          email: user.email,
+          pin: user.pin || "000000" // Default pin if not present
         }
       })
     }

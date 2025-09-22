@@ -15,12 +15,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const ListFilterDropdownMolecule = () => {
   const [open, setOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useQueryState("statusFilter");
-  const translation = useTranslation();
   const translation = useTranslation();
 
   const setStatus = (status: "open" | "inProgress" | "done") => {

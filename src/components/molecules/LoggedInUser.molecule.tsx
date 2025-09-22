@@ -31,7 +31,7 @@ export const LoggedInUserMolecule = ({ userEmail, onSignOut }: LoggedInUserProps
         <User className="h-5 w-5 text-green-600" />
         <div className="flex flex-col">
           <TextAtom size="small" className="text-green-800 font-medium">
-            Logged in as
+            {translation.accountFinderCard.findEmailOrganism.loggedInUser.loggedInAs}
           </TextAtom>
           <TextAtom size="small" className="text-green-700">
             {userEmail}

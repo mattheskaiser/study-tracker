@@ -1,19 +1,4 @@
 export const enTranslations = {
-  validation: {
-    email: {
-      required: "Email is required",
-      invalid: "Invalid email"
-    },
-    course: {
-      name: {
-        required: "Course name cannot be empty"
-      },
-      grade: {
-        requiredIfDone: "Grade is required when the course is completed",
-        onlyIfDone: "Grade can only be set when the course is completed"
-      }
-    }
-  },
   accountFinderCard: {
     cardTitle: "Account",
     cardTitleLoggedIn: "Account",
@@ -31,6 +16,9 @@ export const enTranslations = {
         signOutSuccessToastMessage: "The process was successful!",
         signOutSuccessToastDescription: "You have been logged out of your account.",
       },
+      loggedInUser: {
+        loggedInAs: "Logged in as",
+      },
       form: {
         emailNotEnteredPlaceholder: "Enter email...",
         emailEnteredPlaceholder: "Email has already been entered.",
@@ -45,14 +33,6 @@ export const enTranslations = {
         emailInvalid: "Invalid email",
       },
     },
-  },
-  createCourseCard: {
-    title: "Course Creation",
-    description: "Add new courses to your course list"
-  },
-  courseListCard: {
-    title: "Course List",
-    description: "List of your courses - edit them or whatever you need"
   },
   common: {
     save: "Save",

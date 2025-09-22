@@ -3,7 +3,6 @@ import { TextAtom } from "@/components/atoms/Text.atom";
 import { CourseListOrganism } from "@/components/organisms/CourseList.organism";
 import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const CourseListCardOrganism = () => {
   const translation = useTranslation();
