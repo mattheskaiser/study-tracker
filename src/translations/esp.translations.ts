@@ -152,6 +152,7 @@ export const espTranslations = {
       maxLength: "El PIN debe tener como máximo 6 dígitos",
       numbersOnly: "El PIN debe contener solo números",
       confirmMatch: "La confirmación del PIN debe coincidir",
+      confirmRequired: "Por favor confirma tu PIN",
     },
     course: {
       nameRequired: "El nombre del curso no puede estar vacío",

@@ -13,6 +13,7 @@ export const getValidationMessages = (translation: TranslationType) => ({
     maxLength: translation.validation.pin.maxLength,
     numbersOnly: translation.validation.pin.numbersOnly,
     confirmMatch: translation.validation.pin.confirmMatch,
+    confirmRequired: translation.validation.pin.confirmRequired,
   },
   course: {
     nameRequired: translation.validation.course.nameRequired,

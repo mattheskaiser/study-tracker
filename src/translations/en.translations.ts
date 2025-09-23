@@ -150,6 +150,7 @@ export const enTranslations = {
       maxLength: "PIN must be at most 6 digits",
       numbersOnly: "PIN must contain only numbers",
       confirmMatch: "PIN confirmation must match",
+      confirmRequired: "Please confirm your PIN",
     },
     course: {
       nameRequired: "Course name cannot be empty",

@@ -73,6 +73,7 @@ export const FindEmailOrganism = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     defaultValues: {
@@ -87,8 +88,7 @@ export const FindEmailOrganism = () => {
   const onSubmit: SubmitHandler<FormFields> = async (formData) => {
     setIsLoading(true);
     try {
-      const submitData = { ...formData, newUser: isNewUser };
-      const { data } = await axios.post<DataTypes>("/api/user", submitData);
+      const { data } = await axios.post<DataTypes>("/api/user", formData);
       void setUserId(data.user.id);
       void setUserEmail(data.user.email);
       toast(
@@ -151,13 +151,19 @@ export const FindEmailOrganism = () => {
       <div className="flex gap-2">
         <ModeTab
           active={!isNewUser}
-          onClick={() => setIsNewUser(false)}
+          onClick={() => {
+            setIsNewUser(false);
+            setValue("newUser", false);
+          }}
           icon={<LogIn className="h-4 w-4" />}
           label={translation.accountFinderCard.findEmailOrganism.form.searchEmailButton}
         />
         <ModeTab
           active={isNewUser}
-          onClick={() => setIsNewUser(true)}
+          onClick={() => {
+            setIsNewUser(true);
+            setValue("newUser", true);
+          }}
           icon={<UserPlus className="h-4 w-4" />}
           label={translation.accountFinderCard.findEmailOrganism.form.createAccountButton}
         />
@@ -198,7 +204,7 @@ export const FindEmailOrganism = () => {
           {isNewUser && (
             <div className="flex-1 min-w-0">
               <Input
-                {...register("confirmPin", { required: isNewUser })}
+                {...register("confirmPin")}
                 type="password"
                 placeholder={translation.accountFinderCard.findEmailOrganism.form.confirmPinPlaceholder}
                 maxLength={6}
