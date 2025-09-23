@@ -19,7 +19,11 @@ export const createEmailSchema = (messages: ValidationMessages) =>
     confirmPin: z.string().optional(),
     newUser: z.boolean(),
   })
-  .refine((data) => !data.newUser || (data.confirmPin && data.pin === data.confirmPin), {
+  .refine((data) => !data.newUser || (data.confirmPin && data.confirmPin.length > 0), {
+    path: ["confirmPin"],
+    message: messages.pin.confirmRequired,
+  })
+  .refine((data) => !data.newUser || data.pin === data.confirmPin, {
     path: ["confirmPin"],
     message: messages.pin.confirmMatch,
   });

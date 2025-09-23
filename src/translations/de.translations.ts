@@ -152,6 +152,7 @@ export const deTranslations = {
       maxLength: "PIN darf höchstens 6 Ziffern haben",
       numbersOnly: "PIN darf nur Zahlen enthalten",
       confirmMatch: "PIN-Bestätigung muss übereinstimmen",
+      confirmRequired: "Bitte bestätige deine PIN",
     },
     course: {
       nameRequired: "Kursname darf nicht leer sein",
