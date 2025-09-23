@@ -1,5 +1,6 @@
 "use client";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { useQueryState } from "nuqs";
 
 import { AccountFinderCardOrganism } from "@/components/organisms/AccountFinderCard.organism";
 import { CourseListCardOrganism } from "@/components/organisms/CourseListCard.organism";
@@ -8,6 +9,8 @@ import { OverviewCardOrganism } from "@/components/organisms/OverviewCard.organi
 import { queryClient } from "@/lib/react-query";
 
 const Home = () => {
+  const [userId] = useQueryState("userId");
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-white">
@@ -17,14 +20,18 @@ const Home = () => {
               <AccountFinderCardOrganism />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <CreateCourseCardOrganism />
-              <OverviewCardOrganism />
-            </div>
+            {userId && (
+              <>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in duration-900">
+                  <CreateCourseCardOrganism />
+                  <OverviewCardOrganism />
+                </div>
 
-            <div>
-              <CourseListCardOrganism />
-            </div>
+                <div className="animate-in fade-in duration-700">
+                  <CourseListCardOrganism />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
