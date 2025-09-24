@@ -41,7 +41,7 @@ export const espTranslations = {
     languages: {
       english: "Inglés",
       spanish: "Español",
-      german: "Alemán"
+      german: "Alemán",
     },
     selectSemester: "Seleccionar semestre",
     semesters: {
@@ -50,8 +50,8 @@ export const espTranslations = {
       sem3: "3er Semestre",
       sem4: "4to Semestre",
       sem5: "5to Semestre",
-      sem6: "6to Semestre"
-    }
+      sem6: "6to Semestre",
+    },
   },
   courseManagerCard: {
     cardTitle: "Tus Cursos",
@@ -106,7 +106,8 @@ export const espTranslations = {
             "Desafortunadamente, la operación no tuvo éxito.",
           editErrorToastDescription: "No se pudo editar el curso.",
           deleteSuccessToastMessage: "El curso se eliminó correctamente.",
-          deleteSuccessToastDescription: "El curso ha sido removido de tu lista.",
+          deleteSuccessToastDescription:
+            "El curso ha sido removido de tu lista.",
           deleteErrorToastMessage:
             "Desafortunadamente, la operación no tuvo éxito.",
           deleteErrorToastDescription: "No se pudo eliminar el curso.",
@@ -126,7 +127,7 @@ export const espTranslations = {
   },
   overviewCard: {
     cardTitle: "Resumen",
-    cardDescription: "Tus estudios de un vistazo.",
+    cardDescription: "Tus estudios de un vistazo",
     cardNote: "Nota: Por favor, inicia sesión para acceder a tus estadísticas.",
     openCourses: "Cursos abiertos",
     finishedCourses: "Cursos completados",
@@ -157,8 +158,10 @@ export const espTranslations = {
     course: {
       nameRequired: "El nombre del curso no puede estar vacío",
       semesterRequired: "La selección del semestre es obligatoria",
-      gradeRequiredWhenDone: "La calificación es obligatoria cuando el curso está completado",
-      gradeOnlyWhenDone: "La calificación solo se puede proporcionar cuando el curso está completado",
+      gradeRequiredWhenDone:
+        "La calificación es obligatoria cuando el curso está completado",
+      gradeOnlyWhenDone:
+        "La calificación solo se puede proporcionar cuando el curso está completado",
       gradeRange: "La calificación debe estar entre 1 y 6",
     },
   },

@@ -14,7 +14,8 @@ export const enTranslations = {
         errorToastDescription: "Your account was not found.",
         otherToastDescription: "Unfortunately, an unknown error occurred.",
         signOutSuccessToastMessage: "The process was successful!",
-        signOutSuccessToastDescription: "You have been logged out of your account.",
+        signOutSuccessToastDescription:
+          "You have been logged out of your account.",
       },
       loggedInUser: {
         loggedInAs: "Logged in as",
@@ -40,7 +41,7 @@ export const enTranslations = {
     languages: {
       english: "English",
       spanish: "Spanish",
-      german: "German"
+      german: "German",
     },
     selectSemester: "Select semester",
     semesters: {
@@ -49,8 +50,8 @@ export const enTranslations = {
       sem3: "3rd Semester",
       sem4: "4th Semester",
       sem5: "5th Semester",
-      sem6: "6th Semester"
-    }
+      sem6: "6th Semester",
+    },
   },
   courseManagerCard: {
     cardTitle: "Your Courses",
@@ -104,7 +105,8 @@ export const enTranslations = {
             "The operation was unfortunately not successful.",
           editErrorToastDescription: "The course could not be edited.",
           deleteSuccessToastMessage: "The course was successfully deleted.",
-          deleteSuccessToastDescription: "The course has been removed from your list.",
+          deleteSuccessToastDescription:
+            "The course has been removed from your list.",
           deleteErrorToastMessage:
             "The operation was unfortunately not successful.",
           deleteErrorToastDescription: "The course could not be deleted.",
@@ -124,7 +126,7 @@ export const enTranslations = {
   },
   overviewCard: {
     cardTitle: "Overview",
-    cardDescription: "Your studies at a glance.",
+    cardDescription: "Your studies at a glance",
     cardNote: "Note: Please log in to access your statistics.",
     openCourses: "Open Courses",
     finishedCourses: "Completed Courses",
@@ -156,7 +158,8 @@ export const enTranslations = {
       nameRequired: "Course name cannot be empty",
       semesterRequired: "Semester selection is required",
       gradeRequiredWhenDone: "Grade is required when the course is completed",
-      gradeOnlyWhenDone: "Grade can only be provided when the course is completed",
+      gradeOnlyWhenDone:
+        "Grade can only be provided when the course is completed",
       gradeRange: "Grade must be between 1 and 6",
     },
   },

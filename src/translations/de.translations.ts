@@ -14,7 +14,8 @@ export const deTranslations = {
         errorToastDescription: "Dein Konto wurde nicht gefunden.",
         otherToastDescription: "Leider ist ein unbekannter Fehler aufgetreten.",
         signOutSuccessToastMessage: "Der Vorgang war erfolgreich!",
-        signOutSuccessToastDescription: "Du wurdest von deinem Konto abgemeldet.",
+        signOutSuccessToastDescription:
+          "Du wurdest von deinem Konto abgemeldet.",
       },
       loggedInUser: {
         loggedInAs: "Angemeldet als",
@@ -40,7 +41,7 @@ export const deTranslations = {
     languages: {
       english: "Englisch",
       spanish: "Spanisch",
-      german: "Deutsch"
+      german: "Deutsch",
     },
     selectSemester: "Semester auswählen",
     semesters: {
@@ -49,8 +50,8 @@ export const deTranslations = {
       sem3: "3. Semester",
       sem4: "4. Semester",
       sem5: "5. Semester",
-      sem6: "6. Semester"
-    }
+      sem6: "6. Semester",
+    },
   },
   courseManagerCard: {
     cardTitle: "Deine Kurse",
@@ -105,7 +106,8 @@ export const deTranslations = {
           editErrorToastDescription:
             "Der Kurs konnte leider nicht bearbeitet werden.",
           deleteSuccessToastMessage: "Der Kurs wurde erfolgreich gelöscht.",
-          deleteSuccessToastDescription: "Der Kurs wurde aus deiner Liste entfernt.",
+          deleteSuccessToastDescription:
+            "Der Kurs wurde aus deiner Liste entfernt.",
           deleteErrorToastMessage: "Der Vorgang war leider nicht erfolgreich.",
           deleteErrorToastDescription:
             "Der Kurs konnte leider nicht gelöscht werden.",
@@ -125,7 +127,7 @@ export const deTranslations = {
   },
   overviewCard: {
     cardTitle: "Überblick",
-    cardDescription: "Dein Studium auf einen Blick.",
+    cardDescription: "Dein Studium auf einen Blick",
     cardNote:
       "Hinweis: Bitte melde dich an, um auf deine Statistiken zuzugreifen.",
     openCourses: "Offene Kurse",
@@ -157,8 +159,10 @@ export const deTranslations = {
     course: {
       nameRequired: "Kursname darf nicht leer sein",
       semesterRequired: "Semester-Auswahl ist erforderlich",
-      gradeRequiredWhenDone: "Note ist erforderlich, wenn der Kurs abgeschlossen ist",
-      gradeOnlyWhenDone: "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist",
+      gradeRequiredWhenDone:
+        "Note ist erforderlich, wenn der Kurs abgeschlossen ist",
+      gradeOnlyWhenDone:
+        "Note darf nur angegeben werden, wenn der Kurs abgeschlossen ist",
       gradeRange: "Note muss zwischen 1 und 6 liegen",
     },
   },
