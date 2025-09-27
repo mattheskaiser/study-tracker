@@ -4,8 +4,6 @@ export const enTranslations = {
     cardTitleLoggedIn: "Account",
     cardDescriptionLoginFalse:
       "Search for your email in case you're already registered. Otherwise, enter your email to create an account.",
-    cardDescriptionLoginTrue:
-      "Note: You are now connected to your account and can view and edit your courses and view your statistics.",
     findEmailOrganism: {
       toasts: {
         successToastMessage: "The process was successful!",
@@ -57,7 +55,6 @@ export const enTranslations = {
     cardTitle: "Your Courses",
     cardDescription:
       "Add all your courses and grades to track your academic progress accurately.",
-    cardNoteLoginFalse: "Note: Please log in to view and add courses.",
     createCourseOrganism: {
       toasts: {
         successToastMessage: "The course was successfully created!",
@@ -127,7 +124,6 @@ export const enTranslations = {
   overviewCard: {
     cardTitle: "Overview",
     cardDescription: "Your studies at a glance",
-    cardNote: "Note: Please log in to access your statistics.",
     openCourses: "Open Courses",
     finishedCourses: "Completed Courses",
     gradeAverage: "Grade Average",

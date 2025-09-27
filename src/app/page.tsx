@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
           <div className="space-y-6">
             <div>
               <AccountFinderCardOrganism />
@@ -22,7 +22,7 @@ const Home = () => {
 
             {userId && (
               <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in duration-900">
+                <div className="animate-in fade-in grid grid-cols-1 gap-6 duration-900 lg:grid-cols-2">
                   <CreateCourseCardOrganism />
                   <OverviewCardOrganism />
                 </div>

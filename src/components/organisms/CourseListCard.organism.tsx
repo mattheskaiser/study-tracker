@@ -1,31 +1,21 @@
-import { CardAtom } from "@/components/atoms/Card.atom";
-import { TextAtom } from "@/components/atoms/Text.atom";
+import { TotalCoursesBadgeAtom } from "@/components/atoms/TotalCoursesBadge.atom";
+import { CardMolecule } from "@/components/molecules/Card.molecule";
 import { CourseListOrganism } from "@/components/organisms/CourseList.organism";
-import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const CourseListCardOrganism = () => {
   const translation = useTranslation();
-  const { courses } = useCourses();
 
   return (
-    <CardAtom
-      title={
-        <div className="flex items-center gap-3">
-          <TextAtom size="large" isBold>
-            {translation.courseListCard.cardTitle}
-          </TextAtom>
-          <span className="bg-gray-100 text-gray-600 rounded-full px-3 py-1 text-sm font-medium">
-            {courses.length} {translation.courseManagerCard.courseListOrganism.totalCourses}
-          </span>
-        </div>
-      }
-      description={
-        <TextAtom size="small">
-          {translation.courseListCard.cardDescription}
-        </TextAtom>
-      }
-      content={<CourseListOrganism />}
-    />
+    <div className="relative">
+      <CardMolecule
+        title={translation.courseListCard.cardTitle}
+        description={translation.courseListCard.cardDescription}
+        content={<CourseListOrganism />}
+      />
+      <div className={"absolute top-6.5 left-40"}>
+        <TotalCoursesBadgeAtom />
+      </div>
+    </div>
   );
 };

@@ -4,8 +4,6 @@ export const espTranslations = {
     cardTitleLoggedIn: "Cuenta",
     cardDescriptionLoginFalse:
       "Busca tu correo electrónico en caso de que ya estés registrado. De lo contrario, introduce tu correo para crear una cuenta.",
-    cardDescriptionLoginTrue:
-      "Nota: Ahora estás conectado a tu cuenta y puedes ver y editar tus cursos, así como consultar tus estadísticas.",
     findEmailOrganism: {
       toasts: {
         successToastMessage: "¡El proceso fue exitoso!",
@@ -57,8 +55,6 @@ export const espTranslations = {
     cardTitle: "Tus Cursos",
     cardDescription:
       "Agrega todos tus cursos y calificaciones para seguir tu progreso académico con precisión.",
-    cardNoteLoginFalse:
-      "Nota: Por favor inicia sesión para ver y agregar cursos.",
     createCourseOrganism: {
       toasts: {
         successToastMessage: "¡El curso fue creado con éxito!",
@@ -128,7 +124,6 @@ export const espTranslations = {
   overviewCard: {
     cardTitle: "Resumen",
     cardDescription: "Tus estudios de un vistazo",
-    cardNote: "Nota: Por favor, inicia sesión para acceder a tus estadísticas.",
     openCourses: "Cursos abiertos",
     finishedCourses: "Cursos completados",
     gradeAverage: "Promedio de notas",
