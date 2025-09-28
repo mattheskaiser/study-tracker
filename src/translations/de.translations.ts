@@ -4,8 +4,6 @@ export const deTranslations = {
     cardTitleLoggedIn: "Konto",
     cardDescriptionLoginFalse:
       "Suche nach deiner E-Mail, falls du bereits registriert bist. Andernfalls gib deine E-Mail ein, um ein Konto zu erstellen.",
-    cardDescriptionLoginTrue:
-      "Hinweis: Du bist jetzt mit deinem Konto verbunden und kannst deine Kurse anzeigen und bearbeiten sowie deine Statistiken einsehen.",
     findEmailOrganism: {
       toasts: {
         successToastMessage: "Der Vorgang war erfolgreich!",
@@ -57,8 +55,6 @@ export const deTranslations = {
     cardTitle: "Deine Kurse",
     cardDescription:
       "Füge alle deine Kurse und Noten hinzu, um deinen Studienfortschritt genau zu verfolgen.",
-    cardNoteLoginFalse:
-      "Hinweis: Bitte melde dich an, um Kurse anzusehen und hinzuzufügen.",
     createCourseOrganism: {
       toasts: {
         successToastMessage: "Der Kurs wurde erfolgreich erstellt!",
@@ -128,8 +124,6 @@ export const deTranslations = {
   overviewCard: {
     cardTitle: "Überblick",
     cardDescription: "Dein Studium auf einen Blick",
-    cardNote:
-      "Hinweis: Bitte melde dich an, um auf deine Statistiken zuzugreifen.",
     openCourses: "Offene Kurse",
     finishedCourses: "Abgeschlossene Kurse",
     gradeAverage: "Notendurchschnitt",

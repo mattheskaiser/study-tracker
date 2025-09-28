@@ -25,10 +25,12 @@ export async function GET(req: Request) {
     });
 
     return NextResponse.json({ courses }, { status: 200 });
-  } catch (error: any) {
-    console.error("Error fetching courses:", error.message);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error("Error fetching courses:", errorMessage);
     return NextResponse.json(
-      { error: `Internal Server Error: ${error.message}` },
+      { error: `Internal Server Error: ${errorMessage}` },
       { status: 500 },
     );
   }
@@ -36,7 +38,13 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = (await req.json()) as {
+      userId: string;
+      name: string;
+      semester: string;
+      status: string;
+      grade?: number;
+    };
 
     const { userId, name, semester, status, grade } = body;
 
@@ -59,10 +67,12 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ course }, { status: 201 });
-  } catch (error: any) {
-    console.error("Error creating course:", error.message, error);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error("Error creating course:", errorMessage, error);
     return NextResponse.json(
-      { error: `Internal Server Error: ${error.message}` },
+      { error: `Internal Server Error: ${errorMessage}` },
       { status: 500 },
     );
   }
@@ -70,7 +80,11 @@ export async function POST(req: Request) {
 
 export async function PATCH(req: Request) {
   try {
-    const body = await req.json();
+    const body = (await req.json()) as {
+      courseId: string;
+      status?: string;
+      grade?: number;
+    };
     const { courseId, status, grade } = body;
 
     if (!courseId) {
@@ -105,10 +119,12 @@ export async function PATCH(req: Request) {
     });
 
     return NextResponse.json({ course: updatedCourse }, { status: 200 });
-  } catch (error: any) {
-    console.error("Error updating course:", error.message);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error("Error updating course:", errorMessage);
     return NextResponse.json(
-      { error: `Internal Server Error: ${error.message}` },
+      { error: `Internal Server Error: ${errorMessage}` },
       { status: 500 },
     );
   }
@@ -136,10 +152,12 @@ export async function DELETE(req: Request) {
       { message: "Course deleted successfully" },
       { status: 200 },
     );
-  } catch (error: any) {
-    console.error("Error deleting course:", error.message);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    console.error("Error deleting course:", errorMessage);
     return NextResponse.json(
-      { error: `Internal Server Error: ${error.message}` },
+      { error: `Internal Server Error: ${errorMessage}` },
       { status: 500 },
     );
   }

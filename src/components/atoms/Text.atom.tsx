@@ -1,9 +1,10 @@
+import type { ReactNode } from "react";
 import type { ClassValue } from "clsx";
 
 import { cn } from "@/lib/utils";
 
 type TextAtomProps = {
-  children?: string;
+  children?: string | ReactNode;
   size?: "small" | "medium" | "large";
   isBold?: boolean;
   className?: ClassValue;

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { OverviewBoxMolecule } from "@/components/molecules/OverviewBox.molecule";
+import { OverviewBoxMolecule } from "@/components/molecules/statistics/OverviewBox.molecule";
 import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 
@@ -10,7 +10,10 @@ export const StudyOverviewOrganism = () => {
 
   const { finishedCourses, sumOfGrades } = useMemo(() => {
     const finished = courses.filter((course) => course.status === "done");
-    const total = finished.reduce((sum, course) => sum + (course.grade || 0), 0);
+    const total = finished.reduce(
+      (sum, course) => sum + (course.grade || 0),
+      0,
+    );
     return { finishedCourses: finished, sumOfGrades: total };
   }, [courses]);
 
@@ -23,7 +26,8 @@ export const StudyOverviewOrganism = () => {
       ? (sumOfGrades / finishedCourses.length).toFixed(2)
       : "0";
 
-  const progress = courses.length > 0 ? (finishedCourses.length / courses.length) * 100 : 0;
+  const progress =
+    courses.length > 0 ? (finishedCourses.length / courses.length) * 100 : 0;
 
   return (
     <div className="flex flex-col gap-y-6">

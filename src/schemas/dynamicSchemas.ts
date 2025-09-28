@@ -5,28 +5,33 @@ import type { getValidationMessages } from "@/utils/validation.utils";
 type ValidationMessages = ReturnType<typeof getValidationMessages>;
 
 export const createEmailSchema = (messages: ValidationMessages) =>
-  z.object({
-    email: z
-      .string()
-      .nonempty(messages.email.required)
-      .email(messages.email.invalid),
-    pin: z
-      .string()
-      .nonempty(messages.pin.required)
-      .min(4, messages.pin.minLength)
-      .max(6, messages.pin.maxLength)
-      .regex(/^\d+$/, messages.pin.numbersOnly),
-    confirmPin: z.string().optional(),
-    newUser: z.boolean(),
-  })
-  .refine((data) => !data.newUser || (data.confirmPin && data.confirmPin.length > 0), {
-    path: ["confirmPin"],
-    message: messages.pin.confirmRequired,
-  })
-  .refine((data) => !data.newUser || data.pin === data.confirmPin, {
-    path: ["confirmPin"],
-    message: messages.pin.confirmMatch,
-  });
+  z
+    .object({
+      email: z
+        .string()
+        .nonempty(messages.email.required)
+        .email(messages.email.invalid),
+      pin: z
+        .string()
+        .nonempty(messages.pin.required)
+        .min(4, messages.pin.minLength)
+        .max(6, messages.pin.maxLength)
+        .regex(/^\d+$/, messages.pin.numbersOnly),
+      confirmPin: z.string().optional(),
+      newUser: z.boolean(),
+    })
+    .refine(
+      (data) =>
+        !data.newUser || (data.confirmPin && data.confirmPin.length > 0),
+      {
+        path: ["confirmPin"],
+        message: messages.pin.confirmRequired,
+      },
+    )
+    .refine((data) => !data.newUser || data.pin === data.confirmPin, {
+      path: ["confirmPin"],
+      message: messages.pin.confirmMatch,
+    });
 
 export const createCourseSchema = (messages: ValidationMessages) =>
   z
@@ -42,10 +47,13 @@ export const createCourseSchema = (messages: ValidationMessages) =>
         return isNaN(parsed) ? undefined : parsed;
       }, z.number().min(1, messages.course.gradeRange).max(6, messages.course.gradeRange).optional()),
     })
-    .refine((data) => data.status !== "done" || typeof data.grade === "number", {
-      path: ["grade"],
-      message: messages.course.gradeRequiredWhenDone,
-    })
+    .refine(
+      (data) => data.status !== "done" || typeof data.grade === "number",
+      {
+        path: ["grade"],
+        message: messages.course.gradeRequiredWhenDone,
+      },
+    )
     .refine((data) => data.status === "done" || data.grade === undefined, {
       path: ["grade"],
       message: messages.course.gradeOnlyWhenDone,
@@ -64,10 +72,13 @@ export const createCourseEditSchema = (messages: ValidationMessages) =>
         return isNaN(parsed) ? undefined : parsed;
       }, z.number().min(1, messages.course.gradeRange).max(6, messages.course.gradeRange).optional()),
     })
-    .refine((data) => data.status !== "done" || typeof data.grade === "number", {
-      path: ["grade"],
-      message: messages.course.gradeRequiredWhenDone,
-    })
+    .refine(
+      (data) => data.status !== "done" || typeof data.grade === "number",
+      {
+        path: ["grade"],
+        message: messages.course.gradeRequiredWhenDone,
+      },
+    )
     .refine((data) => data.status === "done" || data.grade === undefined, {
       path: ["grade"],
       message: messages.course.gradeOnlyWhenDone,

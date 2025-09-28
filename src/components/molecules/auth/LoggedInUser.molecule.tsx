@@ -10,38 +10,47 @@ type LoggedInUserProps = {
   onSignOut: () => void;
 };
 
-export const LoggedInUserMolecule = ({ userEmail, onSignOut }: LoggedInUserProps) => {
+export const LoggedInUserMolecule = ({
+  userEmail,
+  onSignOut,
+}: LoggedInUserProps) => {
   const translation = useTranslation();
 
   const handleSignOut = () => {
     toast(
-      translation.accountFinderCard.findEmailOrganism.toasts.signOutSuccessToastMessage,
+      translation.accountFinderCard.findEmailOrganism.toasts
+        .signOutSuccessToastMessage,
       {
         dismissible: true,
-        description: translation.accountFinderCard.findEmailOrganism.toasts.signOutSuccessToastDescription,
+        description:
+          translation.accountFinderCard.findEmailOrganism.toasts
+            .signOutSuccessToastDescription,
         position: "top-center",
-      }
+      },
     );
     onSignOut();
   };
 
   return (
-    <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+    <div className="flex items-center justify-between rounded-lg border border-green-200 bg-green-50 p-4">
       <div className="flex items-center gap-3">
         <User className="h-5 w-5 text-green-600" />
         <div className="flex flex-col">
-          <TextAtom size="small" className="text-green-800 font-medium">
-            {translation.accountFinderCard.findEmailOrganism.loggedInUser.loggedInAs}
+          <TextAtom size="small" className="font-medium text-green-800">
+            {
+              translation.accountFinderCard.findEmailOrganism.loggedInUser
+                .loggedInAs
+            }
           </TextAtom>
           <TextAtom size="small" className="text-green-700">
             {userEmail}
           </TextAtom>
         </div>
       </div>
-      
+
       <ButtonAtom
         onPress={handleSignOut}
-        className="bg-gray-900 hover:bg-gray-800 text-white"
+        className="bg-gray-900 text-white hover:bg-gray-800"
       >
         <LogOut strokeWidth={2} className="h-4 w-4" />
       </ButtonAtom>
