@@ -1,7 +1,7 @@
 import { useQueryState } from "nuqs";
 
-import { CardMolecule } from "@/components/molecules/Card.molecule";
-import { AuthenticationOrganism } from "@/components/organisms/Authentication.organism";
+import { CardMolecule } from "@/components/molecules/general/Card.molecule";
+import { AuthenticationOrganism } from "@/components/organisms/auth/Authentication.organism";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const AccountFinderCardOrganism = () => {

@@ -29,10 +29,10 @@ export const useCourseMutations = () => {
         ...courseData,
         userId,
       });
-      return response.data;
+      return response.data as unknown;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["courses", userId] });
+      void queryClient.invalidateQueries({ queryKey: ["courses", userId] });
       toast(
         translation.courseManagerCard.createCourseOrganism.toasts
           .successToastMessage,
@@ -65,10 +65,10 @@ export const useCourseMutations = () => {
   const updateCourseMutation = useMutation({
     mutationFn: async (updateData: UpdateCourseData) => {
       const response = await axios.patch("/api/courses", updateData);
-      return response.data;
+      return response.data as unknown;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["courses", userId] });
+      void queryClient.invalidateQueries({ queryKey: ["courses", userId] });
       toast(
         translation.courseManagerCard.courseListOrganism.courseTabOrganism
           .toasts.editSuccessToastMessage,
@@ -106,10 +106,10 @@ export const useCourseMutations = () => {
       if (!response.ok) {
         throw new Error("Failed to delete course");
       }
-      return response.json();
+      return (await response.json()) as unknown;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["courses", userId] });
+      void queryClient.invalidateQueries({ queryKey: ["courses", userId] });
       toast(
         translation.courseManagerCard.courseListOrganism.courseTabOrganism
           .toasts.deleteSuccessToastMessage,

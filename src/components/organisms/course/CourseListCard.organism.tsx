@@ -1,6 +1,6 @@
 import { TotalCoursesBadgeAtom } from "@/components/atoms/TotalCoursesBadge.atom";
-import { CardMolecule } from "@/components/molecules/Card.molecule";
-import { CourseListOrganism } from "@/components/organisms/CourseList.organism";
+import { CardMolecule } from "@/components/molecules/general/Card.molecule";
+import { CourseListOrganism } from "@/components/organisms/course/CourseList.organism";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const CourseListCardOrganism = () => {

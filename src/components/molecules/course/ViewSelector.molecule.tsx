@@ -1,6 +1,6 @@
 import { Calendar, LayoutGrid } from "lucide-react";
 
-import { ViewTabMolecule } from "@/components/molecules/ViewTab.molecule";
+import { ViewTabMolecule } from "@/components/molecules/course/ViewTab.molecule";
 
 type ViewSelectorProps = {
   activeView: "status" | "semester";

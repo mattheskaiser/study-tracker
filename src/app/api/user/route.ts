@@ -4,7 +4,12 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
   try {
-    const { email, pin, newUser } = await req.json();
+    const body = (await req.json()) as {
+      email: string;
+      pin: string;
+      newUser: boolean;
+    };
+    const { email, pin, newUser } = body;
 
     if (!email || !pin) {
       return NextResponse.json(
@@ -33,17 +38,11 @@ export async function POST(req: Request) {
     }
 
     if (!existingUser) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 },
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     if (existingUser.pin !== pin) {
-      return NextResponse.json(
-        { error: "Invalid PIN" },
-        { status: 401 },
-      );
+      return NextResponse.json({ error: "Invalid PIN" }, { status: 401 });
     }
 
     return NextResponse.json({ user: existingUser }, { status: 200 });

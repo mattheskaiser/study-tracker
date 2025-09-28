@@ -3,12 +3,11 @@ import type { Resolver, SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
-import { useQueryState } from "nuqs";
 import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { SelectMolecule } from "@/components/molecules/Select.molecule";
+import { SelectMolecule } from "@/components/molecules/general/Select.molecule";
 import { Input } from "@/components/ui/input";
 import { useSelectSemesterItems } from "@/constants/general.constants";
 import { useCourseMutations } from "@/hooks/useCourseMutations.hook";
@@ -51,7 +50,7 @@ export const CreateCourseOrganism = () => {
     resolver: zodResolver(courseSchema) as Resolver<FormFields>,
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (formData) => {
+  const onSubmit: SubmitHandler<FormFields> = (formData) => {
     createCourse.mutate(formData, {
       onSuccess: () => {
         reset(defaultValues);
@@ -60,7 +59,12 @@ export const CreateCourseOrganism = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form
+      onSubmit={(e) => {
+        void handleSubmit(onSubmit)(e);
+      }}
+      className="space-y-4"
+    >
       <div>
         <Input
           type="text"
@@ -132,7 +136,7 @@ export const CreateCourseOrganism = () => {
         <ButtonAtom
           isLoading={isSubmitting || createCourse.isPending}
           type="submit"
-          className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex-shrink-0"
+          className="flex-shrink-0 rounded-lg bg-gray-900 px-4 py-2 text-white transition-colors duration-200 hover:bg-gray-800"
         >
           <Plus className="h-4 w-4 text-white" />
         </ButtonAtom>

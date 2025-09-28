@@ -2,12 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { useQueryState } from "nuqs";
 
-import { LoggedInUserMolecule } from "@/components/molecules/LoggedInUser.molecule";
-import { ModeSelectorMolecule } from "@/components/molecules/ModeSelector.molecule";
-import { EmailFormMolecule } from "@/components/molecules/EmailForm.molecule";
 import { showToast } from "@/components/atoms/Toast.atom";
+import { EmailFormMolecule } from "@/components/molecules/auth/EmailForm.molecule";
+import { LoggedInUserMolecule } from "@/components/molecules/auth/LoggedInUser.molecule";
+import { ModeSelectorMolecule } from "@/components/molecules/auth/ModeSelector.molecule";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import type { EmailFormData, ApiUserResponse } from "@/types/email-form.types";
+import type { ApiUserResponse, EmailFormData } from "@/types/email-form.types";
 
 export const AuthenticationOrganism = () => {
   const [userId, setUserId] = useQueryState("userId");
@@ -34,16 +34,23 @@ export const AuthenticationOrganism = () => {
 
       showToast({
         type: "success",
-        title: translation.accountFinderCard.findEmailOrganism.toasts.successToastMessage,
-        description: translation.accountFinderCard.findEmailOrganism.toasts.successToastDescription,
+        title:
+          translation.accountFinderCard.findEmailOrganism.toasts
+            .successToastMessage,
+        description:
+          translation.accountFinderCard.findEmailOrganism.toasts
+            .successToastDescription,
       });
     } catch (error) {
-      const errorTitle = translation.accountFinderCard.findEmailOrganism.toasts.errorToastMessage;
+      const errorTitle =
+        translation.accountFinderCard.findEmailOrganism.toasts
+          .errorToastMessage;
 
       if (axios.isAxiosError(error)) {
         const errorDescription =
-          error.response?.data?.error ||
-          translation.accountFinderCard.findEmailOrganism.toasts.errorToastDescription;
+          (error.response?.data as { error?: string })?.error ||
+          translation.accountFinderCard.findEmailOrganism.toasts
+            .errorToastDescription;
 
         showToast({
           type: "error",
@@ -54,7 +61,9 @@ export const AuthenticationOrganism = () => {
         showToast({
           type: "error",
           title: errorTitle,
-          description: translation.accountFinderCard.findEmailOrganism.toasts.otherToastDescription,
+          description:
+            translation.accountFinderCard.findEmailOrganism.toasts
+              .otherToastDescription,
         });
       }
       throw error;
@@ -75,8 +84,7 @@ export const AuthenticationOrganism = () => {
         isNewUser={isNewUser}
         onModeChange={handleModeChange}
         searchLabel={
-          translation.accountFinderCard.findEmailOrganism.form
-            .searchEmailButton
+          translation.accountFinderCard.findEmailOrganism.form.searchEmailButton
         }
         createLabel={
           translation.accountFinderCard.findEmailOrganism.form

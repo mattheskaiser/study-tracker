@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-import { NavbarMolecule } from "@/components/molecules/Navbar.molecule";
+import { NavbarMolecule } from "@/components/molecules/general/Navbar.molecule";
 import { Toaster } from "@/components/ui/sonner";
 import { LanguageContextWrapper } from "@/context";
 

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { CourseTabOrganism } from "@/components/organisms/CourseTab.organism";
+import { CourseTabOrganism } from "@/components/organisms/course/CourseTab.organism";
 import type { Course } from "@/types/course.types";
 
 type CourseColumnProps = {

@@ -1,17 +1,15 @@
 import { useMemo, useState } from "react";
 import { BookOpen } from "lucide-react";
 
-import { TextAtom } from "@/components/atoms/Text.atom";
 import { EmptyStateAtom } from "@/components/atoms/EmptyState.atom";
-import { LoadingSpinnerMolecule } from "@/components/molecules/LoadingSpinner.molecule";
-import { ViewSelectorMolecule } from "@/components/molecules/ViewSelector.molecule";
-import { StatusViewOrganism } from "@/components/organisms/StatusView.organism";
-import { SemesterViewOrganism } from "@/components/organisms/SemesterView.organism";
+import { TextAtom } from "@/components/atoms/Text.atom";
+import { ViewSelectorMolecule } from "@/components/molecules/course/ViewSelector.molecule";
+import { LoadingSpinnerMolecule } from "@/components/molecules/general/LoadingSpinner.molecule";
+import { SemesterViewOrganism } from "@/components/organisms/course/SemesterView.organism";
+import { StatusViewOrganism } from "@/components/organisms/course/StatusView.organism";
 import { useCourses } from "@/hooks/useCourses.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import type { CoursesByStatus, CoursesBySemester } from "@/types/course.types";
-
-
+import type { CoursesBySemester, CoursesByStatus } from "@/types/course.types";
 
 export const CourseListOrganism = () => {
   const translation = useTranslation();
@@ -57,7 +55,9 @@ export const CourseListOrganism = () => {
     return (
       <EmptyStateAtom
         icon={<BookOpen />}
-        message={translation.courseManagerCard.courseListOrganism.noCoursesAddedNote}
+        message={
+          translation.courseManagerCard.courseListOrganism.noCoursesAddedNote
+        }
       />
     );
   }
@@ -67,8 +67,12 @@ export const CourseListOrganism = () => {
       <ViewSelectorMolecule
         activeView={activeView}
         onViewChange={setActiveView}
-        statusLabel={translation.courseManagerCard.courseListOrganism.viewTabs.status}
-        semesterLabel={translation.courseManagerCard.courseListOrganism.viewTabs.semester}
+        statusLabel={
+          translation.courseManagerCard.courseListOrganism.viewTabs.status
+        }
+        semesterLabel={
+          translation.courseManagerCard.courseListOrganism.viewTabs.semester
+        }
       />
 
       {activeView === "status" ? (

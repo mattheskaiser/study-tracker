@@ -7,13 +7,11 @@ import type { z } from "zod";
 
 import { ButtonAtom } from "@/components/atoms/Button.atom";
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { CourseTabDropdownMolecule } from "@/components/molecules/CourseTabDropdown.molecule";
-import { SelectMolecule } from "@/components/molecules/Select.molecule";
+import { CourseTabDropdownMolecule } from "@/components/molecules/course/CourseTabDropdown.molecule";
+import { SelectMolecule } from "@/components/molecules/general/Select.molecule";
 import { Input } from "@/components/ui/input";
 import { useCourseMutations } from "@/hooks/useCourseMutations.hook";
 import { useTranslation } from "@/hooks/useTranslation.hook";
-import { queryClient } from "@/lib/react-query";
-import { cn } from "@/lib/utils";
 import { createCourseEditSchema } from "@/schemas/dynamicSchemas";
 import type { CourseStatusType } from "@/types/general.types";
 import { formatSemester } from "@/utils/semester.utils";
@@ -34,7 +32,6 @@ export const CourseTabOrganism = ({
   grade,
   id,
 }: CourseTabMoleculeProps) => {
-  const [userId] = useQueryState("userId");
   const [, setCourseId] = useQueryState("courseId");
   const [edit, setEdit] = useState<boolean>(false);
   const translation = useTranslation();
@@ -65,7 +62,7 @@ export const CourseTabOrganism = ({
     resolver: zodResolver(courseEditSchema) as Resolver<FormDataTypes>,
   });
 
-  const onSubmit: SubmitHandler<FormDataTypes> = async (formData) => {
+  const onSubmit: SubmitHandler<FormDataTypes> = (formData) => {
     updateCourse.mutate(
       { ...formData, courseId: id },
       {
@@ -85,18 +82,21 @@ export const CourseTabOrganism = ({
     });
   };
 
-
-
   return (
-    <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:shadow-md hover:border-gray-300">
+    <div className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white p-3 shadow-sm transition-all duration-200 hover:border-gray-300 hover:shadow-md">
       {edit ? (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+        <form
+          onSubmit={(e) => {
+            void handleSubmit(onSubmit)(e);
+          }}
+          className="space-y-3"
+        >
           <div className="space-y-3">
             <SelectMolecule
               name="status"
               placeholder={
-                translation.courseManagerCard.courseListOrganism.courseTabOrganism
-                  .selectStatusPlaceholder
+                translation.courseManagerCard.courseListOrganism
+                  .courseTabOrganism.selectStatusPlaceholder
               }
               control={control}
               items={[
@@ -141,33 +141,39 @@ export const CourseTabOrganism = ({
             <ButtonAtom
               type="button"
               onPress={() => setEdit(false)}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 text-sm"
+              className="bg-gray-100 px-3 py-1 text-sm text-gray-700 hover:bg-gray-200"
             >
               Cancel
             </ButtonAtom>
             <ButtonAtom
               isLoading={isSubmitting || updateCourse.isPending}
               type="submit"
-              className="bg-gray-900 hover:bg-gray-800 text-white px-3 py-1 text-sm"
+              className="bg-gray-900 px-3 py-1 text-sm text-white hover:bg-gray-800"
             >
-              <Save className="h-3 w-3 mr-1 text-white" />
+              <Save className="mr-1 h-3 w-3 text-white" />
               Save
             </ButtonAtom>
           </div>
         </form>
       ) : (
         <>
-          <div className="flex items-start justify-between mb-2">
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 truncate text-sm mb-1">
+          <div className="mb-2 flex items-start justify-between">
+            <div className="min-w-0 flex-1">
+              <h3 className="mb-1 truncate text-sm font-semibold text-gray-900">
                 {name}
               </h3>
               <div className="flex items-center gap-2 text-xs text-gray-600">
                 <Calendar className="h-3 w-3 flex-shrink-0" />
-                <span>{formatSemester(semester, translation.courseManagerCard.courseListOrganism.semesterLabels)}</span>
+                <span>
+                  {formatSemester(
+                    semester,
+                    translation.courseManagerCard.courseListOrganism
+                      .semesterLabels,
+                  )}
+                </span>
               </div>
             </div>
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="opacity-0 transition-opacity duration-200 group-hover:opacity-100">
               <CourseTabDropdownMolecule
                 setEditAction={() => setEdit(true)}
                 deleteAction={() => void handleDelete(id)}

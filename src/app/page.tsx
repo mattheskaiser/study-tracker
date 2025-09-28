@@ -2,10 +2,10 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 
-import { AccountFinderCardOrganism } from "@/components/organisms/AccountFinderCard.organism";
-import { CourseListCardOrganism } from "@/components/organisms/CourseListCard.organism";
-import { CreateCourseCardOrganism } from "@/components/organisms/CreateCourseCard.organism";
-import { OverviewCardOrganism } from "@/components/organisms/OverviewCard.organism";
+import { AccountFinderCardOrganism } from "@/components/organisms/auth/AccountFinderCard.organism";
+import { CourseListCardOrganism } from "@/components/organisms/course/CourseListCard.organism";
+import { CreateCourseCardOrganism } from "@/components/organisms/course/CreateCourseCard.organism";
+import { OverviewCardOrganism } from "@/components/organisms/statistics/OverviewCard.organism";
 import { queryClient } from "@/lib/react-query";
 
 const Home = () => {

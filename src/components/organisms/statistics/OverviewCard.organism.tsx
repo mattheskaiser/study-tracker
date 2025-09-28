@@ -1,5 +1,5 @@
-import { CardMolecule } from "@/components/molecules/Card.molecule";
-import { StudyOverviewOrganism } from "@/components/organisms/StudyOverview.organism";
+import { CardMolecule } from "@/components/molecules/general/Card.molecule";
+import { StudyOverviewOrganism } from "@/components/organisms/statistics/StudyOverview.organism";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const OverviewCardOrganism = () => {

@@ -43,7 +43,10 @@ export const ListFilterDropdownMolecule = () => {
               <DropdownMenuItem onClick={() => setStatus("open")}>
                 <div className="flex w-full flex-row items-center justify-between">
                   <TextAtom size="small">
-                    {translation.courseManagerCard.courseListOrganism.courseTabOrganism.courseStatusOpen}
+                    {
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.courseStatusOpen
+                    }
                   </TextAtom>
                   {statusFilter === "open" && <Check />}
                 </div>
@@ -51,7 +54,10 @@ export const ListFilterDropdownMolecule = () => {
               <DropdownMenuItem onClick={() => setStatus("inProgress")}>
                 <div className="flex w-full flex-row items-center justify-between">
                   <TextAtom size="small">
-                    {translation.courseManagerCard.courseListOrganism.courseTabOrganism.courseStatusInProgress}
+                    {
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.courseStatusInProgress
+                    }
                   </TextAtom>
                   {statusFilter === "inProgress" && <Check />}
                 </div>
@@ -59,7 +65,10 @@ export const ListFilterDropdownMolecule = () => {
               <DropdownMenuItem onClick={() => setStatus("done")}>
                 <div className="flex w-full flex-row items-center justify-between">
                   <TextAtom size="small">
-                    {translation.courseManagerCard.courseListOrganism.courseTabOrganism.courseStatusDone}
+                    {
+                      translation.courseManagerCard.courseListOrganism
+                        .courseTabOrganism.courseStatusDone
+                    }
                   </TextAtom>
                   {statusFilter === "done" && <Check />}
                 </div>

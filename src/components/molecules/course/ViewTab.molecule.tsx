@@ -9,7 +9,12 @@ type ViewTabProps = {
   label: string;
 };
 
-export const ViewTabMolecule = ({ active, onClick, icon, label }: ViewTabProps) => {
+export const ViewTabMolecule = ({
+  active,
+  onClick,
+  icon,
+  label,
+}: ViewTabProps) => {
   return (
     <ButtonAtom
       onPress={onClick}

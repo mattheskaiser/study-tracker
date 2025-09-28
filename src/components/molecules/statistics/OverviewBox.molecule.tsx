@@ -1,5 +1,5 @@
 import { TextAtom } from "@/components/atoms/Text.atom";
-import { ProgressBarMolecule } from "@/components/molecules/ProgressBar.molecule";
+import { ProgressBarMolecule } from "@/components/molecules/statistics/ProgressBar.molecule";
 
 type OverviewBoxTypes = {
   boxes: {
@@ -10,26 +10,25 @@ type OverviewBoxTypes = {
 };
 
 export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
-  const progressBox = boxes.find(box => box.isProgressBar);
-  const statBoxes = boxes.filter(box => !box.isProgressBar);
+  const progressBox = boxes.find((box) => box.isProgressBar);
+  const statBoxes = boxes.filter((box) => !box.isProgressBar);
 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-3">
         {statBoxes.map((box) => (
           <div
-            className="bg-white rounded-lg border border-gray-200 p-3 shadow-sm hover:shadow-md transition-shadow duration-200 text-center"
+            className="rounded-lg border border-gray-200 bg-white p-3 text-center shadow-sm transition-shadow duration-200 hover:shadow-md"
             key={box.label}
           >
-            <div className="text-lg font-semibold text-gray-900 mb-1">
-              {box.value === null || box.value === undefined || box.value === "0"
+            <div className="mb-1 text-lg font-semibold text-gray-900">
+              {box.value === null ||
+              box.value === undefined ||
+              box.value === "0"
                 ? "—"
                 : box.value}
             </div>
-            <TextAtom
-              size="small"
-              className="text-gray-600 font-medium"
-            >
+            <TextAtom size="small" className="font-medium text-gray-600">
               {box.label}
             </TextAtom>
           </div>
@@ -37,12 +36,9 @@ export const OverviewBoxMolecule = ({ boxes }: OverviewBoxTypes) => {
       </div>
 
       {progressBox && (
-        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow duration-200">
-          <div className="flex items-center justify-between mb-2">
-            <TextAtom
-              size="small"
-              className="text-gray-600 font-medium"
-            >
+        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md">
+          <div className="mb-2 flex items-center justify-between">
+            <TextAtom size="small" className="font-medium text-gray-600">
               {progressBox.label}
             </TextAtom>
             <span className="text-lg font-semibold text-gray-900">
