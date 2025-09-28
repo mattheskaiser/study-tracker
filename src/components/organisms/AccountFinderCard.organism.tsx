@@ -1,7 +1,7 @@
 import { useQueryState } from "nuqs";
 
 import { CardMolecule } from "@/components/molecules/Card.molecule";
-import { FindEmailOrganism } from "@/components/organisms/FindEmail.organism";
+import { AuthenticationOrganism } from "@/components/organisms/Authentication.organism";
 import { useTranslation } from "@/hooks/useTranslation.hook";
 
 export const AccountFinderCardOrganism = () => {
@@ -18,7 +18,7 @@ export const AccountFinderCardOrganism = () => {
       description={
         !userId ? translation.accountFinderCard.cardDescriptionLoginFalse : null
       }
-      content={<FindEmailOrganism />}
+      content={<AuthenticationOrganism />}
     />
   );
 };
