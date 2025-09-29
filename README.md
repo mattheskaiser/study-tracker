@@ -12,7 +12,7 @@ A modern, full-stack web application for tracking academic progress with a clean
 - **🌍 Multi-language Support**: Available in English, German, and Spanish
 - **📱 Responsive Design**: Seamless experience across desktop, tablet, and mobile devices
 - **⚡ Real-time Updates**: Dynamic course status updates with optimistic UI patterns
-- **🎨 Modern UI**: Clean, accessible interface built with Tailwind CSS and Radix UI
+- **🎨 Modern UI**: Clean, accessible interface built with Tailwind CSS and Shadcn
 
 ## 🖼️ Application Screenshots
 
